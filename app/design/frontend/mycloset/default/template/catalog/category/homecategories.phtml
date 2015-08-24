@@ -1,0 +1,35 @@
+<?php
+$cat = Mage::getModel('catalog/category')->load(16);
+$subcats = $cat->getChildren();
+$all_sub_cat = explode(',', $subcats);
+?>
+<div class="row">
+    <?php
+    foreach ($all_sub_cat as $cat_id) {
+        $category = Mage::getModel('catalog/category')->load($cat_id);
+    $products = Mage::getModel('catalog/category')->load($category->getId())
+        ->getProductCollection()
+        ->addAttributeToSelect('entity_id')
+        ->addAttributeToFilter('status', 1)
+        ->addAttributeToFilter('visibility', 4);
+
+    
+//if ($category->getIsActive()):
+if ($products->count()>0):   // active product count
+//    echo 'userid'. $userid=  Mage::getSingleton('customer/session')->getId();// login user id
+// $customerid =Mage::getSingleton('core/session')->setProductOwner($productowner);// product owner id
+//        if($userid===$customerid):
+         
+//echo 'customerid' . $customerid = Mage::getSingleton('core/session')->getProductOwner(); // product owner session id     
+//            if ($userid===$customerid):
+        ?>
+        <div class="col-sm-4 itemList">
+            <a href="<?php echo $category->url_path; ?>">
+                <img src="<?php echo Mage::getBaseUrl('media') . 'catalog/category/' . $category->image; ?>" alt=""/>
+                <b><?php echo $category->name; ?></b>
+            </a>
+        </div>
+        <?php        
+//    endif;
+    endif;
+    }

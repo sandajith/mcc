@@ -8,7 +8,9 @@ media/
 nbproject/
 pkginfo/
 shell/
-skin/
+skin/frontend/base/
+skin/frontend/default/
+skin/frontend/rwd/
 var/
 .htaccess
 .htaccess.sample
@@ -18,6 +20,7 @@ downloader.php
 favicon.ico
 get.php
 index.php
+test.php
 index.php.sample
 install.php
 LICENSE.html
@@ -32,7 +35,10 @@ app/code/core/
 app/locale/
 app/code/community/
 app/code/community/
-app/design/
+app/design/frontend/base/
+app/design/frontend/default/
+app/design/frontend/rwd/
+app/design/install/
 app/.htaccess
 app/etc/
 app/Mage.php

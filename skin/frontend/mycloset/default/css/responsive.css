@@ -1,0 +1,311 @@
+/*==========  Mobile First Method  ==========*/
+
+    /* Custom, iPhone Retina */ 
+    @media only screen and (min-width : 320px) {
+        
+    }
+
+    /* Extra Small Devices, Phones */ 
+    @media only screen and (min-width : 480px) {
+
+    }
+
+    /* Small Devices, Tablets */
+    @media only screen and (min-width : 768px) {
+
+    }
+
+    /* Medium Devices, Desktops */
+    @media only screen and (min-width : 992px) {
+
+    }
+
+    /* Large Devices, Wide Screens */
+    @media only screen and (min-width : 1200px) {
+
+    }
+
+
+
+    /*==========  Non-Mobile First Method  ==========*/
+
+    /* Large Devices, Wide Screens */
+    @media only screen and (max-width : 1200px) {
+
+        header h1 {
+            font-size: 38px;
+            letter-spacing: 16px;
+        }
+
+        header h2 {
+            font-size: 24px;
+            letter-spacing: 6px;
+        }
+
+        header img {
+            height: 120px;
+        }
+
+        header .logo{
+            width: auto
+        }
+
+        .mainMenu .nav li a{
+            padding:15px 30px;
+        }
+
+    }
+
+    /* Medium Devices, Desktops */
+    @media only screen and (max-width : 992px) {
+
+         header h1 {
+            font-size: 26px;
+            letter-spacing: 7px;
+            display: inline-block;
+            margin: 0;
+        }
+
+        header h2 {
+            font-size: 20px;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin: 0;
+            padding-left: 60px;
+        }
+
+        header img {
+            display: inline-block;
+            float: none;
+            margin-bottom: -32px;
+            height: 80px;
+        }
+
+        .mainMenu .nav li a{
+            padding:15px 20px;
+        }
+
+        .brdr-sm-r_0 { border-right: 0 !important}
+
+        .itemsWrapper .itemList a { margin: 0;}
+
+        .itemsWrapper .itemList a.button{
+            font-size: 14px;
+            min-width: 140px;
+        }
+
+        .customDropDown { margin-left: 15px !important; margin-right: 15px !important}
+        
+
+
+    }
+
+    /* Small Devices, Tablets */
+    @media only screen and (max-width : 768px) {
+
+        header { padding: 10px 0 1px;}
+
+        header h1 {
+            display: block;
+            letter-spacing: 1px;
+        }
+
+        header h2 {
+            display: block;
+            font-size: 15px;
+            padding: 0;
+        }
+
+        header img {
+           float: left;
+           margin: 0;
+           height:65px;
+        }
+
+        header .logo {
+            display: block;
+            width: 380px;
+            float: left;
+        }
+
+        header .loginDetails { 
+            text-align: left; 
+            border-bottom: 1px solid #333; 
+            margin-bottom: 10px; 
+            padding-bottom: 5px;
+        }
+        header .loginDetails .search { 
+            width: auto; 
+            float: right;
+        }
+        header .loginDetails .search input { 
+            margin:0
+        }
+
+        header .loginDetails .links { float: left;}
+        .mainMenu {
+            margin-top: 5px;
+        }
+        
+
+    }
+
+
+
+
+    /**** Custom size ******/
+
+
+    
+
+   @media only screen and (max-width : 767px) {
+       .mainMenu .nav li {
+            width: 100%
+        }
+        .footerText { padding: 5px 0;}
+        footer .social { width: 100%; margin: 10px 0; text-align: center;}
+        footer .social img { width: 20px;}
+        .homeGrid h4 { text-align: left; font-size: 25px}
+        .homeGrid h4 font { display: unset;}
+
+        .subhead h2 { padding: 0}
+
+        .filterBy {
+                background: #eee none repeat scroll 0 0;
+                border: 0 none;
+                border-radius: 5px;
+                margin: 15px;
+                overflow: hidden;
+                padding: 10px;
+            }
+
+        .filterBy h3 {
+            border-bottom: 1px solid #ccc;
+            margin: 10px 10px 0;
+            padding-bottom: 10px;
+        }
+        .filterBy .small-accordion a {
+            background: #000 none repeat scroll 0 0;
+            border-radius: 20px;
+            color: #fff;
+            display: block;
+            float: left;
+            font-size: 16px;
+            margin: 3px;
+            padding: 2px 14px;
+        }
+
+        .filterBy .small-accordion .colorBox { 
+            float: left;
+        }
+
+        .filterBy .small-accordion .colorBox a {
+            border-radius: 3px;
+            cursor: pointer;
+            float: left;
+            height: 30px;
+            margin: 5px 5px 0 0;
+            position: relative;
+            width: 30px;
+            padding: 0;
+            border: 0
+        }
+
+        .filterBy .small-accordion h4 { float: left; width: 100%; cursor: pointer;}
+        .filterBy .small-accordion > div { display: none; float: left;}
+
+
+
+
+    }
+
+    @media only screen and (min-width : 616px) {
+        header .loginDetails .search,
+        header .loginDetails .links { display: block !important}
+    }
+
+    @media only screen and (max-width : 615px) {
+        header .loginDetails .search {
+            left: 9px;
+            position: absolute;
+            right: 45px;
+            top: -3px;
+            width: auto;
+            display: none;
+        }
+        header .loginDetails .search input {
+            width: 100%
+        }
+         header .loginDetails span {
+            display: block;
+         }
+
+        header .logo {
+            display: block;
+            width: 269px;
+        }
+                header h1 {
+            font-size: 18px;
+        }
+
+        header h2 {
+            font-size: 11px;
+        }
+
+        header img {
+            height: 44px;
+        }
+
+        header .loginDetails{
+            text-align: left;
+            padding-bottom: 0;
+            padding-left: 6px;
+        }
+
+        header .loginDetails a {
+            color: #ffffff;
+            display: inline-block;
+            font-size: 14px !important;
+            margin: 1px 2px 0;
+            padding-bottom: 4px;
+        }
+
+
+    }
+
+
+    /* Extra Small Devices, Phones */ 
+    @media only screen and (max-width : 480px) {
+
+    }
+
+
+    @media only screen and (max-width : 355px) {
+
+        header .logo{
+            width: 236px;
+        }
+        header h1 {
+            font-size: 15px;
+        }
+
+        header img{
+            height: 37px;
+        }
+
+        header h2{
+            font-size: 9px;
+        }
+
+        header .loginDetails a { margin: 1px 1px 0; font-size: 13px !important}
+
+    }
+
+
+    /* Custom, iPhone Retina */ 
+    @media only screen and (max-width : 320px) {
+        
+    }
+
+
+

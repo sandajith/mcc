@@ -1,0 +1,118 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+
+<header>
+    <div class="container-fluid loginDetails clearfix">
+        <?php echo $this->getChildHtml('topLinks') ?>
+
+        <span aria-hidden="true" class="glyphicon glyphicon-search"></span>
+        <div class="search">           
+            <?php echo $this->getChildHtml('topSearch') ?>
+        </div>
+    </div>
+    <div class="container quick-access">
+        <div class="logo">
+<!--	<img src="<?php // echo $this->getSkinUrl('images/logo.png');   ?>" alt=""/>-->
+            <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo">
+                <strong><?php echo $this->getLogoAlt() ?></strong>
+                <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+            <a href="<?php echo $this->getUrl('') ?>">
+                <h1><?php echo $this->__('my closet conCierge') ?></h1>
+                <h2><?php echo $this->__('Open the door to your endless closet') ?></h2>
+
+            </a> 
+        </div>
+
+
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only"><?php echo $this->__('Toggle navigation') ?></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+
+    </div>
+
+
+    <nav class="mainMenu">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+
+
+                    <li><a href="<?php echo $this->getUrl('') ?>about-magento-demo-store"><?php echo $this->__('ABOUT') ?></a></li>                          
+                    <li><a href="<?php echo $this->getUrl('') ?>howitworks/?___store=default"><?php echo $this->__('HOW IT WORKS') ?></a></li>                        
+                    <li><a href="<?php echo $this->getUrl('') ?>services/?___store=default"><?php echo $this->__('SERVICES') ?></a></li>     
+                    <?php if (!Mage::getSingleton('customer/session')->isLoggedIn()): ?>
+                        <li><a href="<?php echo $this->getUrl('') ?>my-closet.html"><?php echo $this->__('SAMPLE CLOSET') ?></a></li>
+                    <?php else: ?>
+                        <li>
+                            <a href="<?php echo $this->getUrl('') ?>my-closet.html"><?php echo $this->__('MY CLOSET') ?></a>
+
+                            <ul class="sub-nav">
+                                  <li >
+                                    <a class="" href="<?php echo $this->getUrl('') ?>my-closet/accessories.html">Accessories </a>
+                                </li>
+                                <li >
+                                    <a class="" href="<?php echo $this->getUrl('') ?>my-closet/bags.html">Bags</a>
+                                </li>
+                                <li >
+                                    <a class="" href="<?php echo $this->getUrl('') ?>my-closet/bottoms.html">Bottoms</a>
+                                </li>
+                                <li >
+                                    <a class="" href="<?php echo $this->getUrl('') ?>my-closet/coats.html">Coats</a>
+                                </li>
+                                <li >
+                                    <a class="" href="<?php echo $this->getUrl('') ?>my-closet/dress.html">Dress</a>
+                                </li>
+                                <li >
+                                    <a class="" href="<?php echo $this->getUrl('') ?>my-closet/jackets.html">Jackets</a>
+                                </li>
+                                <li >
+                                    <a class="" href="<?php echo $this->getUrl('') ?>my-closet/shoes.html">Shoes</a>
+                                </li>
+                                <li >
+                                    <a class="" href="<?php echo $this->getUrl('') ?>my-closet/suits.html">Suits</a>
+                                </li>
+                                <li >
+                                    <a class="" href="<?php echo $this->getUrl('') ?>my-closet/top.html">Tops</a>
+                                </li>
+                            </ul>  
+                        </li>
+
+                    <?php endif; ?>
+                    <li><a href="<?php echo $this->getUrl('') ?>shop.html"><?php echo $this->__('SHOP') ?></a></li>                       
+                    <li><a href="<?php echo $this->getUrl('') ?>faq/?___store=default"><?php echo $this->__('FAQ') ?></a></li>
+                    <li><a href="<?php echo $this->getUrl('') ?>blog.html"><?php echo $this->__('BLOG') ?></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

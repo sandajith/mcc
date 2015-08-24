@@ -1,0 +1,87 @@
+<?php
+
+/**
+ *Customer Telephone field apart from address telephone field 
+ * */
+$this->addAttribute('customer', 'cus_tele', array(
+    'type' => 'varchar',  
+    'label' => 'Customer telephone',
+    'input' => 'text',
+    'position' => 119,
+    'required' => false, //or true
+    'is_system' => 0,
+    'visible_on_front' => 1
+   
+));
+$attribute = Mage::getSingleton('eav/config')->getAttribute('customer', 'cus_tele');
+$attribute->setData('used_in_forms', array(
+    'adminhtml_customer',
+    'checkout_register',
+    'customer_account_create',
+    'customer_account_edit',
+));
+$attribute->setData('is_user_defined', 0);
+$attribute->save();
+
+
+
+/**
+ *  Membership Type
+ * */
+$this->addAttribute('customer', 'mem_type', array(
+    'type' => 'text',
+    'label' => 'Membership type',
+    'input' => 'select',
+    'position' => 120,
+    'required' => true, //or true
+    'is_system' => 0,
+    'visible_on_front' => 1,
+    'source' => 'membership/entity_memberships'
+));
+$attribute = Mage::getSingleton('eav/config')->getAttribute('customer', 'mem_type');
+$attribute->setData('used_in_forms', array(
+    'adminhtml_customer',
+    'checkout_register',
+    'customer_account_create',
+    'customer_account_edit',
+));
+$attribute->setData('is_user_defined', 0);
+$attribute->save();
+
+
+/**
+ *  Cutomer Attribute in product information
+ * */
+
+
+
+$data = array(
+    'type' => 'text',
+    'label' => 'Customer Name',
+    'input' => 'select',
+
+    'sort_order' => 001, // YOU MIGHT NEED TO CHANGE THIS VALUE TO PUT THE ATTRIBUTE IN THE FIRST POSITION
+    
+    'global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
+    'required' => '0',
+    'comparable' => '0',
+    'searchable' => '0',
+    'is_configurable' => '1',
+    'user_defined' => '1',
+    'visible_on_front' => 0, //want to show on frontend?
+    'visible_in_advanced_search' => 0,
+    'is_html_allowed_on_front' => 0,
+    'required' => 1,
+    'unique' => false,
+    'apply_to' => 'simple', //simple,configurable,bundled,grouped,virtual,downloadable
+    'is_configurable' => false,
+    'source' => 'membership/entity_userdetails'
+);
+
+$this->addAttribute('catalog_product', 'customer_name', $data);
+
+$this->addAttributeToSet(
+        'catalog_product', 'Default', 'General', 'customer_name'
+); //Default = attribute set, General = attribute group
+
+?>

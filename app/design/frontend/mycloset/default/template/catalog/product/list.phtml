@@ -1,0 +1,126 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+?>
+<?php
+$_productCollection = $this->getLoadedProductCollection();
+$_helper = $this->helper('catalog/output');
+$_product1 = $this->getProduct();
+?>
+
+<script type="text/javascript">
+    function SubmitRequest(productid)
+    {
+
+        new Ajax.Request('<?php echo Mage::getBaseUrl()."mycloset/popup?product_id="?>'+productid,
+                {    
+                    method: "get",
+                    onSuccess: function (transport) {
+                        var response = transport.responseText || "no response text";
+                        //cashorcard_webnmobile_apikey
+                        node = $("popupBox");
+                        node.update(response);
+                        
+                    },
+                    onFailure: function () {
+                        node = $("popupBox");
+                        node.update('');
+                    }
+                });
+                
+    }
+</script>
+<?php if (!$_productCollection->count()): ?>
+    <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php else: ?>
+    <div class="topToolbar">
+        <?php echo $this->getToolbarHtml() ?>
+    </div>
+    <?php
+    $userid = Mage::getSingleton('customer/session')->getId(); // login user id
+    ?>
+    <div class="row products-grid">      
+        <?php $_collectionSize = $_productCollection->count() ?>
+        <?php $_columnCount = $this->getColumnCount(); ?>
+        <?php
+        $i = 0;
+        foreach ($_productCollection as $_product):
+            // $productowner = Mage::getModel('catalog/product')->load($_product->getId())->getCustomerName(); // product owner id
+            $productowner = Mage::getModel('catalog/product')->load($_product->getId())->getCustomerName();
+            // product owner session id  
+            Mage::getSingleton('core/session')->setProductOwner($productowner); // set session for product owner
+            $customerid = Mage::getSingleton('core/session')->getProductOwner();
+ 
+
+            if ($userid == $customerid) {
+                ?>
+                <div class="col-sm-4 itemList">
+
+                    <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);"  title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+                    <ul>
+                        <li>
+                            <?php echo $_product->getAttributeText('designer'); ?></br>                                          
+                            <?php echo $_product->getAttributeText('color'); ?></br>
+                           
+                            <label>Size :</label><?php echo $_helper->productAttribute($_product, $_product->getSize(), 'size') ?></br>
+
+                            <?php if ($_product->getAttributeText('product_status') !== 'Shipping To'): ?>
+                                <label>Status :</label><?php echo $_product->getAttributeText('product_status'); ?></br>
+                            <?php endif; ?>
+                        </li>
+                    </ul>
+                    <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') { ?>
+                   <button type="button" title="<?php echo $this->__('Deliver Me') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Deliver Me') ?></span></span></button>
+                   
+                    <?php } else if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'You Have It') { ?>
+                        <a  title="<?php echo $this->__('Pick Me Up') ?>" class="button btn-cart" href="'<?php echo $this->getAddToCartUrl($_product) ?>"><?php echo $this->__('Pick Me Up') ?></a>  
+                    <?php } else if ($_product->isSaleable()) { ?>
+                        <?php echo 'Status :' . $_product->getAttributeText('product_status') . ' ' . $_helper->productAttribute($_product, $_product->getShipped_to(), 'shipped_to'); ?>
+                    <?php } ?>    
+                </div>              
+                <?php
+            }
+        endforeach;
+        ?>
+    </div>
+    <!--pop up for inner page-->
+    <div class="popupWrapper">
+         <div class="popupBox" id="popupBox">
+         </div>
+    </div>                  
+    <!--end pop up div-->
+    <div class="bottomToolbar">
+        <?php echo $this->getToolbarHtml() ?>
+    </div>
+
+<?php endif; ?>
+ 
