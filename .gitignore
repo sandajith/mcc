@@ -33,7 +33,7 @@ php.ini.sample
 RELEASE_NOTES.txt
 app/code/core/
 app/locale/
-app/code/community/
+app/code/local/Usergroup
 app/code/community/
 app/design/frontend/base/
 app/design/frontend/default/
