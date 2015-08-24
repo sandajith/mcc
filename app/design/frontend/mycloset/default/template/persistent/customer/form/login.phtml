@@ -52,8 +52,8 @@
                     <div class="content">                       
                         <p><?php echo $this->__('By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.') ?></p>
                     </div>                    
-                        <div class="buttons-set divFooter">
-                            <button type="button" title="<?php echo $this->__('Create an Account') ?>" class="button pull-right btn" onclick="window.location = '<?php echo Mage::helper('persistent')->getCreateAccountUrl($this->getCreateAccountUrl()) ?>';"><span><span><?php echo $this->__('Create an Account') ?></span></span></button>
+                        <div class=" divFooter">
+                            <button type="button" title="<?php echo $this->__('Create an Account') ?>" class="pull-right btn" onclick="window.location = '<?php echo Mage::helper('persistent')->getCreateAccountUrl($this->getCreateAccountUrl()) ?>';"><span><span><?php echo $this->__('Create an Account') ?></span></span></button>
                         </div>
                   
                 </div>
@@ -74,12 +74,12 @@
                         
                                 <label for="email" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
                                 
-                                    <input type="text" name="login[username]" value="<?php echo $this->escapeHtml($this->getUsername()) ?>" id="email" class="input-text required-entry validate-email txt" title="<?php echo $this->__('Email Address') ?>" />
+                                    <input type="text" name="login[username]" value="<?php echo $this->escapeHtml($this->getUsername()) ?>" id="email" class="txt required-entry validate-email txt" title="<?php echo $this->__('Email Address') ?>" />
                                
                           
                                 <label for="pass" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
                             
-                                    <input type="password" name="login[password]" class="input-text required-entry validate-password txt" id="pass" title="<?php echo $this->__('Password') ?>" />
+                                    <input type="password" name="login[password]" class=" required-entry validate-password txt" id="pass" title="<?php echo $this->__('Password') ?>" />
                            
                          
                             <?php echo $this->getChildHtml('form.additional.info'); ?>
@@ -89,11 +89,10 @@
                         <p class="required"><?php echo $this->__('* Required Fields') ?></p>
                     </div>
                   
-                        <div class="buttons-set divFooter">
-                            <a href="<?php echo $this->getForgotPasswordUrl() ?>" class="f-left pull-left lnk"><?php echo $this->__('Forgot Your Password?') ?></a>
-                            <button type="submit" class="button pull-right btn" title="<?php echo $this->__('Login') ?>" name="send" id="send2"><span><span><?php echo $this->__('Login') ?></span></span></button>
-                        </div>
-                    
+                        <div class="divFooter">
+                            <a href="<?php echo $this->getForgotPasswordUrl() ?>" class=" pull-left lnk"><?php echo $this->__('Forgot Your Password?') ?></a>
+                            <button type="submit" class=" pull-right btn" title="<?php echo $this->__('Login') ?>" name="send" id="send2"><span><span><?php echo $this->__('Login') ?></span></span></button>
+                        </div>                    
                 </div>
             </div>
         </div>
