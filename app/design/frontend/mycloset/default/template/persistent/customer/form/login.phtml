@@ -53,7 +53,7 @@
                         <p><?php echo $this->__('By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.') ?></p>
                     </div>                    
                         <div class="buttons-set divFooter">
-                            <button type="button" title="<?php echo $this->__('Create an Account') ?>" class="button" onclick="window.location = '<?php echo Mage::helper('persistent')->getCreateAccountUrl($this->getCreateAccountUrl()) ?>';"><span><span><?php echo $this->__('Create an Account') ?></span></span></button>
+                            <button type="button" title="<?php echo $this->__('Create an Account') ?>" class="button pull-right btn" onclick="window.location = '<?php echo Mage::helper('persistent')->getCreateAccountUrl($this->getCreateAccountUrl()) ?>';"><span><span><?php echo $this->__('Create an Account') ?></span></span></button>
                         </div>
                   
                 </div>
@@ -90,8 +90,8 @@
                     </div>
                   
                         <div class="buttons-set divFooter">
-                            <a href="<?php echo $this->getForgotPasswordUrl() ?>" class="f-left"><?php echo $this->__('Forgot Your Password?') ?></a>
-                            <button type="submit" class="button" title="<?php echo $this->__('Login') ?>" name="send" id="send2"><span><span><?php echo $this->__('Login') ?></span></span></button>
+                            <a href="<?php echo $this->getForgotPasswordUrl() ?>" class="f-left pull-left lnk"><?php echo $this->__('Forgot Your Password?') ?></a>
+                            <button type="submit" class="button pull-right btn" title="<?php echo $this->__('Login') ?>" name="send" id="send2"><span><span><?php echo $this->__('Login') ?></span></span></button>
                         </div>
                     
                 </div>
