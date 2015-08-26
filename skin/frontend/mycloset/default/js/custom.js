@@ -85,8 +85,8 @@ jqCustom(document).ready(function () {
           
              
           jqCustom("button").click(function(){
-          jqCustom("#div1").css('display') == 'block'.fadeIn();
-   jqCustom("#div1").fadeOut();
+          jqCustom(".pop-up-outer").fadeIn();
+   jqCustom(".pop-up-outer").fadeOut(9000);
        
     });
 
