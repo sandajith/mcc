@@ -98,14 +98,32 @@ $_product1 = $this->getProduct();
                             <?php endif; ?>
                         </li>
                     </ul>
-                    <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') { ?>
+                          
+                    <?php if(!$userid){ ?>
+                    
+                    
+                    
+                           <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') { ?>
+                    
+                    <button> Deliver Me</button>
+                           <?php } ?> 
+                    
+                    
+                    
+                    
+                    
+                    <?php }else { ?>
+                       
+                        
+                 <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') { ?>
                    <button type="button" title="<?php echo $this->__('Deliver Me') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Deliver Me') ?></span></span></button>
                    
                     <?php } else if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'You Have It') { ?>
                         <a  title="<?php echo $this->__('Pick Me Up') ?>" class="button btn-cart" href="'<?php echo $this->getAddToCartUrl($_product) ?>"><?php echo $this->__('Pick Me Up') ?></a>  
                     <?php } else if ($_product->isSaleable()) { ?>
                         <?php echo 'Status :' . $_product->getAttributeText('product_status') . ' ' . $_helper->productAttribute($_product, $_product->getShipped_to(), 'shipped_to'); ?>
-                    <?php } ?>    
+                    <?php } ?> 
+                    <?php }?>
                 </div>              
                 <?php
             }
@@ -118,9 +136,19 @@ $_product1 = $this->getProduct();
          </div>
     </div>                  
     <!--end pop up div-->
+    <!--non logged user popup notification-->
+    <div class="pop-up-outer" style="position: fixed; background: rgba(255, 255, 255, 0.5); top:0; width: 100%; height: 100%; left: 0; z-index: 999; display: none">
+    <div id="div1" style="width:500px;height:500px;alignment-adjust: central;margin-bottom: 200px;z-index: 100;background-color:red; position: absolute; left: 50%; top: 100px; margin: 0 0 0 -250px;">
+        <p>Please sign in our site .<a href="<?php ?>">Click here to signin</a></p>
+    </div>
+    </div>
+    <!--non logged user popup notification-->
+   
+    
     <div class="bottomToolbar">
         <?php echo $this->getToolbarHtml() ?>
     </div>
 
 <?php endif; ?>
+ 
  
