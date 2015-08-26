@@ -41,22 +41,22 @@ $_product1 = $this->getProduct();
     function SubmitRequest(productid)
     {
 
-        new Ajax.Request('<?php echo Mage::getBaseUrl()."mycloset/popup?product_id="?>'+productid,
-                {    
+        new Ajax.Request('<?php echo Mage::getBaseUrl() . "mycloset/popup?product_id=" ?>' + productid,
+                {
                     method: "get",
                     onSuccess: function (transport) {
                         var response = transport.responseText || "no response text";
                         //cashorcard_webnmobile_apikey
                         node = $("popupBox");
                         node.update(response);
-                        
+
                     },
                     onFailure: function () {
                         node = $("popupBox");
                         node.update('');
                     }
                 });
-                
+
     }
 </script>
 <?php if (!$_productCollection->count()): ?>
@@ -79,92 +79,101 @@ $_product1 = $this->getProduct();
             // product owner session id  
             Mage::getSingleton('core/session')->setProductOwner($productowner); // set session for product owner
             $customerid = Mage::getSingleton('core/session')->getProductOwner();
- 
 
-          
-               
-                    if(!$userid){ ?>
-                     <div class="col-sm-4 itemList">
 
+
+
+            if (!$userid) {
+                ?>
+                <div class="col-sm-4 itemList">
                     <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);"  title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
                     <ul>
                         <li>
                             <?php echo $_product->getAttributeText('designer'); ?></br>                                          
                             <?php echo $_product->getAttributeText('color'); ?></br>
-                           
                             <label>Size :</label><?php echo $_helper->productAttribute($_product, $_product->getSize(), 'size') ?></br>
-
                             <?php if ($_product->getAttributeText('product_status') !== 'Shipping To'): ?>
                                 <label>Status :</label><?php echo $_product->getAttributeText('product_status'); ?></br>
                             <?php endif; ?>
                         </li>
                     </ul>
-                    
-                    
-                           <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') { ?>
-                    
-                    <button> Deliver Me</button>
-                           <?php } ?> 
-                    
-                    </div> 
-                    
-                    
-                    
-                    <?php }else  {
-                          if ($userid == $customerid) {
-                        ?>
-                        <div class="col-sm-4 itemList">
-
-                    <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);"  title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
-                    <ul>
-                        <li>
-                            <?php echo $_product->getAttributeText('designer'); ?></br>                                          
-                            <?php echo $_product->getAttributeText('color'); ?></br>
-                           
-                            <label>Size :</label><?php echo $_helper->productAttribute($_product, $_product->getSize(), 'size') ?></br>
-
-                            <?php if ($_product->getAttributeText('product_status') !== 'Shipping To'): ?>
-                                <label>Status :</label><?php echo $_product->getAttributeText('product_status'); ?></br>
-                            <?php endif; ?>
-                        </li>
-                    </ul>
-                        
-                 <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') { ?>
-                   <button type="button" title="<?php echo $this->__('Deliver Me') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Deliver Me') ?></span></span></button>
-                   
+                    <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') { ?>
+                        <button class="button" data-toggle="modal" data-target=".bs-example-modal-sm" title="<?php echo $this->__('Deliver Me') ?>" ><?php echo $this->__('Deliver Me') ?></button>
                     <?php } else if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'You Have It') { ?>
-                        <a  title="<?php echo $this->__('Pick Me Up') ?>" class="button btn-cart" href="'<?php echo $this->getAddToCartUrl($_product) ?>"><?php echo $this->__('Pick Me Up') ?></a>  
+                        <button class="button" data-toggle="modal" data-target=".bs-example-modal-sm"  title="<?php echo $this->__('Pick Me Up') ?>"  ><?php echo $this->__('Pick Me Up') ?></button>  
                     <?php } else if ($_product->isSaleable()) { ?>
-                        <?php echo 'Status :' . $_product->getAttributeText('product_status') . ' ' . $_helper->productAttribute($_product, $_product->getShipped_to(), 'shipped_to'); ?>
-                    <?php } ?> </div> 
-                    <?php 
-                          }
-                    }
+                        <div style="height: 107px;">
+                        <label>Status :</label><?php echo  $_product->getAttributeText('product_status') . ' ' . $_helper->productAttribute($_product, $_product->getShipped_to(), 'shipped_to'); ?>
+                        </div>
+                    <?php } ?> 
+                </div> 
+
+
+
+                <?php
+            } else {
+                if ($userid == $customerid) {
                     ?>
-                             
-                <?php          
+                    <div class="col-sm-4 itemList">
+                        <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);"  title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+                        <ul>
+                            <li>
+                                <?php echo $_product->getAttributeText('designer'); ?></br>                                          
+                                <?php echo $_product->getAttributeText('color'); ?></br>
+                                <label>Size :</label><?php echo $_helper->productAttribute($_product, $_product->getSize(), 'size') ?></br>
+                                <?php if ($_product->getAttributeText('product_status') !== 'Shipping To'): ?>
+                                    <label>Status :</label><?php echo $_product->getAttributeText('product_status'); ?></br>
+                                <?php endif; ?>
+                            </li>
+                        </ul>
+                        <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') { ?>
+                            <button type="button" title="<?php echo $this->__('Deliver Me') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Deliver Me') ?></span></span></button>
+                        <?php } else if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'You Have It') { ?>
+                            <a  title="<?php echo $this->__('Pick Me Up') ?>" class="button btn-cart" href="'<?php echo $this->getAddToCartUrl($_product) ?>"><?php echo $this->__('Pick Me Up') ?></a>  
+                        <?php } else if ($_product->isSaleable()) { ?>
+                            <div >
+                                <?php echo 'Status :' . $_product->getAttributeText('product_status') . ' ' . $_helper->productAttribute($_product, $_product->getShipped_to(), 'shipped_to'); ?>
+                            </div>
+                        <?php } ?> 
+                    </div> 
+                    <?php
+                }
+            }
+            ?>
+
+            <?php
         endforeach;
         ?>
     </div>
     <!--pop up for inner page-->
     <div class="popupWrapper">
-         <div class="popupBox" id="popupBox">
-         </div>
+        <div class="popupBox" id="popupBox">
+        </div>
     </div>                  
     <!--end pop up div-->
     <!--non logged user popup notification-->
-    <div class="pop-up-outer" style="position: fixed; background: rgba(255, 255, 255, 0.5); top:0; width: 100%; height: 100%; left: 0; z-index: 999; display: none">
-    <div id="div1" style="width:400px;height:200px;alignment-adjust: central;margin-bottom: 200px;z-index: 100;background-color:red; position: absolute; left: 50%; top: 100px; margin: 0 0 0 -250px;">
-        <p>Please sign in our site .<a href="<?php ?>">Click here to signin</a></p>
-    </div>
+    <!--    <div class="pop-up-outer-alert">
+            Please sign in our site .<a href="<?php ?>">Click here to signin</a>
+        </div>-->
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Please Sign In..</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Please login into the site for further process..</p>
+                    <p>click here for login <a href="<?php echo $this->getUrl('') ?>membership/account/create/">Sign In</a></p>
+                </div>
+            </div>
+        </div>
     </div>
     <!--non logged user popup notification-->
-   
-    
+
+
     <div class="bottomToolbar">
         <?php echo $this->getToolbarHtml() ?>
     </div>
 
 <?php endif; ?>
- 
- 
