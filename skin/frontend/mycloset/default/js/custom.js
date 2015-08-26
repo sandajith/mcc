@@ -77,20 +77,6 @@ jqCustom(document).ready(function () {
                 itemMargin: 5
             });
       });
-
-    
-         
- 
-   
-          
-             
-          jqCustom("button").click(function(){
-          jqCustom(".pop-up-outer").fadeIn();
-   jqCustom(".pop-up-outer").fadeOut(9000);
-       
-    });
-
- 
 });
 
 jqCustom(window).resize(function () {
