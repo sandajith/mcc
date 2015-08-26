@@ -81,9 +81,10 @@ $_product1 = $this->getProduct();
             $customerid = Mage::getSingleton('core/session')->getProductOwner();
  
 
-            if ($userid == $customerid) {
-                ?>
-                <div class="col-sm-4 itemList">
+          
+               
+                    if(!$userid){ ?>
+                     <div class="col-sm-4 itemList">
 
                     <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);"  title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
                     <ul>
@@ -98,9 +99,6 @@ $_product1 = $this->getProduct();
                             <?php endif; ?>
                         </li>
                     </ul>
-                          
-                    <?php if(!$userid){ ?>
-                    
                     
                     
                            <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') { ?>
@@ -108,12 +106,28 @@ $_product1 = $this->getProduct();
                     <button> Deliver Me</button>
                            <?php } ?> 
                     
+                    </div> 
                     
                     
                     
-                    
-                    <?php }else { ?>
-                       
+                    <?php }else  {
+                          if ($userid == $customerid) {
+                        ?>
+                        <div class="col-sm-4 itemList">
+
+                    <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);"  title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+                    <ul>
+                        <li>
+                            <?php echo $_product->getAttributeText('designer'); ?></br>                                          
+                            <?php echo $_product->getAttributeText('color'); ?></br>
+                           
+                            <label>Size :</label><?php echo $_helper->productAttribute($_product, $_product->getSize(), 'size') ?></br>
+
+                            <?php if ($_product->getAttributeText('product_status') !== 'Shipping To'): ?>
+                                <label>Status :</label><?php echo $_product->getAttributeText('product_status'); ?></br>
+                            <?php endif; ?>
+                        </li>
+                    </ul>
                         
                  <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') { ?>
                    <button type="button" title="<?php echo $this->__('Deliver Me') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Deliver Me') ?></span></span></button>
@@ -122,11 +136,13 @@ $_product1 = $this->getProduct();
                         <a  title="<?php echo $this->__('Pick Me Up') ?>" class="button btn-cart" href="'<?php echo $this->getAddToCartUrl($_product) ?>"><?php echo $this->__('Pick Me Up') ?></a>  
                     <?php } else if ($_product->isSaleable()) { ?>
                         <?php echo 'Status :' . $_product->getAttributeText('product_status') . ' ' . $_helper->productAttribute($_product, $_product->getShipped_to(), 'shipped_to'); ?>
-                    <?php } ?> 
-                    <?php }?>
-                </div>              
-                <?php
-            }
+                    <?php } ?> </div> 
+                    <?php 
+                          }
+                    }
+                    ?>
+                             
+                <?php          
         endforeach;
         ?>
     </div>
