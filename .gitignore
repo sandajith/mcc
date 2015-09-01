@@ -35,6 +35,7 @@ app/code/core/
 app/locale/
 app/code/local/Usergroup
 app/code/community/
+blog/
 app/design/frontend/base/
 app/design/frontend/default/
 app/design/frontend/rwd/
