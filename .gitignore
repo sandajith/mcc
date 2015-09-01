@@ -34,6 +34,7 @@ RELEASE_NOTES.txt
 app/code/core/
 app/locale/
 app/code/local/Usergroup
+blog/
 app/code/community/
 app/design/frontend/base/
 app/design/frontend/default/
