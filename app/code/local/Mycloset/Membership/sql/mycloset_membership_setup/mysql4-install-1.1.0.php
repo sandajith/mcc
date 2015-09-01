@@ -100,5 +100,3 @@ $installer->run("
 INDEX ( `pickup_user_id` , `pickup_category_id` )
 ) ENGINE = innodb;
 ");
-
-?>
