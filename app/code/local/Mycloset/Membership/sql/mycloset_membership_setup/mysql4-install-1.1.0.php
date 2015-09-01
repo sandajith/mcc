@@ -83,5 +83,22 @@ $this->addAttribute('catalog_product', 'customer_name', $data);
 $this->addAttributeToSet(
         'catalog_product', 'Default', 'General', 'customer_name'
 ); //Default = attribute set, General = attribute group
+/**
+ * Edited by neenu
+ * for new pickup details table
+ */
+
+$installer = $this;
+$installer->startSetup();
+$installer->run("
+   CREATE TABLE `closet_pickup_details` (
+`pickup_id` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`pickup_user_id` INT( 10 ) NOT NULL ,
+`pickup_category_id` INT( 10 ) NOT NULL ,
+`pickup_comment` LONGTEXT NOT NULL ,
+`pickup_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+INDEX ( `pickup_user_id` , `pickup_category_id` )
+) ENGINE = innodb;
+");
 
 ?>
