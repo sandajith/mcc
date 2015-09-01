@@ -67,6 +67,9 @@
                     <chosenservices>
                         <table>mycloset_chosen_services</table>
                     </chosenservices>
+                     <pickupdetails>
+                        <table>pickup_details</table>
+                    </pickupdetails>
                 </entities>
             </membership_mysql4>
         </models> 
