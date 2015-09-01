@@ -43,3 +43,4 @@ app/.htaccess
 app/etc/
 app/Mage.php
 /api.php
+app/bootstrap.php
