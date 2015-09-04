@@ -133,8 +133,8 @@ header .loginDetails .search input{
 }
 
 header .loginDetails .search:after {
-    content: ""
-        font-family:"Glyphicons Halflings";
+    content: "";
+    font-family:"Glyphicons Halflings";
     height: 20px;
     position: absolute;
     right: 7px;
@@ -379,28 +379,136 @@ a.button, button.button {
 }
 */
 
+.itemList b {
+    display: block;
+    color: #000000;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.itemList img {
+    max-width: 100%
+}
+.itemsWrapper .customDropDown.pull-left {
+    margin: 0 0 15px 45px
+}
+.itemsWrapper .customDropDown.pull-right {
+    margin: 0 45px 15px 0
+}
+.itemsWrapper .itemList a {
+    border: 2px solid #c3c3c3;
+    float: none;
+    width: auto;
+    display: block;
+    margin: 0 30px;
+}
+.itemsWrapper .itemList ul {
+    list-style: none;
+    margin: 10px 0;
+    padding: 0;
+}
+.itemsWrapper .itemList ul li {
+    font-size: 13px;
+}
+.itemsWrapper .itemList a.button {
+    border: 0;
+    display: inline-block;
+    min-width: 160px;
+    margin: 0
+}
 
-.itemList b { display: block; color: #000000; font-size:16px; font-weight: 400; margin-bottom: 10px;}
-.itemList img { max-width: 100%}
-.itemsWrapper .customDropDown.pull-left { margin:0 0 15px 45px}
-.itemsWrapper .customDropDown.pull-right { margin:0 45px 15px 0}
+.itemsWrapper .itemList .actionsWrapper {
+    display: block;
+    margin: 0 30px;
+}
+.itemsWrapper .itemList .actionsWrapper a.button {
+    float: none;
+    min-width:inherit
+}
+.itemsWrapper .itemList .actionsWrapper .customDropDown {
+    background: rgba(235,232,232,1);
+    background: -moz-linear-gradient(top, rgba(235,232,232,1) 0%, rgba(193,193,193,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(235,232,232,1)), color-stop(100%, rgba(193,193,193,1)));
+    background: -webkit-linear-gradient(top, rgba(235,232,232,1) 0%, rgba(193,193,193,1) 100%);
+    background: -o-linear-gradient(top, rgba(235,232,232,1) 0%, rgba(193,193,193,1) 100%);
+    background: -ms-linear-gradient(top, rgba(235,232,232,1) 0%, rgba(193,193,193,1) 100%);
+    background: linear-gradient(to bottom, rgba(235,232,232,1) 0%, rgba(193,193,193,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebe8e8', endColorstr='#c1c1c1', GradientType=0 );
+    float: none;
+    min-width: 96px;
+    box-shadow: 1px 4px 9px -7px #000;
+    border-radius: 5px;
+    display: inline-block;
+    margin-left: 5px;
+}
+.itemsWrapper .itemList .actionsWrapper .customDropDown  b {
+    color: #52504f;
+    float: right;
+    margin: 12px 0 0 7px;
+}
 
-.itemsWrapper .itemList a { border: 2px solid #c3c3c3; float: none; width: auto; display: block; margin:0 30px;}
-.itemsWrapper .itemList ul { list-style: none; margin:10px 0; padding:0;}
-.itemsWrapper .itemList ul li { font-size:13px;}
-.itemsWrapper .itemList a.button { border: 0; display:inline-block; min-width: 160px; margin: 0}
-.filterBy { 
+.itemsWrapper .itemList .actionsWrapper .customDropDown span {
+    border-right: 1px solid #b5b5b5;
+    float: left;
+    height: 43px;
+    line-height: 43px;
+    margin: 0;
+    padding: 0 11px;
+    width: 63px;
+    color: #52504f;
+}
+.itemsWrapper .itemList .actionsWrapper .customDropDown ul{
+    border-radius: 0 0 5px 5px;
+    left: 0;
+    margin: 0;
+    right: 23px;
+    top: 39px;
+}
+
+.filterBy {
     border: 2px solid #c3c3c3;
     padding: 10px;
     margin: 35px 0 0;
-
 }
-.filterBy h3 { font-family: Lato; font-weight: normal; font-size:15px; margin: 10px 10px 20px 10px}
-.filterBy .small-accordion { margin: 0 10px 10px 10px}
-.filterBy .small-accordion h4 { margin: 20px 0 5px 0; font-size: 15px; font-weight: bold;}
-.filterBy .small-accordion a { display: block; font-style: italic; color: #000000; font-size: 15px; font-weight: 300}
-.colorBox { overflow: hidden;}
-.colorBox a { float: left; width: 30px; height: 30px; border-radius: 3px; margin: 5px 5px 0 0; cursor: pointer; position: relative;}
+.itemsWrapper .itemList ul li a {
+    border: 0;
+    color: #000;
+}
+.filterBy h3 {
+    font-family: Lato;
+    font-weight: normal;
+    font-size: 15px;
+    margin: 10px 10px 20px 10px
+}
+.filterBy .small-accordion {
+    margin: 0 10px 10px 10px
+}
+.filterBy .small-accordion h4 {
+    margin: 20px 0 5px 0;
+    font-size: 15px;
+    font-weight: bold;
+}
+.filterBy .small-accordion label,
+.filterBy .small-accordion a {
+    display: block;
+    font-style: italic;
+    color: #000000;
+    font-size: 15px;
+    font-weight: 300
+}
+.filterBy .small-accordion label input { margin-right:5px;}
+.colorBox {
+    overflow: hidden;
+}
+.colorBox a {
+    float: left;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    margin: 5px 5px 0 0;
+    cursor: pointer;
+    position: relative;
+}
 .colorBox a:after {
     content: " ";
     width: 30px;
@@ -414,9 +522,9 @@ a.button, button.button {
 .customDropDown { position: relative; z-index: 10; cursor: pointer; font-size: 14px;}
 .dropContentBox { position: relative; float: left;}
 .dropContentBox  b { font-weight: normal;}
-.customDropDown span { margin: 0 20px 0 20px}
-.customDropDown ul { position: absolute; right: 0; background: #ffffff; border: 1px solid #ccc; list-style: none; padding: 0; top: -5px; right: 0; display: none;}
-.customDropDown ul li { padding: 0 17px; font-style: italic;}
+.customDropDown span { margin: 0 20px 0 20px; position: relative;}
+.customDropDown ul { position: absolute; left: 0; background: #ffffff; border: 1px solid #ccc; list-style: none; padding: 0; top: -5px; right: 0; display: none; margin-left: -17px; width: -moz-min-content; width: -webkit-min-content; width: min-content}
+.customDropDown ul li { padding: 5px 17px; font-style: italic;}
 .customDropDown ul li b { font-weight: bold; margin-bottom: 5px; display: block}
 .customDropDown ul li ul { position: relative; border:0;}
 .customDropDown ul li ul li { padding:4px 0 4px 5px}
@@ -425,6 +533,67 @@ a.button, button.button {
 
 .customDropDown.sortBy { font-size: 15px;}
 .bottomToolbar .customDropDown {display: none}
+.blog .filterBy { 
+    margin-top: 0px;
+}
+.blog .post { 
+    border: 2px solid #c3c3c3;
+    padding: 20px;
+    color: #504f4f;
+    margin-bottom: 20px;
+
+}
+.blog .post h4 { 
+    margin: 10px 0 20px;
+}
+.readmore { 
+    color: #b24037; 
+    font-style: italic
+}
+.blog .post p {
+    display: block;
+    line-height: 21px;
+}
+.blog .post .readmore {
+    float: right; 
+    margin: 20px 0;
+    background: url(../images/readmore.png) no-repeat center right;
+    padding-right: 25px;
+}
+.blog .post .details{
+    background:#e5e5e5;
+    padding: 10px;
+    display: block;
+    float: left;
+    width: 100%
+}
+.blogImage {
+    text-align: center
+}
+.blogImage img { max-width: 100%}
+.blog .post .details .date {
+    font-size: 18px;
+    color: #000000;
+}
+.contactLeft .form { 
+    margin-bottom: 30px;
+}
+.contactLeft .form label { font-weight: bold; display: block}
+.contactLeft .form input[type="text"]{
+    max-width: 100%; 
+    padding: 5px 10px;
+    border: 1px solid #eb9bb0;
+    margin: 3px 0;
+    width: 300px;
+    border-radius: 3px;
+}
+.contactLeft .form .button{
+    margin: 10px 0;
+}
+.mapBox { border: 1px solid #eb9bb0}
+.contact .map { color:#3b3b3b}
+.about .banner img { max-width: 100%}
+.about .banner { margin: 10px 0}
 .topToolbar .paging { display: none}
 .paging {
     font-size: 15px;
@@ -461,12 +630,17 @@ a.button, button.button {
 .dataTable > .row.th { background: #eee; border-bottom: 1px solid #ccc; border-left:1px solid #ccc; height: auto;}
 .dataTable > .row.th > div { border: 1px solid #eee;}
 .dataTable > .row > div img { max-width: 100%}
+.dataTable > .row.th.foot a.cartButton { background: #b3b3b3; border: 1px solid #9d9d9d; padding: 5px 10px; color: #fff}
+.dataTable > .row.th.foot a.cartButton:hover { background: #666666}
+.dataTable > .row.th.foot a.cartButton.pull-right { margin-left: 10px;}
+.myBag h4 { margin-top: 23px;}
+.totalBox  { background: #ebebeb; padding: 15px; margin: 15px 0;  border: 1px solid #c3c3c3; text-align: right;}
+.totalBox .button { margin:20px 0 0 0; width: 100%; text-align: center;}
 
-
-
-
-
-.footFix { float: left; width: 100%;}
+.footFix {
+    float: left;
+    width: 100%;
+}
 footer { 
     float: left; 
     width: 100%; 
@@ -544,11 +718,12 @@ footer .social a { margin-left: 5px;}
 .account-create.register ul.form-list li .customer-name .field {
     display: block;
 }
-.account-create.register ul.form-list li .customer-name .field label, .account-create.register ul.form-list li .customer-name .field .input-box, .account-create.register ul.form-list li label, .account-create.register ul.form-list li .input-box
-
-{
-    width: 145px;
-    display: inline-block;
+.account-create.register ul.form-list li .customer-name .field label, 
+.account-create.register ul.form-list li .customer-name .field .input-box, 
+.account-create.register ul.form-list li label, 
+.account-create.register ul.form-list li .input-box{   
+	 width: 145px;
+	 display: inline-block;
 }
 
 .account-create.register .fieldset{
@@ -578,19 +753,14 @@ footer .social a { margin-left: 5px;}
     padding: 10px;
     width: 100%;
 }
-.input-text {
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    padding: 10px;
-    width: 100%;
-}
+
 .buttons-set .button { margin:10px 0}
 .registered-users .buttons-set .button  { float: right}
 .registered-users .buttons-set a { padding: 20px 0 0 0; float:left}
 
 
 .form-list label.required {}
-.form-list label.required em {  color:#eb340a; }
+.form-list label.required em { float:right; font-style:normal; color:#eb340a; position:static; top:0; right:-8px; }
 .buttons-set p.required { margin:0 0 10px; }
 p.required { font-size:11px; text-align:right; color:#EB340A; }
 .product-options dt label.required em { color:#eb340a; margin-left:5px; }
