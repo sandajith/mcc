@@ -39,15 +39,26 @@
     </div>
     <div class="container quick-access">
         <div class="logo">
-<!--	<img src="<?php // echo $this->getSkinUrl('images/logo.png');   ?>" alt=""/>-->
-            <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo">
+            <?php if (!Mage::getSingleton('customer/session')->isLoggedIn()): ?>
+                     <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo">
                 <strong><?php echo $this->getLogoAlt() ?></strong>
                 <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
             <a href="<?php echo $this->getUrl('') ?>">
                 <h1><?php echo $this->__('my closet conCierge') ?></h1>
                 <h2><?php echo $this->__('Open the door to your endless closet') ?></h2>
 
+            </a>  
+                    <?php else: ?> 
+<!--	<img src="<?php // echo $this->getSkinUrl('images/logo.png');   ?>" alt=""/>-->
+            <a href="<?php echo $this->getUrl('') ?>loggedhomepage/?___store=default" title="<?php echo $this->getLogoAlt() ?>" class="logo">
+                <strong><?php echo $this->getLogoAlt() ?></strong>
+                <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+            <a href="<?php echo $this->getUrl('') ?>loggedhomepage/?___store=default">
+                <h1><?php echo $this->__('my closet conCierge') ?></h1>
+                <h2><?php echo $this->__('Open the door to your endless closet') ?></h2>
+
             </a> 
+            <?php endif;?>
         </div>
 
 
