@@ -32,17 +32,31 @@
  * @var $this Mage_Checkout_Block_Cart_Totals
  */
 ?>
+
+
+
+
+
 <?php if ($this->canApplyMsrp()): ?>
-    <div class="cart-msrp-totals"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></div>
+    <div class="cart-msrp-totals">
+        <?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?>
+    </div>
 <?php else: ?>
-    <table id="shopping-cart-totals-table">
-        <col />
-        <col width="1" />
-        <tfoot>
+       <div class="row" id="shopping-cart-totals-table">
+    <div class="row">
+            <div class="col-sm-8  col-xs-6">
+                <b>
+                    <?php echo $this->renderTotals(); ?>
+                </b>
+            </div>
+        </div>
+           <div class="row">
+        <div class="col-sm-8  col-xs-6">
             <?php echo $this->renderTotals('footer'); ?>
-        </tfoot>
-        <tbody>
-            <?php echo $this->renderTotals(); ?>
-        </tbody>
-    </table>
+        </div>
+     </div>
+        
+       </div>
+
+    
 <?php endif; ?>
