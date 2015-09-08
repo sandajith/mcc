@@ -36,6 +36,9 @@ php.ini.sample
 RELEASE_NOTES.txt
 app/code/core/
 app/locale/
+skin/frontend/mycloset/default/images/
+skin/frontend/mycloset/default/fonts/
+skin/install/
 app/code/local/Usergroup
 blog/
 app/code/community/
