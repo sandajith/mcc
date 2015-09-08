@@ -107,4 +107,16 @@
     </membership_pickup_index>
     
     <!--pick information-->
+    <!--success page-->
+         <membership_pickup_success>
+        <reference name="root">   
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>   
+        </reference>         
+        <reference name="content">   
+            <block type="membership/membership_pickup" name="membership_pickup" template="mycloset_membership/success.phtml"/>              
+        </reference>                
+    </membership_pickup_success>
+    <!--success page-->
 </layout>
