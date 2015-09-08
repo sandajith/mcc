@@ -3,7 +3,7 @@ var jqCustom = jQuery.noConflict();
 jqCustom(document).ready(function () {
 
     jqCustom(".mainMenu .nav > li").hover(function(){
-        jqCustom(this).children('ul').slideDown();
+        jqCustom(this).children('ul').stop(true,true).slideDown();
     },function(){
         jqCustom(this).children('ul').slideUp();
     })
@@ -77,6 +77,9 @@ jqCustom(document).ready(function () {
                 itemMargin: 5
             });
       });
+
+
+
 });
 
 jqCustom(window).resize(function () {
