@@ -95,7 +95,7 @@ $_product1 = $this->getProduct();
                         <li><a href="#">View Details</a></li>
                     </ul>
                     <div class="actionsWrapper">                     
-                          <a class="button  btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')" title="<?php echo $this->__('ADD TO BAG') ?>" ><?php echo $this->__('ADD TO BAG') ?></a>
+
                         <div class="customDropDown">
                             <div class="dropContentBox">
                                 <span>QTY</span>
@@ -121,23 +121,24 @@ $_product1 = $this->getProduct();
                     <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);"  title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
                     <ul>
                         <li>
+
+
                             <?php echo $_product->getAttributeText('designer'); ?></br>                                          
                             <?php echo $_product->getAttributeText('color'); ?></br>
                             <label>Size :</label><?php echo $_helper->productAttribute($_product, $_product->getSize(), 'size') ?></br>
-                            <?php if ($_product->getAttributeText('product_status') !== 'Shipping To'): ?>
-                                <label>Status :</label><?php echo $_product->getAttributeText('product_status'); ?></br>
-            <?php endif; ?>
+                             <?php if ($_product->getAttributeText('product_status') !== 'Shipping To'): ?>
+                                    <label>Status :</label><?php echo $_product->getAttributeText('product_status'); ?></br>
+                                <?php else: ?>
+                                      <label>Status :</label><?php echo  $_product->getAttributeText('product_status') . ' ' . $_helper->productAttribute($_product, $_product->getShipped_to(), 'shipped_to');  ?></br>
+                                <?php endif; ?>
                         </li>
                     </ul>
+
                     <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') { ?>
                         <button class="button" data-toggle="modal" data-target=".bs-example-modal-sm" title="<?php echo $this->__('Deliver Me') ?>" ><?php echo $this->__('Deliver Me') ?></button>
-                    <?php } else if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'You Have It') { ?>
+                    <?php } else if ($_product->isSaleable()) { ?>
                         <button class="button" data-toggle="modal" data-target=".bs-example-modal-sm"  title="<?php echo $this->__('Pick Me Up') ?>"  ><?php echo $this->__('Pick Me Up') ?></button>  
-            <?php } else if ($_product->isSaleable()) { ?>
-                        <div style="height: 107px;">
-                            <label>Status :</label><?php echo $_product->getAttributeText('product_status') . ' ' . $_helper->productAttribute($_product, $_product->getShipped_to(), 'shipped_to'); ?>
-                        </div>
-            <?php } ?> 
+                     <?php } ?> 
                 </div> 
 
 
@@ -150,24 +151,23 @@ $_product1 = $this->getProduct();
                         <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);"  title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
                         <ul>
                             <li>
+
+
                                 <?php echo $_product->getAttributeText('designer'); ?></br>                                          
                                 <?php echo $_product->getAttributeText('color'); ?></br>
                                 <label>Size :</label><?php echo $_helper->productAttribute($_product, $_product->getSize(), 'size') ?></br>
                                 <?php if ($_product->getAttributeText('product_status') !== 'Shipping To'): ?>
                                     <label>Status :</label><?php echo $_product->getAttributeText('product_status'); ?></br>
-                <?php endif; ?>
+                                <?php else: ?>
+                                      <label>Status :</label><?php echo  $_product->getAttributeText('product_status') . ' ' . $_helper->productAttribute($_product, $_product->getShipped_to(), 'shipped_to');  ?></br>
+                                <?php endif; ?>
                             </li>
                         </ul>
                         <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') { ?>
                             <button type="button" title="<?php echo $this->__('Deliver Me') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Deliver Me') ?></span></span></button>
-                <?php } else if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'You Have It') { ?>
+                        <?php } else if ($_product->isSaleable()) { ?>
                             <button title="<?php echo $this->__('Pick Me Up') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')" ><?php echo $this->__('Pick Me Up') ?></button>  
-
-                            <?php } else if ($_product->isSaleable()) { ?>
-                            <div >
-                            <?php echo 'Status :' . $_product->getAttributeText('product_status') . ' ' . $_helper->productAttribute($_product, $_product->getShipped_to(), 'shipped_to'); ?>
-                            </div>
-                    <?php } ?> 
+                         <?php } ?> 
                     </div> 
                     <?php
                 }
@@ -206,7 +206,7 @@ $_product1 = $this->getProduct();
 
 
     <div class="bottomToolbar">
-    <?php echo $this->getToolbarHtml() ?>
+        <?php echo $this->getToolbarHtml() ?>
     </div>
 
 <?php endif; ?>
