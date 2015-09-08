@@ -30,53 +30,41 @@
 
 <header>
     <div class="container-fluid loginDetails clearfix">
-        <?php echo $this->getChildHtml('topLinks') ?>
-
-        <span aria-hidden="true" class="glyphicon glyphicon-search"></span>
-        <div class="search">           
-            <?php echo $this->getChildHtml('topSearch') ?>
-        </div>
-    </div>
-    <div class="container quick-access">
-        <div class="logo">
-            <?php if (!Mage::getSingleton('customer/session')->isLoggedIn()): ?>
-                     <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo">
-                <strong><?php echo $this->getLogoAlt() ?></strong>
-                <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
-            <a href="<?php echo $this->getUrl('') ?>">
-                <h1><?php echo $this->__('my closet conCierge') ?></h1>
-                <h2><?php echo $this->__('Open the door to your endless closet') ?></h2>
-
-            </a>  
-                    <?php else: ?> 
-<!--	<img src="<?php // echo $this->getSkinUrl('images/logo.png');   ?>" alt=""/>-->
-            <a href="<?php echo $this->getUrl('') ?>sample_home/?___store=default" title="<?php echo $this->getLogoAlt() ?>" class="logo">
-                <strong><?php echo $this->getLogoAlt() ?></strong>
-                <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
-            <a href="<?php echo $this->getUrl('') ?>sample_home/?___store=default">
-                <h1><?php echo $this->__('my closet conCierge') ?></h1>
-                <h2><?php echo $this->__('Open the door to your endless closet') ?></h2>
-            </a> 
-            <?php endif;?>
-        </div>
-
-
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only"><?php echo $this->__('Toggle navigation') ?></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
+        <?php echo $this->getChildHtml('topLinks') ?>
+        <div class="search">           
+            <?php echo $this->getChildHtml('topSearch') ?>
+        </div>
+    </div>
+    <div class="container quick-access">
+        <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo">
 
+            <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" />
+            <h1><?php echo $this->__('my closet conCierge') ?></h1>
+            <h2><?php echo $this->__('Open the door to your endless closet') ?></h2>
+        </a>
     </div>
 
 
     <nav class="mainMenu">
         <div class="container">
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">                 
                 <ul class="nav navbar-nav">
-
-
+                    <li class="search-mobile">                        
+                        <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo">
+                            <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" />
+                            <h1><?php echo $this->__('my closet conCierge') ?></h1>
+                            <h2><?php echo $this->__('Open the door to your endless closet') ?></h2>                        
+                        </a>                            
+                        <div class="search">           
+                            <?php echo $this->getChildHtml('topSearch') ?>
+                        </div>
+                    </li>
                     <li><a href="<?php echo $this->getUrl('') ?>about-magento-demo-store"><?php echo $this->__('ABOUT') ?></a></li>                          
                     <li><a href="<?php echo $this->getUrl('') ?>howitworks/?___store=default"><?php echo $this->__('HOW IT WORKS') ?></a></li>                        
                     <li><a href="<?php echo $this->getUrl('') ?>services/?___store=default"><?php echo $this->__('SERVICES') ?></a></li>     
@@ -87,7 +75,7 @@
                             <a href="<?php echo $this->getUrl('') ?>my-closet.html"><?php echo $this->__('MY CLOSET') ?></a>
 
                             <ul class="sub-nav">
-                                  <li >
+                                <li >
                                     <a class="" href="<?php echo $this->getUrl('') ?>my-closet/accessories.html">Accessories </a>
                                 </li>
                                 <li >
