@@ -11,6 +11,9 @@ shell/
 skin/frontend/base/
 skin/frontend/default/
 skin/frontend/rwd/
+skin/frontend/mycloset/default/images/
+skin/frontend/mycloset/default/fonts/
+skin/install/
 var/
 .htaccess
 .htaccess.sample
