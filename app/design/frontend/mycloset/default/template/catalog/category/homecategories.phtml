@@ -5,31 +5,55 @@ $all_sub_cat = explode(',', $subcats);
 ?>
 <div class="row">
     <?php
-    foreach ($all_sub_cat as $cat_id) {
-        $category = Mage::getModel('catalog/category')->load($cat_id);
-    $products = Mage::getModel('catalog/category')->load($category->getId())
-        ->getProductCollection()
-        ->addAttributeToSelect('entity_id')
-        ->addAttributeToFilter('status', 1)
-        ->addAttributeToFilter('visibility', 4);
 
-    
-//if ($category->getIsActive()):
-if ($products->count()>0):   // active product count
-//    echo 'userid'. $userid=  Mage::getSingleton('customer/session')->getId();// login user id
-// $customerid =Mage::getSingleton('core/session')->setProductOwner($productowner);// product owner id
-//        if($userid===$customerid):
-         
-//echo 'customerid' . $customerid = Mage::getSingleton('core/session')->getProductOwner(); // product owner session id     
-//            if ($userid===$customerid):
-        ?>
-        <div class="col-sm-4 itemList">
-            <a href="<?php echo $category->url_path; ?>">
-                <img src="<?php echo Mage::getBaseUrl('media') . 'catalog/category/' . $category->image; ?>" alt=""/>
-                <b><?php echo $category->name; ?></b>
-            </a>
-        </div>
-        <?php        
-//    endif;
-    endif;
+    $hide_pickup = false;
+    foreach ($all_sub_cat as $cat_id) {
+        $userid = Mage::getSingleton('customer/session')->getId();
+        $category = Mage::getModel('catalog/category')->load($cat_id);
+        $categories = Mage::getModel('catalog/category')->load($category->getId())
+                ->getProductCollection()
+                ->addAttributeToSelect('entity_id')
+                ->addAttributeToFilter('status', 1)
+                ->addAttributeToFilter('visibility', 4);
+        $products = Mage::getModel('catalog/product')
+                ->getCollection()
+                ->addAttributeToFilter('customer_name', $userid)
+                ->addCategoryFilter($category)
+                ->load();
+        if(!Mage::getSingleton('customer/session')->isLoggedIn() && ($categories->count() > 0 ) ){
+     $hide_pickup = true;?>
+              <div class="col-sm-4 itemList">
+                    <a href="<?php echo $category->url_path; ?>">
+                        <img src="<?php echo Mage::getBaseUrl('media') . 'catalog/category/' . $category->image; ?>" alt=""/>
+                        <b><?php echo $category->name; ?></b>
+                    </a>
+                </div>
+   <?php     }
+        foreach ($products as $product) {
+            $customerid = $product->getCustomerName();
+            if (($categories->count() > 0 ) && ($products->count() > 0)) {
+                $hide_pickup = true;
+                ?>
+                <div class="col-sm-4 itemList">
+                    <a href="<?php echo $category->url_path; ?>">
+                        <img src="<?php echo Mage::getBaseUrl('media') . 'catalog/category/' . $category->image; ?>" alt=""/>
+                        <b><?php echo $category->name; ?></b>
+                    </a>
+                </div>
+            <?php
+            }
+        }
     }
+
+    if(!$hide_pickup && (!Mage::getSingleton('customer/session')->isLoggedIn()))
+    {
+                
+                ?>
+                <div class="alignCenter">
+                    <a class="button" href="http://localhost/mgn/magento/mycloset/pickup"> Pick up my clothing</a>
+                </div>
+                <?php
+            
+    }
+    ?>
+</div>
