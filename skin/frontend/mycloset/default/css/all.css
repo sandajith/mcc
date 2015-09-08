@@ -62,6 +62,7 @@ a:hover { text-decoration: none; outline: none !important;}
 h1,h2,h3 {font-family: 'Playfair Display';}
 .allWrapper { position: absolute; left: 0; top: 0; width: 100%; min-height: 100%}
 ul,li { padding: 0; margin: 0; list-style: none}
+.alignCenter { text-align: center}
 header { 
     background: #000;
     font-family: 'Playfair Display';
@@ -75,11 +76,12 @@ header .logo {
     margin: 0 auto;
     overflow: hidden;
     width: 1048px;
+    color: #fff;
+    text-decoration: none;
 }
 
 
-header .logo a { color: #ffffff}
-header .logo a:hover {  text-decoration: none;}
+header a.logo:hover {  text-decoration: none;color: #fff;}
 header h1 { 
     font-size: 48px;
     letter-spacing: 18px;
@@ -89,6 +91,7 @@ header h1 {
 header h2 {
     font-size: 26px;
     letter-spacing:10px;
+    font-family:Lato;
 }
 header img { 
     float: left;
@@ -108,42 +111,48 @@ header .loginDetails a {
 header .loginDetails a:first-child {
     font-size: 20px;
 }
-header .loginDetails span
-{
-    background: red none repeat scroll 0 0;
-    float: right;
-    font-size: 17px;
-    height: 42px;
-    margin: -11px -15px 0;
-    padding: 10px;
-    display: none;
-}
+
 
 header .loginDetails .search{
     float: left; 
     width: 100%;
     position: relative;
-}
-header .loginDetails .search input{
     margin: 10px 10px 10px 0;
+}
+header .search input{
+    
     border-radius:30px;
     border: 0;
     color: #333333;
     padding: 3px 10px;
 }
 
-header .loginDetails .search:after {
+header .search:after {
     content: "";
-    font-family:"Glyphicons Halflings";
+    font-family: "Glyphicons Halflings";
     height: 20px;
     position: absolute;
-    right: 7px;
-    top: 13px;
+    right: 4px;
+    top:3px;
     width: 20px;
     z-index: 10;
+    color: #666;
+    
 }
-
+.navbar-toggle {
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    float: left;
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-top: 0;
+    padding: 4px 10px;
+    position: relative;
+}
 .navbar-toggle .icon-bar { background: #fff}
+
 
 .mainMenu { 
     float: left; 
@@ -185,12 +194,18 @@ header .loginDetails .search:after {
     padding:15px 48px;
 }
 .mainMenu .nav li a:hover { color: #000}
-
+.mainMenu .nav li.search-mobile {  border-bottom: 1px solid #fff;
+    color: #000;
+    display: none;
+    padding: 5px 5px 15px; }
+.mainMenu .nav li.search-mobile a { background: none !important; color:#fff}
+.mainMenu .nav li.search-mobile .search { float: left; width: 100%; position: relative}
+.mainMenu .nav li.search-mobile  input { width: 100%; }
 .navbar-toggle { margin: 0}
 
 .intro { float: left; width: 100%; font-family: 'Playfair Display'; font-style: italic; text-align: center;}
 .intro p { font-size: 28px;}
-a.button, button.button { 
+a.button, button.button, input.button { 
     font-family: Lato; 
     font-style: normal;
     background: #b3a9a9;
@@ -294,6 +309,7 @@ a.button, button.button {
     display: block;
     text-align: right; 
     color: #000000; 
+    text-decoration: underline;
 }
 .homeGrid .brdr { 
     border-right: 1px solid #5b5d5a; 
@@ -303,7 +319,8 @@ a.button, button.button {
     border-left: 0
 }
 .homeGrid > div { 
-    margin: 20px 0 40px 0
+    margin: 20px 0 40px 0;
+    min-height: 276px;
 }
 
 .flex-direction-nav a { 
@@ -633,6 +650,10 @@ a.button, button.button {
 .dataTable > .row.th.foot a.cartButton { background: #b3b3b3; border: 1px solid #9d9d9d; padding: 5px 10px; color: #fff}
 .dataTable > .row.th.foot a.cartButton:hover { background: #666666}
 .dataTable > .row.th.foot a.cartButton.pull-right { margin-left: 10px;}
+.dataTable .a.button, 
+.dataTable button.button, 
+.dataTable input.button { margin:10px 0;}
+.dataTable .input-text { width: 50px; max-width: 100%;}
 .myBag h4 { margin-top: 23px;}
 .totalBox  { background: #ebebeb; padding: 15px; margin: 15px 0;  border: 1px solid #c3c3c3; text-align: right;}
 .totalBox .button { margin:20px 0 0 0; width: 100%; text-align: center;}
