@@ -83,7 +83,9 @@
 
         .mainMenu .nav li a{
             padding:15px 20px;
+            text-align: left
         }
+        .mainMenu .nav li.search-mobile a { text-align: center}
 
         .brdr-sm-r_0 { border-right: 0 !important}
 
@@ -124,7 +126,7 @@
 
         header .logo {
             display: block;
-            width: 380px;
+            width: 100%;
             float: left;
         }
 
@@ -159,11 +161,14 @@
     
 
    @media only screen and (max-width : 767px) {
+       
+       header .navbar-collapse  { background:#000; position: fixed; left: 0; top: 0; height: 100%; right: 40px; z-index: 10; margin: 0 !important}
        .mainMenu .nav li {
-            width: 100%
+            width: 100%;
+            float:left;
         }
         .footerText { padding: 5px 0;}
-        footer .social { width: 100%; margin: 10px 0; text-align: center;}
+        footer .social { width: 100%; margin: 0; text-align: center;}
         footer .social img { width: 20px;}
         .homeGrid h4 { text-align: left; font-size: 25px}
         .homeGrid h4 font { display: unset;}
@@ -214,38 +219,29 @@
         .filterBy .small-accordion h4 { float: left; width: 100%; cursor: pointer;}
         .filterBy .small-accordion > div { display: none; float: left;}
 
-
-
-
+        .homeGrid > div { min-height: auto; border:0 !important}
+        .mainMenu .nav li.search-mobile  { display: block}
+        header .loginDetails .search { display: none}
+        .mainMenu { border: 0px;}
+        header h2 { display: none}
+        header img { float: none}
+        footer .mainMenu { display: none}
+        
     }
 
     @media only screen and (min-width : 616px) {
-        header .loginDetails .search,
+       
         header .loginDetails .links { display: block !important}
     }
 
     @media only screen and (max-width : 615px) {
-        header .loginDetails .search {
-            left: 9px;
-            position: absolute;
-            right: 45px;
-            top: -3px;
-            width: auto;
-            display: none;
-        }
-        header .loginDetails .search input {
-            width: 100%
-        }
-         header .loginDetails span {
-            display: block;
-         }
+        
 
         header .logo {
             display: block;
-            width: 269px;
         }
-                header h1 {
-            font-size: 18px;
+        header h1 {
+            font-size:22px;
         }
 
         header h2 {
@@ -253,7 +249,7 @@
         }
 
         header img {
-            height: 44px;
+           
         }
 
         header .loginDetails{
@@ -283,20 +279,9 @@
     @media only screen and (max-width : 355px) {
 
         header .logo{
-            width: 236px;
+            
         }
-        header h1 {
-            font-size: 15px;
-        }
-
-        header img{
-            height: 37px;
-        }
-
-        header h2{
-            font-size: 9px;
-        }
-
+      
         header .loginDetails a { margin: 1px 1px 0; font-size: 13px !important}
 
     }
