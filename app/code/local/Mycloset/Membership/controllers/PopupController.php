@@ -33,7 +33,12 @@ class Mycloset_Membership_PopupController extends Mage_Core_Controller_Front_Act
                                 <img src="<?php echo Mage::helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" alt=""/></a>
                         </li>  
                         <?php
-                    }
+                    }  else {?>
+                            <li>
+                            <a attr="<?php echo $customerId; ?>"  class="getproductid" rel="<?php echo $_product->getId(); ?>" >
+                                <img src="<?php echo Mage::helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" alt=""/></a>
+                        </li> 
+                   <?php }
                 endforeach;
                 ?>
             </ul>
@@ -56,7 +61,7 @@ class Mycloset_Membership_PopupController extends Mage_Core_Controller_Front_Act
                         jqCustom('.description').html(data['Description']);
                         jqCustom('.status').html('<b>Status</b> : ' + data['product_status']);
                         jqCustom('.size').html('<i>Size' + data['size'] + '</i>');
-                        jqCustom('.season').html('<i>Season' + data['season'] + '</i>');
+                        jqCustom('.season').html('<i>' + data['season'] + '</i>');
 
                     }
                 });

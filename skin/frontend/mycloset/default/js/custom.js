@@ -62,9 +62,10 @@ jqCustom(document).ready(function () {
       jqCustom(".closeppp").click(function () {
         jqCustom("input.inputz").remove();
     });
-    jqCustom(".close").click(function () {
-        jqCustom(".popupWrapper").fadeOut();
-    });
+   jqCustom(".close, .popClose").click(function () {
+            jqCustom(".popupWrapper").fadeOut();
+            jqCustom(".popupBox").empty();
+        });
     jqCustom(".show").click(function () {
         jqCustom(".popupWrapper").fadeIn(500);
     });

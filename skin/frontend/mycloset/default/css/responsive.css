@@ -98,7 +98,7 @@
 
         .customDropDown { margin-left: 15px !important; margin-right: 15px !important}
         
-
+.itemList a.button, .itemList button.button, .itemList input.button{margin:10px 0px;}
 
     }
 
@@ -161,8 +161,9 @@
     
 
    @media only screen and (max-width : 767px) {
-       
-       header .navbar-collapse  { background:#000; position: fixed; left: 0; top: 0; height: 100%; right: 40px; z-index: 10; margin: 0 !important}
+          
+       .std .intro a.button{margin:5px 10px;}
+       header .navbar-collapse  { background:#000; position: fixed; left: 0; top: 0; height: 100%; right: 40px; z-index:100; margin: 0 !important}
        .mainMenu .nav li {
             width: 100%;
             float:left;
@@ -228,6 +229,7 @@
         footer .mainMenu { display: none}
         
     }
+    
 
     @media only screen and (min-width : 616px) {
        
@@ -272,6 +274,9 @@
 
     /* Extra Small Devices, Phones */ 
     @media only screen and (max-width : 480px) {
+        .itemsWrapper .itemList ul{margin: 0px;}
+        .itemList a.button, .itemList button.button, .itemList input.button{margin: 0px;}
+        .std .intro a.button{margin:5px 0px; width:206px;}
 
     }
 

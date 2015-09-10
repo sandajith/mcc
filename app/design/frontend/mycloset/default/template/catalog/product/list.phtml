@@ -35,6 +35,7 @@
 $_productCollection = $this->getLoadedProductCollection();
 $_helper = $this->helper('catalog/output');
 $_product1 = $this->getProduct();
+
 ?>
 
 <script type="text/javascript">
@@ -74,6 +75,9 @@ $_product1 = $this->getProduct();
         <?php
         $i = 0;
         foreach ($_productCollection as $_product):
+//            echo '<pre>';
+//            print_r($_product);
+//            exit;
             // $productowner = Mage::getModel('catalog/product')->load($_product->getId())->getCustomerName(); // product owner id
             $productowner = Mage::getModel('catalog/product')->load($_product->getId())->getCustomerName();
             // product owner session id  
@@ -88,7 +92,11 @@ $_product1 = $this->getProduct();
 
 
                 <div class="col-sm-4 itemList">
+                             <div class="row">
+                            <div class="col-sm-12 col-xs-6">
                     <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);"  title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+                            </div>
+                    <div class="col-sm-12 col-xs-6">
                     <ul>
                         <li>  <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></br></li>
                         <li>Price:$<?php echo $_helper->productAttribute($_product, $_product->getPrice(), 'price') ?></li>
@@ -112,13 +120,19 @@ $_product1 = $this->getProduct();
                         </div>
                     </div>
                 </div>
+                             </div>
+                </div>
 
                 <?php
             }
             if (!$userid && !empty($shop)) {
                 ?>
                 <div class="col-sm-4 itemList">
-                    <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);"  title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+                      <div class="row">
+                            <div class="col-sm-12 col-xs-6">
+                    <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);"  title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(200); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+                            </div>
+                           <div class="col-sm-12 col-xs-6">
                     <ul>
                         <li>
 
@@ -139,16 +153,25 @@ $_product1 = $this->getProduct();
                     <?php } else if ($_product->isSaleable()) { ?>
                         <button class="button" data-toggle="modal" data-target=".bs-example-modal-sm"  title="<?php echo $this->__('Pick Me Up') ?>"  ><?php echo $this->__('Pick Me Up') ?></button>  
                      <?php } ?> 
+                           </div>
                 </div> 
-
+                </div>
 
 
                 <?php
-            } else {
-                if ($userid == $customerid && !empty($shop)) {
+            } if ($userid && !empty($shop)) {
+                
                     ?>
                     <div class="col-sm-4 itemList">
-                        <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);"  title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-6">
+                        <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);" 
+                           title="<?php echo $this->stripTags($this->getImageLabel($_product, 'thumbnail'), null, true) ?>"
+                           class="product-image">
+                            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail')->resize(200); ?>"  alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'thumbnail'), null, true) ?>" />
+                        </a>
+                            </div>
+                            <div class="col-sm-12 col-xs-6">
                         <ul>
                             <li>
 
@@ -163,15 +186,19 @@ $_product1 = $this->getProduct();
                                 <?php endif; ?>
                             </li>
                         </ul>
+                            
+                    
                         <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') { ?>
                             <button type="button" title="<?php echo $this->__('Deliver Me') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Deliver Me') ?></span></span></button>
                         <?php } else if ($_product->isSaleable()) { ?>
                             <button title="<?php echo $this->__('Pick Me Up') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')" ><?php echo $this->__('Pick Me Up') ?></button>  
                          <?php } ?> 
+                            </div>
                     </div> 
+                        </div>
                     <?php
                 }
-            }
+            
             ?>
 
             <?php
@@ -182,6 +209,7 @@ $_product1 = $this->getProduct();
     <div class="popupWrapper">
         <div class="popupBox" id="popupBox">
         </div>
+        <div class="popClose"></div>
     </div>                  
     <!--end pop up div-->
     <!--non logged user popup notification-->

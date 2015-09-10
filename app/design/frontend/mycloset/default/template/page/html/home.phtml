@@ -5,7 +5,7 @@
         <p>-&nbsp; <i>Elizabeth Fitzpatrick, Founder and CEO</i></p>
 
         <a class="button" href="<?php echo $this->getUrl('') ?>membership/account/create/"> Let&rsquo;s Get Started Button</a>
-        <p>Already a Member? <a href="<?php echo $this->getUrl('') ?>membership/account/login/">Click Here</a></p>
+        <p class="alrdyMember">Already a Member? <a href="<?php echo $this->getUrl('') ?>membership/account/login/">Click Here</a></p>
 
     <?php else: ?> 
         <h1>Welcome Back <?php echo Mage::getSingleton('customer/session')->getCustomer()->getName(); ?> !</h1>

@@ -1,64 +1,86 @@
 
 <?php
-
- $p = $this->getProductdetails();
- 
+$p = $this->getProductdetails();
+$userid = Mage::getSingleton('customer/session')->getId(); // login user id
 
 $cat = Mage::getModel('catalog/category')->load(16);
 $subcats = $cat->getChildren();
 $all_sub_cat = explode(',', $subcats);
 $_product = Mage::registry('current_product');
+// $productIds = $p['id'];
+////    $products = Mage::getModel('catalog/product')->getCollection($productIds);
+// $product = Mage::getModel('catalog/product')->load($productIds);      
+//   
 ?>
 
 <div class="popupHead">
-   
- <a class="close">X</a>
+    <div class="sku dress-code"> <?php echo $p['sku']; ?></div>
+    <a class="close" style="float: right;">X</a>
 </div>
-<div class="sku" style="float: right;"> <?php echo $p['sku']; ?></div>
+
 <div class="popupContent">
     <div class="row" id="productdata">
         <div class="col-sm-6 image " style="min-height: 200px;">
             <img alt="" src="<?php echo $p['ImageUrl']; ?>"/>                                                                                
         </div>
         <div class="col-sm-6 details">
-            <h2><?php echo'Dress'                              
+            <h2><?php echo'Dress'
 ?>
             </h2>
             <p class="signature"><?php echo $p['designer']; ?></p>
             <div class="colorBox">
                 <a style=" background:<?php echo $p['color']; ?>"></a>
             </div>
-            <div class="size">Size:<i> <?php echo $p['size']; ?></i></div>
-            <div class="season">Season:<i><?php echo $p['season']; ?></i></div>
-              <!--tag details-->
-<!--            <div class="tags">
-                <b>Tags</b>
-                <span class="tagitem"><a>Formal</a> <i class='tagclose'>X</i></span>
-                <span class="tagitem"><a>Formal</a> <i class='tagclose'>X</i></span>
-                <span class="tagitem"><a>Formal</a> <i class='tagclose'>X</i></span>
-                <span id="remove" class="add"><input type="text" class="inputz" name="tagss" value=""></span>
-
-            </div>-->
+            <div class="size"><i>Size <?php echo $p['size']; ?></i></div>
+            <div class="season"><i><?php echo $p['season']; ?></i></div>
+            <!--tag details-->
+            <!--            <div class="tags">
+                            <b>Tags</b>
+                            <span class="tagitem"><a>Formal</a> <i class='tagclose'>X</i></span>
+                            <span class="tagitem"><a>Formal</a> <i class='tagclose'>X</i></span>
+                            <span class="tagitem"><a>Formal</a> <i class='tagclose'>X</i></span>
+                            <span id="remove" class="add"><input type="text" class="inputz" name="tagss" value=""></span>
+            
+                        </div>-->
             <p class="description">
-               <?php echo $p['ShortDescription']; ?>
+                <?php echo $p['ShortDescription']; ?>
             </p>
             <p class="status">
                 <b>Status</b> : <?php echo $p['product_status']; ?>
             </p>
 
+            <?php
+            if ($userid) {
+                if ($p['product_status'] == 'We Have It') {
+                    ?>
+                    <button type="button" title="<?php echo $this->__('Deliver Me') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($p) ?>')"><span><span><?php echo $this->__('Deliver Me') ?></span></span></button>
+                <?php } else { ?>
+                    <button title="<?php echo $this->__('Pick Me Up') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($p) ?>')" ><?php echo $this->__('Pick Me Up') ?></button>  
+                <?php
+                }
+            } else {
+                if ($p['product_status'] == 'We Have It') {
+                    ?>
+                    <a  title="<?php echo $this->__('Deliver Me') ?>" class="button btn-cart" href="<?php echo $this->getUrl('') ?>membership/account/create/"><span><span><?php echo $this->__('Deliver Me') ?></span></span></a>
+                <?php } else { ?>
+                    <a title="<?php echo $this->__('Pick Me Up') ?>" class="button btn-cart" href="<?php echo $this->getUrl('') ?>membership/account/create/"><?php echo $this->__('Pick Me Up') ?></a>  
+                <?php
+                }
+            }
+            ?> 
         </div>
     </div>
     <div>
-        
-      <!--SHOW BY-->
-<!--        <div class="customDropDown pull-left">
-            <div class="dropContentBox">
-                <b>SORT BY</b>
-                <span>Category</span>
-                <ul>
-                    <li> <b>Category</b>
-                        <ul>                         
-                            <?php
+
+        <!--SHOW BY-->
+        <!--        <div class="customDropDown pull-left">
+                    <div class="dropContentBox">
+                        <b>SORT BY</b>
+                        <span>Category</span>
+                        <ul>
+                            <li> <b>Category</b>
+                                <ul>                         
+        <?php
 //                            foreach ($all_sub_cat as $cat_id) {
 //                                $category = Mage::getModel('catalog/category')->load($cat_id);
 //                                $products = Mage::getModel('catalog/category')->load($category->getId())
@@ -66,14 +88,14 @@ $_product = Mage::registry('current_product');
 //                                        ->addAttributeToSelect('entity_id')
 //                                        ->addAttributeToFilter('status', 1)
 //                                        ->addAttributeToFilter('visibility', 4);
-                                ?>
-                                <li><?php // echo $category->name; ?></li> 
-                            <?php // } ?>
+        ?>
+                                        <li><?php // echo $category->name;  ?></li> 
+<?php // }   ?>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>-->
+                    </div>
+                </div>-->
     </div>
     <!--slider-->
     <div class="flexsliderPopup carousel">
@@ -91,7 +113,7 @@ $_product = Mage::registry('current_product');
                     ?>               
                     <li>                       
                         <a class="getcatid" rel="<?php echo $category->getId(); ?>" ><img  src="<?php echo Mage::getBaseUrl('media') . 'catalog/category/' . $category->image; ?>" alt=""/></a> 
-                        
+
                     </li>    
                     <?php
                 endif;
@@ -104,15 +126,15 @@ $_product = Mage::registry('current_product');
     var jqCustom = jQuery.noConflict();
     jqCustom(document).ready(function () {
         //slider change images of product
-    jqCustom('.getcatid').click(function () {
+        jqCustom('.getcatid').click(function () {
             var catid = jqCustom(this).attr('rel');
-          
+
             jqCustom.ajax({
                 url: "<?php echo Mage::getBaseUrl(); ?>" + "mycloset/popup/slider",
                 type: 'post',
                 data: {
-                    categoryId: catid  
-        },
+                    categoryId: catid
+                },
                 success: function (data) {
                     jqCustom('.flexsliderPopup').remove();
                     jqCustom(data).appendTo(".popupContent");
@@ -127,7 +149,7 @@ $_product = Mage::registry('current_product');
                 }
             });
         });
-       
+
         var footHeight = jqCustom("footer").outerHeight();
         jqCustom(".footFix").css({"paddingBottom": footHeight + "px"});
         jqCustom("header .loginDetails span").click(function () {
@@ -187,11 +209,11 @@ $_product = Mage::registry('current_product');
 //            jqCustom(this).fadeOut(100);
             jqCustom(this).find('span:last').remove();
         });
-        jqCustom(".close").click(function () {
+        jqCustom(".close,.popClose").click(function () {
             jqCustom(".popupWrapper").fadeOut();
             jqCustom(".popupBox").empty();
-            
         });
+
     });
 
     jqCustom(window).resize(function () {
