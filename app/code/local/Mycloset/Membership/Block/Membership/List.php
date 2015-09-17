@@ -25,9 +25,10 @@ class Mycloset_Membership_Block_Membership_List extends Mage_Core_Block_Template
         $model = Mage::getModel('customer/customer')->load(Mage::getSingleton('customer/session')->getMemId());
         $memtypeid = $model->getMemType();
         $one = Mage::getModel('membership/types')->load($memtypeid);
+        $id = $one->getMembershipId();
         $price = $one->getMembershipPrice();
         $plan = $one->getMembershipType();
-        return $price.'-'.$plan;
+        return $price.'-'.$plan.'-'.$id;
     }
     
     public function getSettings() {

@@ -6,6 +6,17 @@ $userid = Mage::getSingleton('customer/session')->getId(); // login user id
 $cat = Mage::getModel('catalog/category')->load(16);
 $subcats = $cat->getChildren();
 $all_sub_cat = explode(',', $subcats);
+//echo '<pre>';
+//print_r($p);
+
+
+$product = $p['id'];
+
+$cats = $product->getCategoryIds();
+foreach ($cats as $category_id) {
+    $_cat = Mage::getModel('catalog/category')->load($category_id) ;
+    $catname = $_cat->getName();
+} 
 $_product = Mage::registry('current_product');
 // $productIds = $p['id'];
 ////    $products = Mage::getModel('catalog/product')->getCollection($productIds);
@@ -24,7 +35,8 @@ $_product = Mage::registry('current_product');
             <img alt="" src="<?php echo $p['ImageUrl']; ?>"/>                                                                                
         </div>
         <div class="col-sm-6 details">
-            <h2><?php echo'Dress'
+           <!--category name-->
+            <h2><?php echo $catname;
 ?>
             </h2>
             <p class="signature"><?php echo $p['designer']; ?></p>

@@ -18,6 +18,7 @@
     $api_login_id = $var['b'];
     $transaction_key = $var['d'];
     $amount = $exp[0];
+    $mem_table_id =  $exp[2];
     ?>
 
     <form method="post" action="<?php echo Mage::getBaseUrl(); ?>membership/payment/authorizepayment/">
@@ -25,6 +26,7 @@
         <div class="form-list">
             <input type="hidden" name="mem_type" value="<?php echo $exp[1]; ?>" />
             <input type="hidden" name="amt" value="<?php echo $amount; ?>" />
+            <input type="hidden" name="mem_table_id" value="<?php echo $mem_table_id; ?>" />
             <div>
                 <label for="card_number">Credit Card Number</label>
                 <div class="input-box">
@@ -46,9 +48,19 @@
                 </select> 
 
                 <select name="card_exp_month" style="width:7%;">
+                    
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
                     <?php
-                    for ($mo = 1; $mo <= 31; $mo++)
-                        echo "<option value='$mo'>$mo</option>";
+                    for ($mo = 10; $mo <= 12; $mo++)
+                       echo "<option value='$mo'>$mo</option>";
                     ?>
                 </select>
 

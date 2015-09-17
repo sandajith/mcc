@@ -119,7 +119,7 @@ html[xmlns] .flexslider .slides {
   margin: -20px 0 0;
   position: absolute;
   top: 50%;
-  z-index: 10;
+  z-index: 10000;
   overflow: hidden;
   opacity: 0;
   cursor: pointer;

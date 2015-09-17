@@ -70,8 +70,8 @@
                     <div class="field">
                         <label for="membership_plan" class="required"><?php echo $this->__('Choose your membership type') ?><em>*</em></label>
                         <div class="input-box">
-                            <select id="mem_type" name="mem_type" title="" onchange="GetPrice(this.value);">
-                                <option value="0">Select membership</option><option value="1">Standard Closet</option><option value="2">Virtual Closet</option><option value="3">Endless Closet</option>
+                            <select id="mem_type" name="mem_type" title="" onchange="GetPrice(this.value);" required>
+                                <option value="">Select membership</option><option value="1">Standard Closet</option><option value="2">Virtual Closet</option><option value="3">Endless Closet</option>
                                 <?php echo $this->getMemberships(); ?>
                             </select>                        
                         </div>

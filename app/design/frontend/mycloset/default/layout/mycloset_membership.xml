@@ -57,17 +57,7 @@
     
      
     
-    <membership_inactive_index>
-        <reference name="root">   
-            <action method="setTemplate">
-                <template>page/1column.phtml</template>
-            </action>   
-        </reference>
-         
-        <reference name="content">   
-            <block type="mcore/template" name="membership_inactive" template="mycloset_membership/waiting.phtml"/>        
-        </reference>  
-    </membership_inactive_index> 
+
     
       <!-- product popup -->
   <membership_popup_index>

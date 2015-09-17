@@ -7,7 +7,12 @@
                 <name>Membership payments</name>
                 <block>membership/adminhtml_customer_tab</block>
             </action>
-        </reference>
+            
+            <action method="addTab">
+                <name>Membership settings</name>
+                <block>membership/adminhtml_customer_tab2</block>
+            </action>
+         </reference>
     </adminhtml_customer_edit>
     
   

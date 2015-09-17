@@ -23,10 +23,13 @@ class Mycloset_Membership_Block_Adminhtml_Customer_Tab extends Mage_Adminhtml_Bl
         $customer_address_id = $model->getShippingAddressId();
         $amount = $model->getAmount();
 
+        $model2 = Mage::getModel('membership/membership')->load($amount, 'membership_id');
+        $getamount = $model2->getMembershipPrice();
+        
         if ($customer_payment_id == NULL) {
             return 'The customer has not made any payments';
         }
-        return $customer_pro_id . '-' . $customer_payment_id . '-' . $customer_address_id . '-' . $amount . '-' . $membership_type;
+        return $customer_pro_id . '-' . $customer_payment_id . '-' . $customer_address_id . '-' . $amount . '-' . $membership_type. '-' . $getamount;
 
     }
 

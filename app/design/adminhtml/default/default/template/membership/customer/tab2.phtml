@@ -1,0 +1,80 @@
+<?php
+$cusgroup = Mage::getModel('customer/customer')->load(Mage::app()->getRequest()->getParam('id'))->getGroupId();
+?>
+
+<table cellspacing="0" class="form-edit">
+    <tr>
+        <td class="payment-section">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-customer-address-list"><?php echo Mage::helper('customer')->__('Membership Settings') ?></h4>
+            </div> 
+            <div class="fieldset">
+                <form action="<?php echo Mage::getBaseUrl(); ?>mycloset/payment/settings/" method="POST">
+
+                    <?php
+                    $pay = explode('-', $this->getCustomerpayments());
+                    $time = date("d/m/Y h:i:s A", $pay['5']);
+                    ?>
+                    
+                     <?php if ($cusgroup == 5): ?>
+                        <h4 style="color: #DF280A;"> Membership Closed</h4>
+                    <?php else: ?>
+                        <?php if ($pay['4'] == ''): ?>
+
+                            <h4> Membership Status : Waiting list</h4>
+
+
+                        <?php else: ?>
+                            <h4> Membership type - <?php echo $pay['4'] ?> </h4>
+                            <?php if ($cusgroup == 6): ?>
+                                <h4> Membership is in notice</h4>
+                            <?php else: ?>
+                                <input type="radio" name="mem_plan" id="mem_plan" value="<?php echo $pay['3'] ?>"  checked> <label> Renew current membership plan</label>
+                                <br>
+                                <?php if (($pay['4'] == 'Virtual Closet')): ?>
+
+                                    <input type="radio" name="mem_plan" id="mem_plan"  value="3"> <label> Upgrade membership plan to Endless closet</label>
+                                    <br>
+
+                                    <input type="radio" name="mem_plan" id="mem_plan" value="1" > <label> Upgrade membership plan to Standard closet</label>
+                                    <br>
+                                <?php elseif (($pay['4'] == 'Standard Closet')): ?>
+
+                                    <input type="radio" name="mem_plan" id="mem_plan" value="3"> <label> Upgrade membership plan to Endless closet</label>
+                                    <br>
+
+                                <?php endif; ?>
+                                <input type="radio" name="mem_plan" id="mem_plan" value="4" onclick="Getplan(this.value);"><label> Close membership</label>
+                                <br>
+                            <?php endif; ?>
+                        <?php endif; ?>
+
+                    <input id="mem_plan" value="<?php
+                    if ($cusgroup == 6) {
+                        echo '1111';
+                    } else {
+                        echo '1000';
+                    }
+                    ?>" name="mem_plan" type="radio" required="required"/> <?php
+                           if ($cusgroup == 6) {
+                               echo 'Remove from notice';
+                           } else {
+                               echo 'Add to notice';
+                           }
+                           ?>   
+                    
+<br>
+<br>
+                    <input type="hidden" name="return_url" value="<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/customer/edit/id', array('id' => Mage::app()->getRequest()->getParam('id'))) ?>" />
+                    <input type="hidden" name="customer_entity_id" value="<?php echo Mage::app()->getRequest()->getParam('id'); ?>" />
+
+                    <button type='submit' class="scalable" value='Submit'  value="Submit">Submit settings</button>
+                    <?php endif; ?>
+                </form>
+
+            </div>
+    </tr>
+</table>
+
+
+

@@ -39,7 +39,7 @@
 
         header h2 {
             font-size: 24px;
-            letter-spacing: 6px;
+            letter-spacing:4px;
         }
 
         header img {
@@ -47,44 +47,52 @@
         }
 
         header .logo{
-            width: auto
+           width:861px;
         }
 
         .mainMenu .nav li a{
             padding:15px 30px;
         }
+        
+        footer .mainMenu .nav li a { padding: 15px 20px;}
 
     }
 
     /* Medium Devices, Desktops */
     @media only screen and (max-width : 992px) {
-
-         header h1 {
-            font-size: 26px;
-            letter-spacing: 7px;
-            display: inline-block;
-            margin: 0;
+        
+        header .logo {
+            width: 668px;
         }
 
+         header h1 {
+            display: block;
+            font-size: 36px;
+            letter-spacing: 7px;
+            margin: 10px 0 9px;
+        }
+        
         header h2 {
-            font-size: 20px;
-            letter-spacing: 1px;
             display: inline-block;
+            font-size: 22px;
+            letter-spacing: 1px;
             margin: 0;
-            padding-left: 60px;
         }
 
         header img {
-            display: inline-block;
-            float: none;
-            margin-bottom: -32px;
-            height: 80px;
+            float: left;
+            height: 100px;
+            margin-left: 10px;
+            margin-right: 10px;
+            margin-top: 0;
         }
+
 
         .mainMenu .nav li a{
             padding:15px 20px;
             text-align: left
         }
+        .mainMenu .nav li a.logo { padding:10px 0px;}
         .mainMenu .nav li.search-mobile a { text-align: center}
 
         .brdr-sm-r_0 { border-right: 0 !important}
@@ -99,6 +107,8 @@
         .customDropDown { margin-left: 15px !important; margin-right: 15px !important}
         
 .itemList a.button, .itemList button.button, .itemList input.button{margin:10px 0px;}
+
+ footer .mainMenu .nav li a { padding: 15px 7px;} 
 
     }
 
@@ -161,13 +171,38 @@
     
 
    @media only screen and (max-width : 767px) {
-          
+       .showMenu { overflow: hidden}
+       .allWrapper {transition: all 0.5s ease;}
+       .showMenu .allWrapper {left: 280px;}
+       .itemsWrapper,
+       .filterBy{ float: none}
+          header .loginDetails a { float: left }
        .std .intro a.button{margin:5px 10px;}
-       header .navbar-collapse  { background:#000; position: fixed; left: 0; top: 0; height: 100%; right: 40px; z-index:100; margin: 0 !important}
+       header .navbar-collapse  { transition: all 0.5s ease; background:#000; position: fixed; left: -280px; top: 0; height: 100% !important; width:280px; z-index:100; margin: 0 !important; display:block !important;}
+       header .navbar-collapse.in,
+       header .navbar-collapse.collapsing { left: 0%;}
        .mainMenu .nav li {
             width: 100%;
             float:left;
         }
+        
+        .mainMenu .nav li b.glyphicon { position: absolute; right: 10px; top:16px}
+        .mainMenu .nav li ul.sub-nav { position: relative}
+        .mainMenu .nav li ul.sub-nav li a {
+            border-bottom:0;
+            color: #ffffff !important;
+            display: block;
+            padding: 5px 30px;
+            text-decoration: none;
+        }
+        .mainMenu .nav li a{
+            padding:10px 20px;
+            text-align: left;
+            color:#fff !important;
+        }
+        .mainMenu .nav li.active a { color: red !important;}
+        .nav > li > a:focus, 
+        .nav > li > a:hover { background: none; color:#fff}
         .footerText { padding: 5px 0;}
         footer .social { width: 100%; margin: 0; text-align: center;}
         footer .social img { width: 20px;}
@@ -175,35 +210,52 @@
         .homeGrid h4 font { display: unset;}
 
         .subhead h2 { padding: 0}
-
+        .block-title { display: none;}
         .filterBy {
-                background: #eee none repeat scroll 0 0;
+                
                 border: 0 none;
                 border-radius: 5px;
-                margin: 15px;
+                margin: 0;
                 overflow: hidden;
                 padding: 10px;
             }
+            .filterBy .small-accordion{ margin: 0}
 
         .filterBy h3 {
             border-bottom: 1px solid #ccc;
             margin: 10px 10px 0;
             padding-bottom: 10px;
         }
-        .filterBy .small-accordion a {
-            background: #000 none repeat scroll 0 0;
+        
+        .itemList { margin: 15px 0 0 0}
+        .filterBy .small-accordion {
+            border-bottom: 1px solid #ccc;
+            margin:15px 0;
+        }
+        .filterBy .small-accordion h4 {
+            border-top: 1px solid #ccc;
+            font-size: 15px;
+            font-weight: bold;
+            margin: 0;
+            padding: 13px 0;
+        }
+        .filterBy .small-accordion h4 b { display: block; float:right; color:#666666}
+        
+        .filterBy .small-accordion > div {
+            padding: 0 0 10px 0;
+        }
+        
+       .filterBy .small-accordion a {
             border-radius: 20px;
-            color: #fff;
             display: block;
-            float: left;
             font-size: 16px;
-            margin: 3px;
-            padding: 2px 14px;
+            padding: 0 14px;
         }
 
         .filterBy .small-accordion .colorBox { 
             float: left;
         }
+        .topToolbar { border-top:1px solid #ccc; border-bottom:1px solid #ccc; padding-top:15px}
 
         .filterBy .small-accordion .colorBox a {
             border-radius: 3px;
@@ -220,14 +272,32 @@
         .filterBy .small-accordion h4 { float: left; width: 100%; cursor: pointer;}
         .filterBy .small-accordion > div { display: none; float: left;}
 
-        .homeGrid > div { min-height: auto; border:0 !important}
+        .homeGrid > div { min-height: auto; border:0 !important; margin: 20px 0}
         .mainMenu .nav li.search-mobile  { display: block}
         header .loginDetails .search { display: none}
         .mainMenu { border: 0px;}
         header h2 { display: none}
         header img { float: none}
         footer .mainMenu { display: none}
-        
+        .mobileFooter { display: block; border-top: 1px solid #fff} 
+        .popupBox { width:100%; margin: 0; left:0}
+        .popupContent .details {
+            border-bottom: 1px solid #ccc;
+            font-size: 16px;
+            margin: 0 15px;
+            padding: 0;
+        }
+        .popupContent .details a.button, 
+        .popupContent .details button.button, 
+        .popupContent .details input.button {
+            float: none;
+            left: 50%;
+            margin: 10px auto 10px -100px;
+            position: relative;
+            width: 200px;
+        }
+        .popupContent .carousel { border: 0}
+        .flex-direction-nav { display: none}
     }
     
 
@@ -243,7 +313,7 @@
             display: block;
         }
         header h1 {
-            font-size:22px;
+            font-size:19px;
         }
 
         header h2 {
@@ -266,6 +336,7 @@
             font-size: 14px !important;
             margin: 1px 2px 0;
             padding-bottom: 4px;
+            float: left
         }
 
 
@@ -287,7 +358,7 @@
             
         }
       
-        header .loginDetails a { margin: 1px 1px 0; font-size: 13px !important}
+        header .loginDetails a { margin: 1px 1px 0; font-size: 11px !important}
 
     }
 

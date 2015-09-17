@@ -103,7 +103,7 @@ class Mycloset_Membership_AccountController extends Mage_Core_Controller_Front_A
      * Login post action
      */
     public function loginPostAction() {
-        if (!$this->_validateFormKey()) {
+         if (!$this->_validateFormKey()) {
             $this->_redirect('*/*/');
             return;
         }
@@ -112,39 +112,52 @@ class Mycloset_Membership_AccountController extends Mage_Core_Controller_Front_A
             $this->_redirect('*/*/');
             return;
         }
-        $session = $this->_getSession();
-
-        if ($this->getRequest()->isPost()) {
-            $login = $this->getRequest()->getPost('login');
-            if (!empty($login['username']) && !empty($login['password'])) {
-                try {
-                    $session->login($login['username'], $login['password']);
-                    if ($session->getCustomer()->getIsJustConfirmed()) {
-                        $this->_welcomeCustomer($session->getCustomer(), true);
+        //restricting user to login based on group  
+        $login = $this->getRequest()->getPost('login');
+        $customer = Mage::getModel('customer/customer')
+                ->setWebsiteId(Mage::app()->getStore()->getWebsiteId())
+                ->loadByEmail($login['username']);
+        $group = $customer->getGroupId();        
+        if (($group == '4') || ($group == '5')) {
+            $session = $this->_getSession();
+            $message = 'Your membership is not activated or it has been closed';
+            $session->addError($message);
+            $this->_loginPostRedirect();
+        } else {
+            //user is granted login to website after the group verification
+            $session = $this->_getSession();
+            if ($this->getRequest()->isPost()) {
+                $login = $this->getRequest()->getPost('login');
+                if (!empty($login['username']) && !empty($login['password'])) {
+                    try {
+                        $session->login($login['username'], $login['password']);
+                        if ($session->getCustomer()->getIsJustConfirmed()) {
+                            $this->_welcomeCustomer($session->getCustomer(), true);
+                        }
+                    } catch (Mage_Core_Exception $e) {
+                        switch ($e->getCode()) {
+                            case Mage_Customer_Model_Customer::EXCEPTION_EMAIL_NOT_CONFIRMED:
+                                $value = $this->_getHelper('customer')->getEmailConfirmationUrl($login['username']);
+                                $message = $this->_getHelper('customer')->__('This account is not confirmed. <a href="%s">Click here</a> to resend confirmation email.', $value);
+                                break;
+                            case Mage_Customer_Model_Customer::EXCEPTION_INVALID_EMAIL_OR_PASSWORD:
+                                $message = $e->getMessage();
+                                break;
+                            default:
+                                $message = $e->getMessage();
+                        }
+                        $session->addError($message);
+                        $session->setUsername($login['username']);
+                    } catch (Exception $e) {
+                        // Mage::logException($e); // PA DSS violation: this exception log can disclose customer password
                     }
-                } catch (Mage_Core_Exception $e) {
-                    switch ($e->getCode()) {
-                        case Mage_Customer_Model_Customer::EXCEPTION_EMAIL_NOT_CONFIRMED:
-                            $value = $this->_getHelper('customer')->getEmailConfirmationUrl($login['username']);
-                            $message = $this->_getHelper('customer')->__('This account is not confirmed. <a href="%s">Click here</a> to resend confirmation email.', $value);
-                            break;
-                        case Mage_Customer_Model_Customer::EXCEPTION_INVALID_EMAIL_OR_PASSWORD:
-                            $message = $e->getMessage();
-                            break;
-                        default:
-                            $message = $e->getMessage();
-                    }
-                    $session->addError($message);
-                    $session->setUsername($login['username']);
-                } catch (Exception $e) {
-                    // Mage::logException($e); // PA DSS violation: this exception log can disclose customer password
+                } else {
+                    $session->addError($this->__('Login and password are required.'));
                 }
-            } else {
-                $session->addError($this->__('Login and password are required.'));
             }
-        }
 
-        $this->_loginPostRedirect();
+            $this->_loginPostRedirect();
+        }
     }
 
     /**

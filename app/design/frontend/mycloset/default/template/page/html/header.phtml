@@ -75,41 +75,55 @@
                             <a href="<?php echo $this->getUrl('') ?>my-closet.html"><?php echo $this->__('MY CLOSET') ?></a>
 
                             <ul class="sub-nav">
-                                <li >
-                                    <a class="" href="<?php echo $this->getUrl('') ?>my-closet/accessories.html">Accessories </a>
-                                </li>
-                                <li >
-                                    <a class="" href="<?php echo $this->getUrl('') ?>my-closet/bags.html">Bags</a>
-                                </li>
-                                <li >
-                                    <a class="" href="<?php echo $this->getUrl('') ?>my-closet/bottoms.html">Bottoms</a>
-                                </li>
-                                <li >
-                                    <a class="" href="<?php echo $this->getUrl('') ?>my-closet/coats.html">Coats</a>
-                                </li>
-                                <li >
-                                    <a class="" href="<?php echo $this->getUrl('') ?>my-closet/dress.html">Dress</a>
-                                </li>
-                                <li >
-                                    <a class="" href="<?php echo $this->getUrl('') ?>my-closet/jackets.html">Jackets</a>
-                                </li>
-                                <li >
-                                    <a class="" href="<?php echo $this->getUrl('') ?>my-closet/shoes.html">Shoes</a>
-                                </li>
-                                <li >
-                                    <a class="" href="<?php echo $this->getUrl('') ?>my-closet/suits.html">Suits</a>
-                                </li>
-                                <li >
-                                    <a class="" href="<?php echo $this->getUrl('') ?>my-closet/top.html">Tops</a>
-                                </li>
+                                <?php
+                                $cat = Mage::getModel('catalog/category')->load(16);
+                                $subcats = $cat->getChildren();
+                                $all_sub_cat = explode(',', $subcats);
+
+
+                                foreach ($all_sub_cat as $cat_id) {
+                                    $userid = Mage::getSingleton('customer/session')->getId();
+                                    $category = Mage::getModel('catalog/category')->load($cat_id);
+                                    $categories = Mage::getModel('catalog/category')->load($category->getId())
+                                            ->getProductCollection()
+                                            ->addAttributeToSelect('entity_id')
+                                            ->addAttributeToFilter('status', 1)
+                                            ->addAttributeToFilter('visibility', 4);
+                                    $products = Mage::getModel('catalog/product')
+                                            ->getCollection()
+                                            ->addAttributeToFilter('customer_name', $userid)
+                                           ->addCategoryFilter($category)
+                                            ->load();
+                                    if (($products->count() > 0 )) {
+                                      
+                                        ?>
+                                      
+                                        <li >
+                                            <a class="" href="<?php echo $this->getUrl('') ?>my-closet/accessories.html"><?php echo $category->name; ?> </a>
+                                        </li>
+                                    <?php
+                                    }
+                                }
+                                ?>                               
                             </ul>  
                         </li>
 
-                    <?php endif; ?>
+<?php endif; ?>
                     <li><a href="<?php echo $this->getUrl('') ?>shop.html"><?php echo $this->__('SHOP') ?></a></li>                       
                     <li><a href="<?php echo $this->getUrl('') ?>faq/?___store=default"><?php echo $this->__('FAQ') ?></a></li>
-                    <li><a href="<?php echo $this->getUrl('') ?>blog.html"><?php echo $this->__('BLOG') ?></a></li>
+                    <li><a href="http://mycc.bridge-delivery.com/mgn/blog/"><?php echo $this->__('BLOG') ?></a></li>
                 </ul>
+
+                <ul class="nav navbar-nav mobileFooter">
+
+                    <li><a href="<?php echo $this->getUrl('') ?>testimonials/?___store=default">Testimonials</a></li>                        
+                    <li><a href="<?php echo $this->getUrl('') ?>press/?___store=default">Press</a></li>                   
+                    <li><a href="<?php echo $this->getUrl('') ?>careers/?___store=default">Careers </a></li>                       
+                    <li><a href="<?php echo $this->getUrl('') ?>">Contact </a></li>                       
+                    <li><a href="<?php echo $this->getUrl('') ?>termservices/?___store=default">Terms and Conditions </a></li>
+                    <li><a href="<?php echo $this->getUrl('') ?>privacy/?___store=default">Privacy </a></li>
+                </ul>
+
             </div>
         </div>
     </nav>

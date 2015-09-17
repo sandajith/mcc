@@ -61,7 +61,7 @@ $_product1 = $this->getProduct();
     }
 </script>
 <?php if (!$_productCollection->count()): ?>
-    <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+    <p class="note-msg align_center"><?php echo $this->__('There are no products matching the selection.') ?></p>
 <?php else: ?>
     <div class="topToolbar">
         <?php echo $this->getToolbarHtml() ?>
@@ -130,7 +130,8 @@ $_product1 = $this->getProduct();
                 <div class="col-sm-4 itemList">
                       <div class="row">
                             <div class="col-sm-12 col-xs-6">
-                    <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);"  title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(200); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+                    <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);"  title="<?php echo $this->stripTags($this->getImageLabel($_product, 'thumbnail'), null, true) ?>" class="product-image">
+                        <img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail')->resize(200); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'thumbnail'), null, true) ?>" /></a>
                             </div>
                            <div class="col-sm-12 col-xs-6">
                     <ul>

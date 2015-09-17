@@ -66,7 +66,7 @@ if ($this->canShowBlock()):
                     
                     
                         <?php if ($_filter->getItemsCount()): ?>
-                        <h4><?php echo $this->__($_filter->getName()) ?></h4>
+                        <h4><?php echo $this->__($_filter->getName()) ?> <b class="glyphicon glyphicon-chevron-down" aria-hidden="true"></b></h4>
                         <?php if ($this->__($_filter->getName()) === 'Color'): ?>
                             <div class="colorBox">                                
                             <?php echo $_filter->getHtml() ?>

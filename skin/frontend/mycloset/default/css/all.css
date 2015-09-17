@@ -55,7 +55,7 @@
 }
 a,
 html,body{ height: 100%}
-body { background: #ffffff; color: #000; font-family: Lato; margin: 0}
+body { background: #ffffff; color: #000; font-family: Lato; font-size: 16px; margin: 0}
 a { text-decoration:none }
 a,
 a:hover { text-decoration: none; outline: none !important;}
@@ -70,32 +70,36 @@ header {
     float: left;
     width: 100%;
     text-align: center;
-    padding: 10px 0 1px 0;
+    padding:0 0 1px;
 }
-header .logo { 
+header .logo {
+    color: #fff;
+    display: inline-block;
     margin: 0 auto;
     overflow: hidden;
-    width: 1048px;
-    color: #fff;
     text-decoration: none;
+    width: 968px;
 }
 
 
 header a.logo:hover {  text-decoration: none;color: #fff;}
 header h1 { 
-    font-size: 48px;
-    letter-spacing: 18px;
+    font-size: 46px;
+    letter-spacing: 14px;
     text-transform: uppercase;
+    margin-top: 10px;
 }
 
 header h2 {
-    font-size: 26px;
-    letter-spacing:10px;
-    font-family:Lato;
+    font-family: Lato;
+    font-size: 23px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-top: 10px;
 }
 header img { 
     float: left;
-    height: 140px;
+    height: 142px;
 }
 
 header .loginDetails{
@@ -105,11 +109,12 @@ header .loginDetails{
 }
 header .loginDetails a {
     color: #ffffff;
-    font-size:16px;
+    font-size:14px;
     margin: 0 10px 0 10px;
 }
 header .loginDetails a:first-child {
-    font-size: 20px;
+    /* comment by neenu
+    font-size: 16px; */
 }
 
 
@@ -117,14 +122,14 @@ header .loginDetails .search{
     float: left; 
     width: 100%;
     position: relative;
-    margin: 10px 10px 10px 0;
+    margin: 3px 10px 0 0;
 }
 header .search input{
     
-    border-radius:30px;
-    border: 0;
+   border: 0 none;
+    border-radius: 30px;
     color: #333333;
-    padding: 3px 10px;
+    padding: 2px 9px;
 }
 
 header .search:after {
@@ -132,8 +137,8 @@ header .search:after {
     font-family: "Glyphicons Halflings";
     height: 20px;
     position: absolute;
-    right: 4px;
-    top:3px;
+    right:10px;
+    top:2px;
     width: 20px;
     z-index: 10;
     color: #666;
@@ -160,7 +165,7 @@ header .search:after {
     background:#000; 
     border-top: 1px solid #fff; 
     border-bottom: 1px solid #fff;
-    margin-top: 24px;
+    margin-top: 20px;
     font-family: Lato;
 }
 
@@ -191,7 +196,7 @@ header .search:after {
 .mainMenu .nav li ul.sub-nav li { display: block; float: 100%}
 .mainMenu .nav li ul.sub-nav li a { color: #ffffff; display: block; border-bottom: 1px solid #ffffff;   text-decoration: none;}
 .mainMenu .nav li a{
-    padding:15px 48px;
+    padding:12px 44px;
 }
 .mainMenu .nav li a:hover { color: #000}
 .mainMenu .nav li.search-mobile {  border-bottom: 1px solid #fff;
@@ -202,7 +207,7 @@ header .search:after {
 .mainMenu .nav li.search-mobile .search { float: left; width: 100%; position: relative}
 .mainMenu .nav li.search-mobile  input { width: 100%; }
 .navbar-toggle { margin: 0}
-
+.mobileFooter { display: none}
 .intro { float: left; width: 100%; font-family: 'Playfair Display'; font-style: italic; text-align: center;}
 .intro p { font-size: 28px;}
 a.button, button.button, input.button { 
@@ -229,6 +234,7 @@ a.button, button.button, input.button {
     -webkit-box-shadow:3px 4px 10px -6px #000;
     -o-box-shadow:3px 4px 10px -6px #000;
     border: 0;
+    text-transform: uppercase;
 }
 
 .itemList ul label{font-weight: normal;}
@@ -242,7 +248,7 @@ a.button, button.button, input.button {
     padding: 5px 0px; 
     border-top:1px solid #000;
     border-bottom:1px solid #000;
-    margin: 10px 0
+    margin: 10px 0 15px;
 }
 .carousel ul { 
     width:4000px; 
@@ -305,11 +311,11 @@ a.button, button.button, input.button {
 .homeGrid p { 
     font-style: italic; 
     font-weight: 300; 
-    font-size: 18px;
+    min-height: 135px;
 }
 .homeGrid a { 
     font-weight: 300; 
-    font-size: 18px; 
+    font-size: 16px; 
     display: block;
     text-align: right; 
     color: #000000; 
@@ -323,8 +329,9 @@ a.button, button.button, input.button {
     border-left: 0
 }
 .homeGrid > div { 
-    margin: 20px 0 40px 0;
-    min-height: 276px;
+    margin: 12px 0 16px 0;
+    min-height: 216px;
+    padding-bottom: 30px;
 }
 
 .flex-direction-nav a { 
@@ -410,6 +417,7 @@ a.button, button.button, input.button {
 .itemList img {
     max-width: 100%
 }
+.itemsWrapper  { float: right}
 .itemsWrapper .customDropDown.pull-left {
     margin: 0 0 15px 45px
 }
@@ -490,6 +498,7 @@ a.button, button.button, input.button {
     border: 2px solid #c3c3c3;
     padding: 10px;
     margin: 35px 0 0;
+    float: left;
 }
 .itemsWrapper .itemList ul li a {
     border: 0;
@@ -509,6 +518,7 @@ a.button, button.button, input.button {
     font-size: 15px;
     font-weight: bold;
 }
+.filterBy .small-accordion h4 b { display: none}
 .filterBy .small-accordion label,
 .filterBy .small-accordion a {
     display: block;
@@ -684,7 +694,7 @@ footer .mainMenu .nav li {
 footer .mainMenu .nav li a { 
     color: #e0e0e0 !important;
     font-weight: 300;
-    padding: 15px 37px;
+    padding: 15px 27px;
     text-transform: none;
     background: none !important
 }
@@ -884,3 +894,35 @@ p.required { font-size:11px; text-align:right; color:#EB340A; }
 .intro p.alrdyMember{font: 14px/20px arial;}
 .block-subscribe .actions{text-align: center;}
 .block-subscribe .actions button.button{margin:15px 0px; }
+.success_title{text-align: center; }
+.pickup_success{text-align: center;}
+.align_center{text-align: center; margin: 0 auto; width: 50%; padding: 0 10px;}
+.align_center .dataTable .input-text{height: 30px; max-width: 100%; text-align: center;width: 30px;}
+.align_center .dataTable > .row{height:70px; vertical-align: middle; }
+.align_center .dataTable > .row+.foot{height:100%;}
+ header .loginDetails .links { display: block !important;position: relative;z-index: 50001;}
+ .align_center .dataTable .input-text{padding: 3px;font-size: 13px;}
+ .about{margin-bottom: 30px;}
+ .about h2{margin-top: 6px;}
+ .about h3{margin-top: 0px;}
+ .about p{font-family:"Lato"; font-size: 1em;}
+ 
+ 
+ @media only screen and (max-width : 768px) {
+        .align_center .dataTable > .row{font-size:12px; line-height: 30px; }
+        .align_center{text-align: center; margin: 0 auto; width: 100%; padding: 0 10px;}
+        .align_center .dataTable .input-text{padding: 3px; font-size: 12px;}
+        
+    }
+
+/* neenu */
+.note-msg+.align_center {text-align: center;}
+
+/* sreedarsh*/
+ul.messages li{
+    padding-top: 20px;
+    color: #DF280A;
+}
+
+ul.messages li.error-msg > ul > li{text-align:center; padding:5px;background:#FAEBE7;}
+ul.messages li.error-msg > ul > li span{padding-left:25px;background:url("../images/errorico.png") no-repeat left center;width:20px; height:20px;}

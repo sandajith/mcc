@@ -1,0 +1,250 @@
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00027
+                    [text] => The credit card number is invalid.
+                )
+
+        )
+
+    [directResponse] => 2,4,37,The credit card number is invalid.,,P,7523016577,INV185924206,,1.00,CC,auth_only,144220150975,Sreedarsh,A,,,,,,,4564564564,,fdgsfghdf@jkjk.com,Sreedarsh,A,Sdffgdasfg,,,,,,,,0.00,,,42694609FC3FBB3891DBA762618EEF21,,,,,,,,,,,,,XXXX0027,Visa,,,,,,,,,,,,,,,,,208183666
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00027
+                    [text] => The credit card number is invalid.
+                )
+
+        )
+
+    [directResponse] => 2,4,37,The credit card number is invalid.,,P,7523018331,INV185924426,,1.00,CC,auth_only,144220168399,Sreedarsh,A,,,,,,,4564564564,,fdgsfghdf@jkjk.com,Sreedarsh,A,Sdffgdasfg,,,,,,,,0.00,,,288BEBDFBB4AF573215EDDFAB86B2984,,,,,,,,,,,,,XXXX0027,Visa,,,,,,,,,,,,,,,,,208183898
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00009
+                    [text] => The payment gateway account is in Test Mode. The request cannot be processed.
+                )
+
+        )
+
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00013
+                    [text] => Expiration Date is invalid.
+                )
+
+        )
+
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00003
+                    [text] => The 'AnetApi/xml/v1/schema/AnetApiSchema.xsd:customerPaymentProfileId' element is invalid - The value '' is invalid according to its datatype 'AnetApi/xml/v1/schema/AnetApiSchema.xsd:numericString' - The Pattern constraint failed.
+                )
+
+        )
+
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00027
+                    [text] => The credit card number is invalid.
+                )
+
+        )
+
+    [directResponse] => 2,4,37,The credit card number is invalid.,,P,7523127907,INV185928747,,1.00,CC,auth_only,144221144872,Test,Q,,,,,,,456546,,test@red.com,Test,Q,dgnhkjhdsgkjh,,,,,,,,0.00,,,6700A3AAF68D370BD2B3D252400F6A45,,,,,,,,,,,,,XXXX0027,Visa,,,,,,,,,,,,,,,,,208188016
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00027
+                    [text] => The credit card number is invalid.
+                )
+
+        )
+
+    [directResponse] => 3,1,6,The credit card number is invalid.,,P,0,INV186112273,,1.00,CC,auth_only,144229011676,Michel,John,,,,,,,4784784564,,mich78457@in.com,Michel,John,Web design,,,,,,,,0.00,,,207BCBBF78E85CF174C87AE286B472D2,,,,,,,,,,,,,XXXX0026,,,,,,,,,,,,,,,,,,208405897
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00027
+                    [text] => The credit card number is invalid.
+                )
+
+        )
+
+    [directResponse] => 3,1,6,The credit card number is invalid.,,P,0,INV186112379,,1.00,CC,auth_only,144229034756,Michel,John,,,,,,,4784784564,,mich78457@in.com,Michel,John,Web design,,,,,,,,0.00,,,207BCBBF78E85CF174C87AE286B472D2,,,,,,,,,,,,,XXXX0026,,,,,,,,,,,,,,,,,,208406016
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00027
+                    [text] => The credit card number is invalid.
+                )
+
+        )
+
+    [directResponse] => 3,1,6,The credit card number is invalid.,,P,0,INV186113547,,1.00,CC,auth_only,144229290927,Michel,John,,,,,,,4784784564,,mich78457@in.com,Michel,John,Web design,,,,,,,,0.00,,,207BCBBF78E85CF174C87AE286B472D2,,,,,,,,,,,,,XXXX0026,,,,,,,,,,,,,,,,,,208407169
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00027
+                    [text] => The credit card number is invalid.
+                )
+
+        )
+
+    [directResponse] => 3,1,6,The credit card number is invalid.,,P,0,INV186115672,,1.00,CC,auth_only,144229899221,Sandra,sd,,,,,,,454546456,,fghgf@gmail.com,Sandra,sd,Sghfgf,,,,,,,,0.00,,,207BCBBF78E85CF174C87AE286B472D2,,,,,,,,,,,,,XXXX0026,,,,,,,,,,,,,,,,,,208408940
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00027
+                    [text] => The credit card number is invalid.
+                )
+
+        )
+
+    [directResponse] => 3,1,6,The credit card number is invalid.,,P,0,INV186116085,,1.00,CC,auth_only,144230033924,Sandra,sd,,,,,,,454546456,,fghgf@gmail.com,Sandra,sd,Sghfgf,,,,,,,,0.00,,,207BCBBF78E85CF174C87AE286B472D2,,,,,,,,,,,,,XXXX0026,,,,,,,,,,,,,,,,,,208409280
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00027
+                    [text] => The credit card number is invalid.
+                )
+
+        )
+
+    [directResponse] => 3,1,6,The credit card number is invalid.,,P,0,INV186116636,,1.00,CC,auth_only,144230220866,Sandra,sd,,,,,,,454546456,,fghgf@gmail.com,Sandra,sd,Sghfgf,,,,,,,,0.00,,,207BCBBF78E85CF174C87AE286B472D2,,,,,,,,,,,,,XXXX0026,,,,,,,,,,,,,,,,,,208409724
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00027
+                    [text] => The credit card number is invalid.
+                )
+
+        )
+
+    [directResponse] => 3,1,6,The credit card number is invalid.,,P,0,INV186116691,,1.00,CC,auth_only,144230236874,Sandra,sd,,,,,,,454546456,,fghgf@gmail.com,Sandra,sd,Sghfgf,,,,,,,,0.00,,,207BCBBF78E85CF174C87AE286B472D2,,,,,,,,,,,,,XXXX0026,,,,,,,,,,,,,,,,,,208409771
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00003
+                    [text] => The 'AnetApi/xml/v1/schema/AnetApiSchema.xsd:cardNumber' element is invalid - The value '45872113789657452' is invalid according to its datatype 'String' - The actual length is greater than the MaxLength value.
+                )
+
+        )
+
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00003
+                    [text] => The 'AnetApi/xml/v1/schema/AnetApiSchema.xsd:customerPaymentProfileId' element is invalid - The value '' is invalid according to its datatype 'AnetApi/xml/v1/schema/AnetApiSchema.xsd:numericString' - The Pattern constraint failed.
+                )
+
+        )
+
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00027
+                    [text] => The credit card number is invalid.
+                )
+
+        )
+
+    [directResponse] => 3,1,6,The credit card number is invalid.,,P,0,INV186116845,,1.00,CC,auth_only,144230281187,efr,sdf,,,,,,,5646,,dsf@gmail.com,efr,sdf,yghkyg,,,,,,,,0.00,,,207BCBBF78E85CF174C87AE286B472D2,,,,,,,,,,,,,XXXX4123,,,,,,,,,,,,,,,,,,208409924
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00027
+                    [text] => The credit card number is invalid.
+                )
+
+        )
+
+    [directResponse] => 3,1,6,The credit card number is invalid.,,P,0,INV186118460,,1.00,CC,auth_only,14423053988,Sandra,sd,,,,,,,454546456,,fghgf@gmail.com,Sandra,sd,Sghfgf,,,,,,,,0.00,,,207BCBBF78E85CF174C87AE286B472D2,,,,,,,,,,,,,XXXX0026,,,,,,,,,,,,,,,,,,208411018
+)
