@@ -32,18 +32,59 @@
         <nav class="mainMenu">
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="<?php echo $this->getUrl('') ?>about-magento-demo-store">About</a></li>                          
-                     <li><a href="<?php echo $this->getUrl('') ?>testimonials/?___store=default">Testimonials</a></li>                        
-                    <li><a href="<?php echo $this->getUrl('') ?>press/?___store=default">Press</a></li>                   
+                      <?php
+                    $_page = Mage::getModel('cms/page')->load('about-magento-demo-store', 'identifier');
+                    if ($_page->getIsActive()) {
+                        ?>
+                        <li><a href="<?php echo $this->getUrl('') ?>about-magento-demo-store">About</a></li>  
+                    <?php } ?>
+                   
+                        <?php
+                    $_page = Mage::getModel('cms/page')->load('testimonials', 'identifier');
+                    if ($_page->getIsActive()) {
+                        ?>
+                        <li><a href="<?php echo $this->getUrl('') ?>testimonials">Testimonials</a></li>  
+                    <?php }
+                    $_page = Mage::getModel('cms/page')->load('press', 'identifier');
+                    if ($_page->getIsActive()) {
+                        ?>
+                        <li><a href="<?php echo $this->getUrl('') ?>press">Press</a></li>  
+                    <?php } ?>
                      <?php if (!Mage::getSingleton('customer/session')->isLoggedIn()): ?>                  
                      <li><a href="<?php echo $this->getUrl('') ?>my-closet.html">Sample Closet</a></li> 
                       <?php else: ?>
                     <li><a href="<?php echo $this->getUrl('') ?>my-closet.html">My Closet </a></li> 
                      <?php endif; ?>
-                    <li><a href="<?php echo $this->getUrl('') ?>faq/?___store=default">FAQ</a></li>                        
-                    <li><a href="<?php echo $this->getUrl('') ?>careers/?___store=default">Careers </a></li>                       
-                   <li><a href="<?php echo $this->getUrl('') ?>termservices/?___store=default">Terms and Conditions </a></li>
-                   <li><a href="<?php echo $this->getUrl('') ?>privacy/?___store=default">Privacy </a></li>
+                    
+                    
+                    
+                         <?php
+                    $_page = Mage::getModel('cms/page')->load('faq', 'identifier');
+                    if ($_page->getIsActive()) {
+                        ?>
+                        <li><a href="<?php echo $this->getUrl('') ?>faq">FAQ</a></li>  
+                    <?php } ?>
+                             <?php
+                    $_page = Mage::getModel('cms/page')->load('careers', 'identifier');
+                    if ($_page->getIsActive()) {
+                        ?>
+                        <li><a href="<?php echo $this->getUrl('') ?>careers">Careers</a></li>  
+                    <?php } ?>
+                             <?php
+                    $_page = Mage::getModel('cms/page')->load('termservices', 'identifier');
+                    if ($_page->getIsActive()) {
+                        ?>
+                        <li><a href="<?php echo $this->getUrl('') ?>termservices">Terms and Conditions </a></li>  
+                    <?php } ?>
+                             <?php
+                    $_page = Mage::getModel('cms/page')->load('privacy', 'identifier');
+                    if ($_page->getIsActive()) {
+                        ?>
+                        <li><a href="<?php echo $this->getUrl('') ?>privacy">Privacy</a></li>  
+                    <?php } ?>
+                    <!--<li><a href="<?php echo $this->getUrl('') ?>contacts">Contact </a></li>--> 
+                     
+                     
                 </ul>
             </div>
         </nav>

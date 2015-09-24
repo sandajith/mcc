@@ -89,7 +89,7 @@
 
 
         .mainMenu .nav li a{
-            padding:15px 20px;
+            padding:15px 13px;
             text-align: left
         }
         .mainMenu .nav li a.logo { padding:10px 0px;}
@@ -170,7 +170,7 @@
 
     
 
-   @media only screen and (max-width : 767px) {
+   @media only screen and (max-width : 769px) {
        .showMenu { overflow: hidden}
        .allWrapper {transition: all 0.5s ease;}
        .showMenu .allWrapper {left: 280px;}
@@ -297,13 +297,13 @@
             width: 200px;
         }
         .popupContent .carousel { border: 0}
-        .flex-direction-nav { display: none}
+        .productdata {  margin-left: -15px; margin-right: -15px;}
     }
     
 
     @media only screen and (min-width : 616px) {
        
-        header .loginDetails .links { display: block !important}
+        header .loginDetails .links { display: block !important;}
     }
 
     @media only screen and (max-width : 615px) {
@@ -365,6 +365,7 @@
 
     /* Custom, iPhone Retina */ 
     @media only screen and (max-width : 320px) {
+        
         
     }
 

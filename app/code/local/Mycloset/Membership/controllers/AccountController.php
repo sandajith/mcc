@@ -307,7 +307,7 @@ class Mycloset_Membership_AccountController extends Mage_Core_Controller_Front_A
             $session->setCustomerFormData($this->getRequest()->getPost());
             if ($e->getCode() === Mage_Customer_Model_Customer::EXCEPTION_EMAIL_EXISTS) {
                 $url = $this->_getUrl('customer/account/forgotpassword');
-                $message = $this->__('There is already an account with this email address. If you are sure that it is your email address, <a href="%s">click here</a> to get your password and access your account.', $url);
+                $message = $this->__('Sorry,There is already an account registered with this email address.', $url);
                 $session->setEscapeMessages(false);
             } else {
                 $message = $e->getMessage();
@@ -317,7 +317,7 @@ class Mycloset_Membership_AccountController extends Mage_Core_Controller_Front_A
             $session->setCustomerFormData($this->getRequest()->getPost())
                     ->addException($e, $this->__('Cannot save the customer.'));
         }
-        $errUrl = $this->_getUrl('*/*/create', array('_secure' => true));
+        $errUrl = $this->_getUrl('*/*/exists', array('_secure' => true));
         $this->_redirectError($errUrl);
     }
 
@@ -963,7 +963,10 @@ class Mycloset_Membership_AccountController extends Mage_Core_Controller_Front_A
         return $this->_getHelper('customer/address')->isVatValidationEnabled($store);
     }
 
-    
+    public function existsAction(){
+         $this->loadLayout();
+        $this->renderLayout();
+    }
 
     
 }

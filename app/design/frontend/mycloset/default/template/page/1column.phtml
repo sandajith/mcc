@@ -42,17 +42,24 @@
                 <?php echo $this->getChildHtml('header') ?>
                 <div class="main-container col1-layout"> 
 
-                    <div class="main">
-                        <div class="container">
+                    <div class="main"> 
+                      
+                        <div   <?php
+                     $currentUrl = Mage::helper('core/url')->getCurrentUrl();
+ $url = Mage::getSingleton('core/url')->parseUrl($currentUrl);
+ $path = $url->getPath();
+$keyword = explode('/mgn/magento/', $path);
+if($keyword[1]!='home'){ 
+                        ?> class="container" <?php } ?>>
 
-                            <div class="row">
+                            
                                 <?php //echo $this->getChildHtml('breadcrumbs') ?>
-                                <div class="col-main col-md-12">
+                                <div class="col-main">
                                     <?php echo $this->getChildHtml('global_messages') ?>
                                     <?php echo $this->getChildHtml('content') ?>
                                 </div>
 
-                            </div>
+                           
                         </div>
                     </div>
                 </div>

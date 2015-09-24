@@ -1,4 +1,4 @@
-
+  
 <?php
 $p = $this->getProductdetails();
 $userid = Mage::getSingleton('customer/session')->getId(); // login user id
@@ -6,22 +6,18 @@ $userid = Mage::getSingleton('customer/session')->getId(); // login user id
 $cat = Mage::getModel('catalog/category')->load(16);
 $subcats = $cat->getChildren();
 $all_sub_cat = explode(',', $subcats);
-//echo '<pre>';
-//print_r($p);
-
-
 $product = $p['id'];
-
 $cats = $product->getCategoryIds();
 foreach ($cats as $category_id) {
-    $_cat = Mage::getModel('catalog/category')->load($category_id) ;
+    $_cat = Mage::getModel('catalog/category')->load($category_id);
     $catname = $_cat->getName();
-} 
+}
 $_product = Mage::registry('current_product');
 // $productIds = $p['id'];
 ////    $products = Mage::getModel('catalog/product')->getCollection($productIds);
 // $product = Mage::getModel('catalog/product')->load($productIds);      
 //   
+
 ?>
 
 <div class="popupHead">
@@ -30,12 +26,12 @@ $_product = Mage::registry('current_product');
 </div>
 
 <div class="popupContent">
-    <div class="row" id="productdata">
-        <div class="col-sm-6 image " style="min-height: 200px;">
+    <div class="row productdata" id="productdata">
+        <div class="col-sm-7 image " style="min-height: 200px;">
             <img alt="" src="<?php echo $p['ImageUrl']; ?>"/>                                                                                
         </div>
-        <div class="col-sm-6 details">
-           <!--category name-->
+        <div class="col-sm-5 details">
+            <!--category name-->
             <h2><?php echo $catname;
 ?>
             </h2>
@@ -45,14 +41,13 @@ $_product = Mage::registry('current_product');
             </div>
             <div class="size"><i>Size <?php echo $p['size']; ?></i></div>
             <div class="season"><i><?php echo $p['season']; ?></i></div>
-            <!--tag details-->
-            <!--            <div class="tags">
+<!--            tag details
+                        <div class="tags">
                             <b>Tags</b>
-                            <span class="tagitem"><a>Formal</a> <i class='tagclose'>X</i></span>
-                            <span class="tagitem"><a>Formal</a> <i class='tagclose'>X</i></span>
-                            <span class="tagitem"><a>Formal</a> <i class='tagclose'>X</i></span>
+                            <div>
+                            <span class="tagitem"><a>Formal</a> <i class='tagclose'>X</i></span>                          
                             <span id="remove" class="add"><input type="text" class="inputz" name="tagss" value=""></span>
-            
+                            </div>
                         </div>-->
             <p class="description">
                 <?php echo $p['ShortDescription']; ?>
@@ -68,7 +63,7 @@ $_product = Mage::registry('current_product');
                     <button type="button" title="<?php echo $this->__('Deliver Me') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($p) ?>')"><span><span><?php echo $this->__('Deliver Me') ?></span></span></button>
                 <?php } else { ?>
                     <button title="<?php echo $this->__('Pick Me Up') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($p) ?>')" ><?php echo $this->__('Pick Me Up') ?></button>  
-                <?php
+                    <?php
                 }
             } else {
                 if ($p['product_status'] == 'We Have It') {
@@ -76,7 +71,7 @@ $_product = Mage::registry('current_product');
                     <a  title="<?php echo $this->__('Deliver Me') ?>" class="button btn-cart" href="<?php echo $this->getUrl('') ?>membership/account/create/"><span><span><?php echo $this->__('Deliver Me') ?></span></span></a>
                 <?php } else { ?>
                     <a title="<?php echo $this->__('Pick Me Up') ?>" class="button btn-cart" href="<?php echo $this->getUrl('') ?>membership/account/create/"><?php echo $this->__('Pick Me Up') ?></a>  
-                <?php
+                    <?php
                 }
             }
             ?> 
@@ -85,58 +80,116 @@ $_product = Mage::registry('current_product');
     <div>
 
         <!--SHOW BY-->
-        <!--        <div class="customDropDown pull-left">
-                    <div class="dropContentBox">
-                        <b>SORT BY</b>
-                        <span>Category</span>
-                        <ul>
-                            <li> <b>Category</b>
-                                <ul>                         
-        <?php
-//                            foreach ($all_sub_cat as $cat_id) {
-//                                $category = Mage::getModel('catalog/category')->load($cat_id);
-//                                $products = Mage::getModel('catalog/category')->load($category->getId())
-//                                        ->getProductCollection()
-//                                        ->addAttributeToSelect('entity_id')
-//                                        ->addAttributeToFilter('status', 1)
-//                                        ->addAttributeToFilter('visibility', 4);
-        ?>
-                                        <li><?php // echo $category->name;  ?></li> 
-<?php // }   ?>
-                                </ul>
-                            </li>
+<!--        <div class="customDropDown pull-left">
+            <div class="dropContentBox">
+                <b>SORT BY</b>
+
+                <ul>
+                    <li> <b>Category</b>
+                        <ul>  
+                            <li> All Categories</li>
+                            <?php
+                            foreach ($all_sub_cat as $cat_id) {
+                                $category = Mage::getModel('catalog/category')->load($cat_id);
+                                $categories = Mage::getModel('catalog/category')->load($category->getId())
+                                        ->getProductCollection()
+                                        ->addAttributeToSelect('entity_id')
+                                        ->addAttributeToFilter('status', 1)
+                                        ->addAttributeToFilter('visibility', 4);
+                                $products = Mage::getModel('catalog/product')
+                                        ->getCollection()
+                                        ->addAttributeToFilter('customer_name', $userid)
+                                        ->addCategoryFilter($category)
+                                        ->load();
+
+                                if (($products->count() > 0 ) && ($userid)) {
+                                    ?>              
+                                    <li >                       
+                                        <a class="getcatid" rel="<?php echo $category->getId(); ?>" ><?php echo $category->name; ?></a> 
+                                    </li>    
+
+                                <?php } else if (($categories->count() > 0) && (!$userid)) {
+                                    ?>
+
+                                    <li >                       
+                                        <a class="getcatid" rel="<?php echo $category->getId(); ?>" ><?php echo $category->name; ?></a> 
+                                    </li> 
+
+                                    <?php
+                                }
+                            }
+                            ?>
                         </ul>
-                    </div>
-                </div>-->
+                    </li>
+                    <li><b>Designer</b>
+                        <ul>
+             
+                      
+                        </ul> 
+                    </li>
+                    <li>
+                        <b>Color</b>
+                        <ul>
+                            <?php ?>    
+                            <li class="getcatid" rel="<?php echo $category->getId(); ?>"  >
+                                <?php echo 'black'; ?> 
+                            </li>
+                            <?php ?>
+                        </ul>
+                    </li>
+                    <li><b>Status</b></li>
+                    <li><b>My Tag</b></li>
+                    <li><b>Season</b></li>
+                </ul>
+                <span></span>
+            </div>
+        </div>-->
     </div>
     <!--slider-->
-    <div class="flexsliderPopup carousel">
+    <div class="flexsliderPopup flexslider carousel">
         <ul class="slides">
             <?php
-            foreach ($all_sub_cat as $cat_id1) {
-                $category = Mage::getModel('catalog/category')->load($cat_id1);
-                $products = Mage::getModel('catalog/category')->load($category->getId())
+            foreach ($all_sub_cat as $cat_id) {
+                $userid = Mage::getSingleton('customer/session')->getId();
+                $category = Mage::getModel('catalog/category')->load($cat_id);
+                $categories = Mage::getModel('catalog/category')->load($category->getId())
                         ->getProductCollection()
                         ->addAttributeToSelect('entity_id')
                         ->addAttributeToFilter('status', 1)
                         ->addAttributeToFilter('visibility', 4);
-//                $customerid = Mage::getSingleton('core/session')->getProductOwner();
-                if ($products->count() > 0):   // active product count
-                    ?>               
-                    <li>                       
+                $products = Mage::getModel('catalog/product')
+                        ->getCollection()
+                        ->addAttributeToFilter('customer_name', $userid)
+                        ->addCategoryFilter($category)
+                        ->load();
+                if (($products->count() > 0 ) && ($userid)) {
+                    ?>              
+                    <li >                       
                         <a class="getcatid" rel="<?php echo $category->getId(); ?>" ><img  src="<?php echo Mage::getBaseUrl('media') . 'catalog/category/' . $category->image; ?>" alt=""/></a> 
-
                     </li>    
+
+                <?php } else if (($categories->count() > 0) && (!$userid)) {
+                    ?>
+
+                    <li >                       
+                        <a class="getcatid" rel="<?php echo $category->getId(); ?>" ><img  src="<?php echo Mage::getBaseUrl('media') . 'catalog/category/' . $category->image; ?>" alt=""/></a> 
+                    </li> 
+
                     <?php
-                endif;
+                }
             }
             ?>
         </ul>
     </div>
+
 </div>
 <script type="text/javascript">
     var jqCustom = jQuery.noConflict();
     jqCustom(document).ready(function () {
+
+        //slider change images by 'show by' click
+
+
         //slider change images of product
         jqCustom('.getcatid').click(function () {
             var catid = jqCustom(this).attr('rel');
@@ -211,16 +264,21 @@ $_product = Mage::registry('current_product');
             var key = e.which;
             if (key == 13)  // the enter key code
             {
-                jqCustom(".tags").append("<span>" + jqCustom('.inputz').val() + "<i class='tagclose'>X</i></span>");
+                jqCustom("<span>" + jqCustom('.inputz').val() + "<i class='tagclose'>X</i></span>").prependTo(".tags > div");
 
                 jqCustom("input.inputz").val('');
             }
+            
+             jqCustom(".tagclose").on("click",function () {
+                jqCustom(this).parent('span').remove();
+            });
         });
-        jqCustom(".tagclose").click(function () {
-
-//            jqCustom(this).fadeOut(100);
-            jqCustom(this).find('span:last').remove();
+        
+        jqCustom(".tagclose").on("click",function () {
+            jqCustom(this).parent('span').remove();
         });
+        
+       
         jqCustom(".close,.popClose").click(function () {
             jqCustom(".popupWrapper").fadeOut();
             jqCustom(".popupBox").empty();

@@ -55,7 +55,17 @@
         </reference>
     </membership_payment_confirmpayment>
     
-     
+     <membership_account_exists>
+        <reference name="root">   
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>   
+        </reference>
+         
+        <reference name="content">   
+            <block type="membership/membership_form" name="membership_form" template="mycloset_membership/account_exists.phtml"/>             
+        </reference>
+    </membership_account_exists>
     
 
     

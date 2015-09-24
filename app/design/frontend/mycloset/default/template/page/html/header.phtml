@@ -65,22 +65,34 @@
                             <?php echo $this->getChildHtml('topSearch') ?>
                         </div>
                     </li>
-                    <li><a href="<?php echo $this->getUrl('') ?>about-magento-demo-store"><?php echo $this->__('ABOUT') ?></a></li>                          
-                    <li><a href="<?php echo $this->getUrl('') ?>howitworks/?___store=default"><?php echo $this->__('HOW IT WORKS') ?></a></li>                        
-                    <li><a href="<?php echo $this->getUrl('') ?>services/?___store=default"><?php echo $this->__('SERVICES') ?></a></li>     
+                    <?php
+                    $_page = Mage::getModel('cms/page')->load('about-magento-demo-store', 'identifier');
+                    if ($_page->getIsActive()) {
+                        ?>
+                        <li><a href="<?php echo $this->getUrl('') ?>about-magento-demo-store"><?php echo $this->__('ABOUT') ?></a></li>
+                    <?php } ?>
+                    <?php
+                    $_page = Mage::getModel('cms/page')->load('howitworks', 'identifier');
+                    if ($_page->getIsActive()) {
+                        ?>
+                        <li><a href="<?php echo $this->getUrl('') ?>howitworks"><?php echo $this->__('HOW IT WORKS') ?></a></li>                    
+                    <?php } ?>
+                    <?php
+                    $_page = Mage::getModel('cms/page')->load('services', 'identifier');
+                    if ($_page->getIsActive()) {
+                        ?>
+                        <li><a href="<?php echo $this->getUrl('') ?>services"><?php echo $this->__('SERVICES') ?></a></li>  
+                    <?php } ?>                           
                     <?php if (!Mage::getSingleton('customer/session')->isLoggedIn()): ?>
                         <li><a href="<?php echo $this->getUrl('') ?>my-closet.html"><?php echo $this->__('SAMPLE CLOSET') ?></a></li>
                     <?php else: ?>
                         <li>
                             <a href="<?php echo $this->getUrl('') ?>my-closet.html"><?php echo $this->__('MY CLOSET') ?></a>
-
                             <ul class="sub-nav">
                                 <?php
                                 $cat = Mage::getModel('catalog/category')->load(16);
                                 $subcats = $cat->getChildren();
                                 $all_sub_cat = explode(',', $subcats);
-
-
                                 foreach ($all_sub_cat as $cat_id) {
                                     $userid = Mage::getSingleton('customer/session')->getId();
                                     $category = Mage::getModel('catalog/category')->load($cat_id);
@@ -92,39 +104,69 @@
                                     $products = Mage::getModel('catalog/product')
                                             ->getCollection()
                                             ->addAttributeToFilter('customer_name', $userid)
-                                           ->addCategoryFilter($category)
+                                            ->addCategoryFilter($category)
                                             ->load();
-                                    if (($products->count() > 0 )) {
-                                      
+                                    if (($products->count() > 0)) {
                                         ?>
-                                      
                                         <li >
                                             <a class="" href="<?php echo $this->getUrl('') ?>my-closet/accessories.html"><?php echo $category->name; ?> </a>
                                         </li>
-                                    <?php
+                                        <?php
                                     }
                                 }
                                 ?>                               
                             </ul>  
                         </li>
+                    <?php endif; ?>
+                    <li><a href="<?php echo $this->getUrl('') ?>shop.html"><?php echo $this->__('SHOP') ?></a></li>
+                    <?php
+                    $_page = Mage::getModel('cms/page')->load('faq');
+                    if ($_page->getIsActive()) {
+                        ?>
+                        <li><a href="<?php echo $this->getUrl('') ?>faq"><?php echo $this->__('FAQ') ?></a></li>    
+<?php } ?>
+                    <li><a href="http://mycc.bridge-delivery.com/mgn/blog/" target="_blank" ><?php echo $this->__('BLOG') ?></a></li>
 
-<?php endif; ?>
-                    <li><a href="<?php echo $this->getUrl('') ?>shop.html"><?php echo $this->__('SHOP') ?></a></li>                       
-                    <li><a href="<?php echo $this->getUrl('') ?>faq/?___store=default"><?php echo $this->__('FAQ') ?></a></li>
-                    <li><a href="http://mycc.bridge-delivery.com/mgn/blog/"><?php echo $this->__('BLOG') ?></a></li>
                 </ul>
-
                 <ul class="nav navbar-nav mobileFooter">
+                    <?php
+                    $_page = Mage::getModel('cms/page')->load('testimonials');
+                    if ($_page->getIsActive()) {
+                        ?>
+                        <li><a href="<?php echo $this->getUrl('') ?>testimonials">Testimonials</a></li>    
+                    <?php } ?>
 
-                    <li><a href="<?php echo $this->getUrl('') ?>testimonials/?___store=default">Testimonials</a></li>                        
-                    <li><a href="<?php echo $this->getUrl('') ?>press/?___store=default">Press</a></li>                   
-                    <li><a href="<?php echo $this->getUrl('') ?>careers/?___store=default">Careers </a></li>                       
-                    <li><a href="<?php echo $this->getUrl('') ?>">Contact </a></li>                       
-                    <li><a href="<?php echo $this->getUrl('') ?>termservices/?___store=default">Terms and Conditions </a></li>
-                    <li><a href="<?php echo $this->getUrl('') ?>privacy/?___store=default">Privacy </a></li>
+                    <?php
+                    $_page = Mage::getModel('cms/page')->load('press');
+                    if ($_page->getIsActive()) {
+                        ?>
+                        <li><a href="<?php echo $this->getUrl('') ?>press">Press</a></li>    
+                    <?php } ?> 
+
+                    <?php
+                    $_page = Mage::getModel('cms/page')->load('careers');
+                    if ($_page->getIsActive()) {
+                        ?>
+                        <li><a href="<?php echo $this->getUrl('') ?>careers">Careers</a></li>    
+                    <?php } ?>
+
+                    <?php
+                    $_page = Mage::getModel('cms/page')->load('termservices');
+                    if ($_page->getIsActive()) {
+                        ?>
+                        <li><a href="<?php echo $this->getUrl('') ?>termservices">Testimonials</a></li>    
+                    <?php } ?>
+
+                    <?php
+                    $_page = Mage::getModel('cms/page')->load('privacy');
+                    if ($_page->getIsActive()) {
+                        ?>
+                        <li><a href="<?php echo $this->getUrl('') ?>privacy">Privacy</a></li>    
+<?php } ?>
                 </ul>
 
             </div>
         </div>
     </nav>
 </header>
+

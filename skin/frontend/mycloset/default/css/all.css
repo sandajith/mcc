@@ -54,11 +54,10 @@
     src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(../fonts/HkF_qI1x_noxlxhrhMQYEFtXRa8TVwTICgirnJhmVJw.woff2) format('woff2'), url(http://fonts.gstatic.com/s/lato/v11/HkF_qI1x_noxlxhrhMQYED8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
 }
 a,
-html,body{ height: 100%}
+html,body{ height: 100%; line-height: 23px;}
 body { background: #ffffff; color: #000; font-family: Lato; font-size: 16px; margin: 0}
-a { text-decoration:none }
 a,
-a:hover { text-decoration: none; outline: none !important;}
+a:hover { text-decoration: none; outline: none !important;color: #000; cursor: pointer}
 h1,h2,h3 {font-family: 'Playfair Display';}
 .allWrapper { position: absolute; left: 0; top: 0; width: 100%; min-height: 100%}
 ul,li { padding: 0; margin: 0; list-style: none}
@@ -194,7 +193,10 @@ header .search:after {
 }
 .mainMenu .nav li ul.sub-nav { display: none; position: absolute; min-width: 100%; top: 100%; left: 0; background:#000; margin: 0; padding: 0}
 .mainMenu .nav li ul.sub-nav li { display: block; float: 100%}
-.mainMenu .nav li ul.sub-nav li a { color: #ffffff; display: block; border-bottom: 1px solid #ffffff;   text-decoration: none;}
+/*edited by neenu
+for sub menu width changes
+*/
+.mainMenu .nav li ul.sub-nav li a { color: #ffffff; display: block; border-bottom: 1px solid #ffffff;   text-decoration: none; width: 174px;}
 .mainMenu .nav li a{
     padding:12px 44px;
 }
@@ -209,7 +211,7 @@ header .search:after {
 .navbar-toggle { margin: 0}
 .mobileFooter { display: none}
 .intro { float: left; width: 100%; font-family: 'Playfair Display'; font-style: italic; text-align: center;}
-.intro p { font-size: 28px;}
+.intro p { font-size: 27px; line-height: 29px;}
 a.button, button.button, input.button { 
     font-family: Lato; 
     font-style: normal;
@@ -337,16 +339,20 @@ a.button, button.button, input.button {
 .flex-direction-nav a { 
     text-indent: 99999px;
     width: 58px;
-    height: 90px
+    height: 90px;
+    opacity: 1;
 }
 .flex-direction-nav a:before,
 .flex-direction-nav a:after { content: "" !important}
 .flex-direction-nav .flex-next { 
     background:url(../images/slide-next.png) no-repeat;
+    right: 10px;
 }
 
 .flex-direction-nav .flex-prev { 
     background:url(../images/slide-prev.png) no-repeat;
+    left:10px;
+        
 }
 .subhead h2 { 
     font-family:Lato; 
@@ -374,7 +380,7 @@ a.button, button.button, input.button {
 }
 
 .itemList a:hover{
-    box-shadow: 0 0 15px 0 #cccccc;
+    /*box-shadow: 0 0 15px 0 #cccccc;*/
     display: block;
     z-index: 5
 }
@@ -415,7 +421,8 @@ a.button, button.button, input.button {
     margin-bottom: 10px;
 }
 .itemList img {
-    max-width: 100%
+    max-width: 100%;
+    border: 2px solid #c3c3c3;
 }
 .itemsWrapper  { float: right}
 .itemsWrapper .customDropDown.pull-left {
@@ -430,6 +437,9 @@ a.button, button.button, input.button {
     width: auto;
     display: block;
     margin: 0 30px;
+}
+.itemsWrapper .itemList a img {
+    border: 0
 }
 .itemsWrapper .itemList ul {
     list-style: none;
@@ -531,6 +541,7 @@ a.button, button.button, input.button {
 .colorBox {
     overflow: hidden;
 }
+
 .colorBox a {
     float: left;
     width: 30px;
@@ -539,6 +550,16 @@ a.button, button.button, input.button {
     margin: 5px 5px 0 0;
     cursor: pointer;
     position: relative;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fceabb+0,43b7db+20,e2469f+54,97d300+74,fbdf93+100 */
+background: #fceabb; /* Old browsers */
+background: -moz-linear-gradient(-45deg,  #fceabb 0%, #43b7db 20%, #e2469f 54%, #97d300 74%, #fbdf93 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#fceabb), color-stop(20%,#43b7db), color-stop(54%,#e2469f), color-stop(74%,#97d300), color-stop(100%,#fbdf93)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg,  #fceabb 0%,#43b7db 20%,#e2469f 54%,#97d300 74%,#fbdf93 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg,  #fceabb 0%,#43b7db 20%,#e2469f 54%,#97d300 74%,#fbdf93 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg,  #fceabb 0%,#43b7db 20%,#e2469f 54%,#97d300 74%,#fbdf93 100%); /* IE10+ */
+background: linear-gradient(135deg,  #fceabb 0%,#43b7db 20%,#e2469f 54%,#97d300 74%,#fbdf93 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', endColorstr='#fbdf93',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
 }
 .colorBox a:after {
     content: " ";
@@ -554,8 +575,8 @@ a.button, button.button, input.button {
 .dropContentBox { position: relative; float: left;}
 .dropContentBox  b { font-weight: normal;}
 .customDropDown span { margin: 0 20px 0 20px; position: relative;}
-.customDropDown ul { position: absolute; left: 0; background: #ffffff; border: 1px solid #ccc; list-style: none; padding: 0; top: -5px; right: 0; display: none; margin-left: -17px; width: -moz-min-content; width: -webkit-min-content; width: min-content}
-.customDropDown ul li { padding: 5px 17px; font-style: italic;}
+.customDropDown ul { position: absolute; left: 0; background: #ffffff; border: 1px solid #ccc; list-style: none; padding: 0; top: -5px; right: 0; display: none; margin-left: 66px; width: -moz-min-content; width: -webkit-min-content; width: min-content; z-index: 5;}
+.customDropDown ul li { padding: 5px 17px; font-style: italic;  white-space: nowrap;}
 .customDropDown ul li b { font-weight: bold; margin-bottom: 5px; display: block}
 .customDropDown ul li ul { position: relative; border:0;}
 .customDropDown ul li ul li { padding:4px 0 4px 5px}
@@ -724,7 +745,7 @@ footer .social a { margin-left: 5px;}
 .popupWrapper { display: none; position:fixed; width: 100%; height: 100%; left: 0; top: 0; overflow: auto; background: rgba(256,256,256,0.5); z-index: 100}
 .popClose 
 { position:absolute; width: 100%; height: 100%; z-index: 10;}
-.popupBox { background: #fff; border: 3px solid #c7c7c7;  left: 50%; margin: 60px 0 0 -300px;  padding: 20px; position: absolute; width: 600px; z-index: 109;}
+.popupBox { background: #fff; border: 3px solid #c7c7c7;  left: 50%; margin: 60px 0 0 -384px;  padding: 20px; position: absolute; width:768px; z-index: 109;}
 .popupHead { position: absolute; right:10px; top: 10px; line-height:19px}
 .popupHead a { margin-left: 20px; font-size: 17px; color: #000000; opacity: 1}
 .popupContent .image { text-align: center;}
@@ -735,8 +756,8 @@ footer .social a { margin-left: 5px;}
 .popupContent .details .signature { font-size:17px;}
 .popupContent .details .tags { margin:10px 0 20px 0; display: block; width: 100%; float: left;}
 .popupContent .details .tags b { display: block; margin-bottom: 5px}
-.popupContent .details .tags span { background:#ada4a5; color: #ffffff; font-size: 15px; border-radius: 30px; padding:1px 15px; cursor: pointer; float: left; margin: 0 10px 10px 0; box-shadow:0 0 5px 0 #9d9495}
-.popupContent .details .tags span input { border: 0 none; border-radius: 20px; color: #333; height: 22px; margin: 0 -8px; padding: 0 10px; width: 89px;}
+.popupContent .details .tags span { background:#ada4a5; height: 23px; color: #ffffff; font-size: 15px; border-radius: 30px; padding:1px 15px; cursor: pointer; float: left; margin: 0 10px 10px 0; box-shadow:0 0 5px 0 #9d9495}
+.popupContent .details .tags span input {float:left; border: 0 none; border-radius: 20px; color: #333; height: 21px; margin:0 -13px; padding: 0 10px; width: 89px;}
 .popupContent .details .tags span i { float: right; font-size: 12px; font-style: normal; margin: 3px 0 0 15px; font-weight: bold;}
 .popupContent .details .tags span a { color: #ffffff}
 .popupContent .details .tags span.add i { margin: 0; padding:1px; font-size: 14px;}
@@ -744,7 +765,12 @@ footer .social a { margin-left: 5px;}
 .popupContent .details p.status { font-style: italic;}
 .popupContent .details p.status b { font-style: normal;}
 .popupContent .details a.button { margin:25px 0 0 0; display: block; text-align: center;}
+.popupContent .flex-direction-nav a { margin: -33px 0 0 0;}
 
+.popupContent .carousel { border: 0; margin: 0; padding: 0 50px;}
+.popupContent .carousel .flex-direction-nav .flex-prev { background:url("../images/slide-prev-popup.png") no-repeat scroll 0 0; left: 10px; opacity: 1}
+.popupContent .carousel .flex-direction-nav .flex-next { background:url("../images/slide-next-popup.png") no-repeat scroll right 0; opacity: 1; right: 10px}
+.productdata { margin: 0 20px}
 /*9/9/2015*/
 .dress-code{
     float: left;
@@ -926,3 +952,6 @@ ul.messages li{
 
 ul.messages li.error-msg > ul > li{text-align:center; padding:5px;background:#FAEBE7;}
 ul.messages li.error-msg > ul > li span{padding-left:25px;background:url("../images/errorico.png") no-repeat left center;width:20px; height:20px;}
+.dropContentBox ul li ul{
+margin-left:10px;
+}

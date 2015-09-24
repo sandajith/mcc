@@ -104,6 +104,8 @@ $_product1 = $this->getProduct();
                     </ul>
                     <div class="actionsWrapper">                     
 
+  <a type="button" title="<?php echo $this->__('ADD TO BAG') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
+     <?php echo $this->__('ADD TO BAG') ?></a>
                         <div class="customDropDown">
                             <div class="dropContentBox">
                                 <span>QTY</span>
@@ -137,7 +139,7 @@ $_product1 = $this->getProduct();
                     <ul>
                         <li>
 
-
+<!--<div><?php // echo $_product->getData('size'); ?></div>-->
                             <?php echo $_product->getAttributeText('designer'); ?></br>                                          
                             <?php echo $_product->getAttributeText('color'); ?></br>
                             <label>Size :</label><?php echo $_helper->productAttribute($_product, $_product->getSize(), 'size') ?></br>

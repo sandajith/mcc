@@ -49,9 +49,14 @@ session_start();
     <?php foreach ($this->getItems() as $_item):
         ?>
         <?php if ($_item->getCount() > 0): ?> 
-            <?php if ($this->getName() == "Color"): ?>       
-                <a style="background: <?php echo $_item->getLabel() ?>" title="<?php echo $_item->getLabel() ?>" href="<?php echo $this->urlEscape($_item->getUrl()) ?>"> </a>                                   
-            <?php else : ?>
+            <?php if ($this->getName() == "Color"): ?>
+<?php if( $_item->getLabel()=="Multi"):?>
+<!--fo multi color box-->
+                <a  title="<?php echo $_item->getLabel() ?>" href="<?php echo $this->urlEscape($_item->getUrl()) ?>"> </a>                                   
+          <?php else:?>
+                   <a style="background: <?php echo $_item->getLabel() ?>" title="<?php echo $_item->getLabel() ?>" href="<?php echo $this->urlEscape($_item->getUrl()) ?>"> </a>                                   
+  <?php endif; ?>
+                       <?php else : ?>
                 <a style="background: <?php echo $_item->getLabel() ?>" href="<?php echo $this->urlEscape($_item->getUrl()) ?>"><?php echo $_item->getLabel() ?></a>                                        
             <?php endif; ?>
         <?php else: echo $_item->getLabel() ?>
