@@ -31,14 +31,14 @@ $cusgroup = Mage::getModel('customer/customer')->load(Mage::app()->getRequest()-
                             <?php else: ?>
                                 <input type="radio" name="mem_plan" id="mem_plan" value="<?php echo $pay['3'] ?>"  checked> <label> Renew current membership plan</label>
                                 <br>
-                                <?php if (($pay['4'] == 'Virtual Closet')): ?>
+                                <?php if (($pay['3'] == 2)): ?>
 
                                     <input type="radio" name="mem_plan" id="mem_plan"  value="3"> <label> Upgrade membership plan to Endless closet</label>
                                     <br>
 
                                     <input type="radio" name="mem_plan" id="mem_plan" value="1" > <label> Upgrade membership plan to Standard closet</label>
                                     <br>
-                                <?php elseif (($pay['4'] == 'Standard Closet')): ?>
+                                <?php elseif (($pay['3'] == 1)): ?>
 
                                     <input type="radio" name="mem_plan" id="mem_plan" value="3"> <label> Upgrade membership plan to Endless closet</label>
                                     <br>

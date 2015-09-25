@@ -10,29 +10,26 @@ class Mycloset_Membership_Block_Adminhtml_Customer_Tab2 extends Mage_Adminhtml_B
         parent::_construct();
         $this->setTemplate('membership/customer/tab2.phtml');
     }
-    
+
     public function getCustomerpayments() {
 
         $customer = Mage::registry('current_customer');
         // $model = Mage::getModel('membership/payment')->load($customer['entity_id']);
-        $model = Mage::getModel('membership/payment')->load($customer['entity_id'], 'customer_id');       
+        $model = Mage::getModel('membership/payment')->load($customer['entity_id'], 'customer_id');
         $customer_pro_id = $model->getCustomerProfileId();
         $customer_payment_id = $model->getPaymentProfileId();
-        $membership_type = $model->getMembershipType();
-       
         $customer_address_id = $model->getShippingAddressId();
-        $amount = $model->getAmount();
-       // $timestamp = $model->getTimestamp();
+        $membership_id = $model->getMembershipId();
+        // $timestamp = $model->getTimestamp();
         //$acttime = strtotime($timestamp);
-        
-        $model2 = Mage::getModel('membership/membership')->load($amount, 'membership_id');
+
+        $model2 = Mage::getModel('membership/membership')->load($membership_id, 'membership_id');
         $getamount = $model2->getMembershipPrice();
-        
+        $getmembership_type = $model2->getMembershipType();
         if ($customer_payment_id == NULL) {
             return 'The customer has not made any payments';
         }
-        return $customer_pro_id . '-' . $customer_payment_id . '-' . $customer_address_id . '-' . $amount . '-' . $membership_type. '-' . $getamount;
-
+        return $customer_pro_id . '-' . $customer_payment_id . '-' . $customer_address_id . '-' . $membership_id . '-' . $getmembership_type . '-' . $getamount;
     }
 
     /**
@@ -44,7 +41,6 @@ class Mycloset_Membership_Block_Adminhtml_Customer_Tab2 extends Mage_Adminhtml_B
         return $this->__('Membership settings');
     }
 
-    
     /**
      * Retrieve the title used by this tab
      *

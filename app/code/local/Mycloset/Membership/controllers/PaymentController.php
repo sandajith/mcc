@@ -138,7 +138,7 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
                 "<customerPaymentProfileId>" . $parsed_paymentprofile_id . "</customerPaymentProfileId>" .
                 "<customerShippingAddressId>" . $parsed_address_id . "</customerShippingAddressId>" .
                 "<order>" .
-                "<invoiceNumber>" . "INV" . $parsed_customer_id . "</invoiceNumber>" .
+                "<invoiceNumber>" . "MCC" . $parsed_customer_id . "</invoiceNumber>" .
                 "</order>" .
                 "</profileTransAuthOnly>" .
                 "</transaction>" .
@@ -185,7 +185,7 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
                 $emailTemplate->send($admin_email, 'Mycloset mail', $vars);
                 //
                 $date = date("Y-m-d H:i:s ", time());
-                $data = array('customer_id' => Mage::getSingleton('customer/session')->getMemID(), 'customer_profile_id' => $parsed_customer_id, 'payment_profile_id' => $parsed_paymentprofile_id, 'shipping_address_id' => $parsed_address_id, 'membership_type' => $this->getRequest()->getPost('mem_type'), 'amount' => $this->getRequest()->getPost('mem_table_id'), 'created_at' => $date);
+                $data = array('customer_id' => Mage::getSingleton('customer/session')->getMemID(), 'customer_profile_id' => $parsed_customer_id, 'payment_profile_id' => $parsed_paymentprofile_id, 'shipping_address_id' => $parsed_address_id,'membership_id' => $this->getRequest()->getPost('mem_table_id'), 'created_at' => $date);
                 $model = Mage::getModel('membership/payment')->setData($data);
                 $insertId = $model->save()->getId();
                 //logging-in the customer after successful payment
@@ -263,7 +263,7 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
                 "<customerPaymentProfileId>" . $this->getRequest()->getPost('customer_payment_id') . "</customerPaymentProfileId>" .
                 "<customerShippingAddressId>" . $this->getRequest()->getPost('customer_address_id') . "</customerShippingAddressId>" .
                 "<order>" .
-                "<invoiceNumber>" . "INV" . $this->getRequest()->getPost('customer_address_id') . "</invoiceNumber>" .
+                "<invoiceNumber>" . "MCC" . $this->getRequest()->getPost('customer_address_id') . "</invoiceNumber>" .
                 "</order>" .
                 "</profileTransAuthOnly>" .
                 "</transaction>" .
