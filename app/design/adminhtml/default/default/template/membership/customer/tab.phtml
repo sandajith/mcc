@@ -16,12 +16,24 @@ $cusgroup = Mage::getModel('customer/customer')->load(Mage::app()->getRequest()-
                 <input type="hidden" name="customer_entity_id" value="<?php echo Mage::app()->getRequest()->getParam('id'); ?>" />
                 <?php
                 $pay = explode('-', $this->getCustomerpayment());
+                print_r($pay);
                 $time = date("d/m/Y h:i:s A", $pay['5']);
                 ?>
-                
-                 <?php if ($cusgroup == 5): ?>
+
+
+ <!--edited by neenu-->
+                    <?php if ($cusgroup === '15'):                       
+                        //Get customer Group name
+                        $group = Mage::getModel('customer/group')->load($cusgroup);
+                    
+                    ?>
+                        <h4> <label>Membership Status</label>: <?php echo $group->getCode(); ?></h4>                   
+                    <!--edited by neenu END-->
+                <?php elseif ($cusgroup == 5): ?>
                     <h4 style="color: #DF280A;"> Membership Closed</h4>
-                <?php else: ?>
+                    
+                <?php else : ?>
+                    
                     <?php if ($pay['4'] == ''): ?>
 
                         <h4> Membership Status : Waiting list</h4>
@@ -35,6 +47,7 @@ $cusgroup = Mage::getModel('customer/customer')->load(Mage::app()->getRequest()-
                     <?php if ($cusgroup == 6): ?>
                         <h4 style="color: #DF280A;"> Membership is in notice</h4>
                     <?php endif; ?>
+                   
                 <?php endif; ?>
 
 
