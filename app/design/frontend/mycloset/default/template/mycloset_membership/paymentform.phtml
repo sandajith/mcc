@@ -6,12 +6,21 @@
 
     <?php
     $exp = explode('-', $this->getChosenplan());
+    
     ?>
-
+<div id="previous_membership" >
+   <?php  if(empty($exp[1])) { ?>
     <?php echo $this->__('You Chose'); ?>
+    <h3 style="color: #e76200;"><?php echo "I wish to pay later"; ?></h3>
+  
+    <h2 style="color: #e76200;"><?php echo "0 USD"; ?></h2>
+   <?php } else {?>
+         <?php echo $this->__('You Chose'); ?>
     <h3 style="color: #e76200;"><?php echo $exp[1]; ?></h3>
     <?php echo $this->__('Amount to be paid'); ?>
     <h2 style="color: #e76200;"><?php echo $exp[0] . " USD"; ?></h2>
+  <?php  } ?>
+    </div>
     <?php
     $var = $this->getSettings();
     $gateurl = $var['a'];
@@ -22,11 +31,47 @@
     ?>
 
     <form method="post" action="<?php echo Mage::getBaseUrl(); ?>membership/payment/authorizepayment/">
-
         <div class="form-list">
+         <?php   $model = Mage::getModel('customer/customer')->load(Mage::getSingleton('customer/session')->getMemId());
+            $memtypeid = $model->getMemType();
+             if ($memtypeid === '0') { ?>
+             <li class="fields">
+                    <div class="field">
+                        <label for="membership_plan" class="required"><?php echo $this->__('Choose your membership type') ?><em>*</em></label>
+                        <div class="input-box">
+
+                              <?php
+                                                $model = Mage::getModel('membership/types');
+                                                $data = $model->getCollection()->getData();
+                                                foreach ($data as $options) {
+                                                    ?>
+                            <input type="radio" name="mem_type" value="<?php echo $options['membership_id']; ?>" onclick="javascript:GetPrice(this.value);" />&nbsp;<?php echo $options['membership_type']; ?><br>
+                                                <?php } ?>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="membership_plan" class="required"><?php echo $this->__('Membership price') ?></label>
+
+                        <div class="input-box" style="font-size: 15px;">
+                            <?php echo "&nbsp; " . Mage::app()->getStore()->getCurrentCurrencyCode(); ?>
+
+                            <div id="price_change" style="float: left;">
+                              <?php echo $this->__('0') ?> <!-- amount here -->
+                            </div>    
+                            <input type="hidden" name="amt" id="mem_amt" value=" <?php echo $this->__('0') ?>"/>
+                           
+                       </div>
+                  </div>
+                    
+               
+                </li>
+               
+
+           <?php } else { ?>
             <input type="hidden" name="mem_type" value="<?php echo $exp[1]; ?>" />
             <input type="hidden" name="amt" value="<?php echo $amount; ?>" />
             <input type="hidden" name="mem_table_id" value="<?php echo $mem_table_id; ?>" />
+               <?php } ?>
             <div>
                 <label for="card_number">Credit Card Number</label>
                 <div class="input-box">
@@ -108,7 +153,8 @@
 <script type="text/javascript">
     function GetPrice(memid)
     {
-
+ $('previous_membership').hide();
+ 
         new Ajax.Request('<?php echo Mage::getBaseUrl() . "membership/payment/Getprice?memid=" ?>' + memid,
                 {
                     method: "get",
@@ -117,7 +163,7 @@
                         node = $("price_change");
                         //$("price_change").update = response;
                         node.update(response);
-
+  $('mem_amt').writeAttribute('value', response);
                     },
                     onFailure: function () {
                         alert("Something went wrong...")
