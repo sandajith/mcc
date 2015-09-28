@@ -27,9 +27,12 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
     }
 
     public function GetpriceAction() {
+        $mode = 0;
         $value = Mage::app()->getRequest()->getParam('memid');
+        if($value){
         $model = Mage::getModel('membership/types')->load($value);
         $mode = $model->getMembershipPrice();
+        }
         echo $mode;
     }
 
@@ -39,6 +42,31 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
     }
 
     public function authorizepaymentAction() {
+//         $j = Mage::getModel('membership/paymenthistory')->load('5');
+//         $j->setPpp('38')->save();
+//         var_dump($j);exit;
+//                      //  INSERT INTO `bridgedelivery_local_new`.`closet_mycloset_payment_history` 
+//                      //  (`payment_history_id`, `customer_id`, `transaction_id`, `payment_datetime`, 
+//                      //  `payment_details`, `payment_id`, `amount_paid`) VALUES (NULL, '100', '6767',
+//                      //   CURRENT_TIMESTAMP, '', '5', '4');
+//                        //->setData($data2)
+//                       $j ->setCustomerId('103')
+//                         ->setPay('3')
+//                        ->setTransactionId('77')
+//                  ->setPaymentDetails('')
+//                 //  ->setPaymentDatetime(CURRENT_TIMESTAMP)
+//                         ->setAmounPaid('4')
+//                        ;
+//               $j->save();
+//        
+//        exit;
+        
+        
+//      $postdata=  $this->getRequest()->getPost();
+//      echo'<pre>';
+////      echo  Mage::getSingleton('customer/session')->getMemEmail() ;
+//      print_r($postdata);
+//      exit;
         $g_loginname = Mage::getStoreConfig(self::PATH_API_LOGIN); // Keep this secure.
         $g_transactionkey = Mage::getStoreConfig(self::PATH_TRANS_KEY); // Keep this secure.
         $g_apihost = Mage::getStoreConfig(self::PATH_GATE_URL);
@@ -159,11 +187,12 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
 //            . "<br><br>";
 
             $directResponseFields = explode(",", $parsedresponse->directResponse);
-            $responseCode = $directResponseFields[0]; // 1 = Approved 2 = Declined 3 = Error
-            $responseReasonCode = $directResponseFields[2]; // See http://www.authorize.net/support/AIM_guide.pdf
+       $responseCode = $directResponseFields[0]; // 1 = Approved 2 = Declined 3 = Error
+           $responseReasonCode = $directResponseFields[2]; // See http://www.authorize.net/support/AIM_guide.pdf
             $responseReasonText = $directResponseFields[3];
-            $approvalCode = $directResponseFields[4]; // Authorization code
-            $transId = $directResponseFields[6];
+           $approvalCode = $directResponseFields[4]; // Authorization code
+           $transId = $directResponseFields[6];
+           
             //Variables to send e-mail
             $z_firstname = Mage::getSingleton('customer/session')->getMemFname();
             $z_lastname = Mage::getSingleton('customer/session')->getMemLname();
@@ -185,9 +214,45 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
                 $emailTemplate->send($admin_email, 'Mycloset mail', $vars);
                 //
                 $date = date("Y-m-d H:i:s ", time());
-                $data = array('customer_id' => Mage::getSingleton('customer/session')->getMemID(), 'customer_profile_id' => $parsed_customer_id, 'payment_profile_id' => $parsed_paymentprofile_id, 'shipping_address_id' => $parsed_address_id,'membership_id' => $this->getRequest()->getPost('mem_table_id'), 'created_at' => $date);
-                $model = Mage::getModel('membership/payment')->setData($data);
+                $data = array(
+                    'customer_id' => Mage::getSingleton('customer/session')->getMemID(), 
+                    'customer_profile_id' => $parsed_customer_id,
+                    'payment_profile_id' => $parsed_paymentprofile_id,
+                    'shipping_address_id' => $parsed_address_id
+                        );
+                $model = Mage::getModel('membership/payment')->setData($data);               
                 $insertId = $model->save()->getId();
+//                ,'membership_id' => $this->getRequest()->getPost('mem_table_id'), 'created_at' => $date
+
+            // echo $payment_id= $insertId;
+             //   exit;
+           //  $fp = fopen('test.txt','w+');
+                
+                
+//                  edited by neenu
+               /* $data2 = array(
+                    'customer_id' => Mage::getSingleton('customer/session')->getMemID(),
+                    'payment_id'=>$payment_id,
+                    'transaction_id' => $transId,                   
+                    'amount_paid' => $z_amount
+                        );*/
+                    $data2 = array(
+                    'customer_id' => Mage::getSingleton('customer/session')->getMemID(),
+                    'payment_id'=>'5',
+                    'transaction_id' => '99',                   
+                    'amount_paid' => '9'
+                        );
+                $model2 = Mage::getModel('membership/paymenthistory')
+                        
+                        //->setData($data2)
+                        ->setCustomerId('9')
+                         ->setPaymentId('6')
+                        ->setTransactionId('6555')
+                         ->setAmounPaid('2')
+                        ;
+               $model2->save();
+        echo $model2->getId();
+                exit;
                 //logging-in the customer after successful payment
                 $session = $this->_getSession();
                 $customer = Mage::getModel('customer/customer')->load(Mage::getSingleton('customer/session')->getMemID());
@@ -234,6 +299,7 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
     }
 
     public function paymeAction() {
+        exit;
         $g_loginname = Mage::getStoreConfig(self::PATH_API_LOGIN); // Keep this secure.
         $g_transactionkey = Mage::getStoreConfig(self::PATH_TRANS_KEY); // Keep this secure.
         $g_apihost = Mage::getStoreConfig(self::PATH_GATE_URL);
@@ -284,18 +350,24 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
 //            . "<br><br>";
 
             $directResponseFields = explode(",", $parsedresponse->directResponse);
-            $responseCode = $directResponseFields[0]; // 1 = Approved 2 = Declined 3 = Error
-            $responseReasonCode = $directResponseFields[2]; // See http://www.authorize.net/support/AIM_guide.pdf
+            $responseCode = $directResponseFields[0]; // 1 = Approved 2 = Declined 3 = Error       
+           $responseReasonCode = $directResponseFields[2]; // See http://www.authorize.net/support/AIM_guide.pdf
             $responseReasonText = $directResponseFields[3];
             $approvalCode = $directResponseFields[4]; // Authorization code
-            $transId = $directResponseFields[6];
+           $transId = $directResponseFields[6];
 
             if ("1" == $responseCode) {
-                $data = array('customer_id' => $this->getRequest()->getPost('customer_entity_id'), 'transaction_id' => $transId, 'transaction_amount' => $this->getRequest()->getPost('amount'));
+                $data = array(
+                    'customer_id' => $this->getRequest()->getPost('customer_entity_id'),
+                    'transaction_id' => $transId,
+                    'amount_paid' => $this->getRequest()->getPost('amount')
+                        );
+               
                 $model = Mage::getModel('membership/paymenthistory')->setData($data);
                 $insertId = $model->save()->getId();
                 $customerid = Mage::getModel('membership/payment')->load($this->getRequest()->getPost('customer_entity_id'), 'customer_id');
                 $payment_id = $customerid->getPaymentId();
+           
                 $path = $this->getRequest()->getPost('return_url') . '?q=success' . '&tranid=' . $transId;
                 $this->_redirectUrl($path);
             } else if ("2" == $responseCode) {
