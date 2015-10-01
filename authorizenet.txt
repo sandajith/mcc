@@ -374,3 +374,33 @@ SimpleXMLElement Object
         )
 
 )
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00027
+                    [text] => The credit card has expired.
+                )
+
+        )
+
+    [directResponse] => 3,1,8,The credit card has expired.,,P,0,MCC188246618,,30.00,CC,auth_only,144347425393,E,F - 28,,,,,,,,,info@myclosetconcierge.com,E,F - 28,,,,,,,,,0.00,,,B585F1A14CCFB3BE4F8E19E04D101D74,,,,,,,,,,,,,XXXX6005,American Express,,,,,,,,,,,,,,,,,211260867
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00027
+                    [text] => The merchant does not accept this type of credit card.
+                )
+
+        )
+
+    [directResponse] => 3,2,17,The merchant does not accept this type of credit card.,,P,0,MCC188246977,,30.00,CC,auth_only,144347441210,E,F - 28,,,,,,,,,info@myclosetconcierge.com,E,F - 28,,,,,,,,,0.00,,,B585F1A14CCFB3BE4F8E19E04D101D74,,,,,,,,,,,,,XXXX6005,American Express,,,,,,,,,,,,,,,,,211261285
+)
