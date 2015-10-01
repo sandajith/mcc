@@ -1,52 +1,41 @@
 
 <div class='fieldset'>
     <h2 class="legend">Make Payment</h2>
-    
-
-
-    <?php
-    $exp = explode('-', $this->getChosenplan());
-    
-    ?>
-<div id="previous_membership" >
-   <?php  if(empty($exp[1])) { ?>
-    <?php echo $this->__('You Chose'); ?>
-    <h3 style="color: #e76200;"><?php echo "I wish to pay later"; ?></h3>
+      <?php
+    $membership = $this->getMembershipdetails();
   
-    <h2 style="color: #e76200;"><?php echo "0 USD"; ?></h2>
-   <?php } else {?>
-         <?php echo $this->__('You Chose'); ?>
-    <h3 style="color: #e76200;"><?php echo $exp[1]; ?></h3>
-    <?php echo $this->__('Amount to be paid'); ?>
-    <h2 style="color: #e76200;"><?php echo $exp[0] . " USD"; ?></h2>
-  <?php  } ?>
-    </div>
-    <?php
     $var = $this->getSettings();
     $gateurl = $var['a'];
     $api_login_id = $var['b'];
     $transaction_key = $var['d'];
-    $amount = $exp[0];
-    $mem_table_id =  $exp[2];
+$amount =  $membership['membership_price']; // membership amount
+$mem_id =  $membership['membership_id']; // membership id  
+$group_id= $membership['customer_group'];// groupid 
     ?>
+  
+  
 
     <form method="post" action="<?php echo Mage::getBaseUrl(); ?>membership/payment/authorizepayment/">
         <div class="form-list">
-         <?php   $model = Mage::getModel('customer/customer')->load(Mage::getSingleton('customer/session')->getMemId());
-            $memtypeid = $model->getMemType();
-             if ($memtypeid === '0') { ?>
-             <li class="fields">
+            <?php
+            if ((empty($mem_id)) && ($group_id === '15')) {         
+                ?>
+            <div id="previous_membership">
+                 <h3 style="color: #e76200;"><?php echo "I wish to pay later"; ?></h3>
+            <h2 style="color: #e76200;"><?php echo "0 USD"; ?></h2>
+            </div>
+           
+                <li class="fields">
                     <div class="field">
                         <label for="membership_plan" class="required"><?php echo $this->__('Choose your membership type') ?><em>*</em></label>
                         <div class="input-box">
-
-                              <?php
-                                                $model = Mage::getModel('membership/types');
-                                                $data = $model->getCollection()->getData();
-                                                foreach ($data as $options) {
-                                                    ?>
-                            <input type="radio" name="mem_type" value="<?php echo $options['membership_id']; ?>" onclick="javascript:GetPrice(this.value);" />&nbsp;<?php echo $options['membership_type']; ?><br>
-                                                <?php } ?>
+                            <?php
+                            $model = Mage::getModel('membership/types');
+                            $data = $model->getCollection()->getData();
+                            foreach ($data as $options) {
+                                ?>
+                                <input type="radio" name="mem_type" value="<?php echo $options['membership_id']; ?>" onclick="javascript:GetPrice(this.value);" />&nbsp;<?php echo $options['membership_type']; ?><br>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="field">
@@ -56,22 +45,70 @@
                             <?php echo "&nbsp; " . Mage::app()->getStore()->getCurrentCurrencyCode(); ?>
 
                             <div id="price_change" style="float: left;">
-                              <?php echo $this->__('0') ?> <!-- amount here -->
+                                <?php echo $this->__('0') ?> <!-- amount here -->
                             </div>    
                             <input type="hidden" name="amt" id="mem_amt" value=" <?php echo $this->__('0') ?>"/>
-                           
-                       </div>
-                  </div>
-                    
-               
-                </li>
-               
 
-           <?php } else { ?>
-            <input type="hidden" name="mem_type" value="<?php echo $exp[1]; ?>" />
-            <input type="hidden" name="amt" value="<?php echo $amount; ?>" />
-            <input type="hidden" name="mem_table_id" value="<?php echo $mem_table_id; ?>" />
-               <?php } ?>
+                        </div>
+                    </div>
+
+
+                </li>
+
+
+            <?php } else if(!empty($mem_id) && ($group_id ==='15')) {   ?>    
+                <div id="previous_membership">
+                            <?php echo $this->__('You Chose'); ?>
+            <h3 style="color: #e76200;"><?php echo $membership['membership_type']; ?></h3>
+            <?php echo $this->__('Amount to be paid'); ?>
+            <h2 style="color: #e76200;"><?php echo $membership['membership_price'] . " USD"; ?></h2>
+
+                </div>           
+                 <li class="fields">
+                    <div class="field">
+                        <label for="membership_plan" class="required"><?php echo $this->__('Choose your membership type') ?><em>*</em></label>
+                        <div class="input-box">
+                            
+                            
+                            <?php
+                            $model = Mage::getModel('membership/types');
+                            $data = $model->getCollection()->getData();
+                            foreach ($data as $options) {
+                                ?>
+                            <input type="radio" checked="checked"name="mem_type" value="<?php echo $options['membership_id']; ?>" onclick="javascript:GetPrice(this.value);" />&nbsp;<?php echo $options['membership_type']; ?><br>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="membership_plan" class="required"><?php echo $this->__('Membership price') ?></label>
+
+                        <div class="input-box" style="font-size: 15px;">
+                            <?php echo "&nbsp; " . Mage::app()->getStore()->getCurrentCurrencyCode(); ?>
+
+                            <div id="price_change" style="float: left;">
+                                <?php echo $membership['membership_price']  ?> <!-- amount here -->
+                            </div>    
+                            <input type="hidden" name="amt" id="mem_amt" value=" <?php echo $this->__('0') ?>"/>
+
+                        </div>
+                    </div>
+
+
+                </li>
+                
+          <?php   } else if(!empty ($mem_id) && ($group_id!=='15')) {                ?>
+                <input type="hidden" name="mem_type" value="<?php echo $membership['membership_type']; ?>" />
+                <input type="hidden" name="amt" value="<?php echo $amount; ?>" />
+                <input type="hidden" name="mem_table_id" value="<?php echo $mem_id; ?>" />
+           
+                   <div id="previous_membership">
+                            <?php echo $this->__('You Chose'); ?>
+            <h3 style="color: #e76200;"><?php echo $membership['membership_type']; ?></h3>
+            <?php echo $this->__('Amount to be paid'); ?>
+            <h2 style="color: #e76200;"><?php echo $membership['membership_price'] . " USD"; ?></h2>
+
+                </div>
+                 <?php } ?>
             <div>
                 <label for="card_number">Credit Card Number</label>
                 <div class="input-box">
@@ -93,7 +130,7 @@
                 </select> 
 
                 <select name="card_exp_month" style="width:7%;">
-                    
+
                     <option value="01">01</option>
                     <option value="02">02</option>
                     <option value="03">03</option>
@@ -105,7 +142,7 @@
                     <option value="09">09</option>
                     <?php
                     for ($mo = 10; $mo <= 12; $mo++)
-                       echo "<option value='$mo'>$mo</option>";
+                        echo "<option value='$mo'>$mo</option>";
                     ?>
                 </select>
 
@@ -153,8 +190,8 @@
 <script type="text/javascript">
     function GetPrice(memid)
     {
- $('previous_membership').hide();
- 
+        $('previous_membership').hide();
+
         new Ajax.Request('<?php echo Mage::getBaseUrl() . "membership/payment/Getprice?memid=" ?>' + memid,
                 {
                     method: "get",
@@ -163,7 +200,7 @@
                         node = $("price_change");
                         //$("price_change").update = response;
                         node.update(response);
-  $('mem_amt').writeAttribute('value', response);
+                        $('mem_amt').writeAttribute('value', response);
                     },
                     onFailure: function () {
                         alert("Something went wrong...")
