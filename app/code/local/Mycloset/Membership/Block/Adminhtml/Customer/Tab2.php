@@ -12,24 +12,21 @@ class Mycloset_Membership_Block_Adminhtml_Customer_Tab2 extends Mage_Adminhtml_B
     }
 
     public function getCustomerpayments() {
-
-        $customer = Mage::registry('current_customer');
-        // $model = Mage::getModel('membership/payment')->load($customer['entity_id']);
+      $customer = Mage::registry('current_customer');
+      
         $model = Mage::getModel('membership/payment')->load($customer['entity_id'], 'customer_id');
-        $customer_pro_id = $model->getCustomerProfileId();
-        $customer_payment_id = $model->getPaymentProfileId();
-        $customer_address_id = $model->getShippingAddressId();
-        $membership_id = $model->getMembershipId();
-        // $timestamp = $model->getTimestamp();
-        //$acttime = strtotime($timestamp);
-
+        $customermembership = Mage::getModel('membership/customermembership')->load($customer['entity_id'], 'customer_id');
+        $membership_id = $customermembership['membership_id'];
         $model2 = Mage::getModel('membership/membership')->load($membership_id, 'membership_id');
-        $getamount = $model2->getMembershipPrice();
-        $getmembership_type = $model2->getMembershipType();
-        if ($customer_payment_id == NULL) {
-            return 'The customer has not made any payments';
-        }
-        return $customer_pro_id . '-' . $customer_payment_id . '-' . $customer_address_id . '-' . $membership_id . '-' . $getmembership_type . '-' . $getamount;
+        $data = array();
+        $data['customer_id'] = $customer['entity_id'];
+        $data['customer_profileId'] = $model->getCustomerProfileId();
+        $data['payment_profileId'] = $model->getPaymentProfileId();
+        $data['shipping_addressId'] = $model->getShippingAddressId();
+        $data['membership_Id'] = $membership_id;
+        $data['membership_price'] = $model2->getMembershipPrice();
+        $data['membership_type'] = $model2->getMembershipType();     
+        return $data;
     }
 
     /**

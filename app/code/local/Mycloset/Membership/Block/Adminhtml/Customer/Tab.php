@@ -13,28 +13,39 @@ class Mycloset_Membership_Block_Adminhtml_Customer_Tab extends Mage_Adminhtml_Bl
 
     public function getCustomerpayment() {
 
-        $customer = Mage::registry('current_customer');
+       $customer = Mage::registry('current_customer');
         // $model = Mage::getModel('membership/payment')->load($customer['entity_id']);
         $model = Mage::getModel('membership/payment')->load($customer['entity_id'], 'customer_id');
-        //$cusid = $model->getCustomerId();
-        $customer_pro_id = $model->getCustomerProfileId();
-        $customer_payment_id = $model->getPaymentProfileId();
-        $customer_address_id = $model->getShippingAddressId();
-        $membership_id = $model->getMembershipId();
-
-        $model2 = Mage::getModel('membership/membership')->load($membership_id, 'membership_id');
-        $getamount = $model2->getMembershipPrice();
-        $getmembership_type = $model2->getMembershipType();
         
-        if ($customer_payment_id == NULL) {
-            return 'The customer has not made any payments';
-        }
-        return $customer_pro_id . '-' . $customer_payment_id . '-' . $customer_address_id . '-' . $membership_id . '-' . $getmembership_type. '-' . $getamount;
+//        $paymenthistory = Mage::getModel('membership/paymenthistory')->load($customer['entity_id'], 'customer_id');
+        $cusid = $model->getCustomerId();
+//        $customer_pro_id = $model->getCustomerProfileId();
+//        $customer_payment_id = $model->getPaymentProfileId();
+//        $customer_address_id = $model->getShippingAddressId();
+        // get customer membership details
+        $customermembership = Mage::getModel('membership/customermembership')->load($cusid, 'customer_id');
+      $customermembership->getMembershipId();
+      $membership_id = $customermembership->getMembershipId();
+        $model2 = Mage::getModel('membership/membership')->load($membership_id, 'membership_id');
+     
+       
+//        $getamount = $model2->getMembershipPrice();
+//        $getmembership_type = $model2->getMembershipType();
+       $info = array();
+$info['customer_pro_id']=$model->getCustomerProfileId();
+$info['customer_payment_id']=$model->getPaymentProfileId();
+$info['customer_address_id']=$model->getShippingAddressId();
+$info['getamount']=$model2->getMembershipPrice();
+$info['membership_id']= $customermembership->getMembershipId();
+$info['getmembership_type']=$model2->getMembershipType();
 
+        
+
+        return $info;
     }
 
     public function getChosenservices() {
-      $customer = Mage::registry('current_customer');
+        $customer = Mage::registry('current_customer');
         //  echo $customer;
 //echo  Mage::app()->getRequest()->getParam('id')
         $collection = Mage::getModel('membership/chosenservices')->getCollection()->addFieldToFilter('customer_id', $customer['entity_id']);
@@ -42,18 +53,18 @@ class Mycloset_Membership_Block_Adminhtml_Customer_Tab extends Mage_Adminhtml_Bl
         //$collection = Mage::getModel('membership/chosenservices')->getCollection()->addFieldToFilter('customer_id', Mage::app()->getRequest()->getParam('id'));
         //$keys = array_keys($collection->getServiceName()->getData());
         $options = array();
-         if(count($collection)){
-        foreach ($collection as $val) {
-            
+        if (count($collection)) {
+            foreach ($collection as $val) {
+
 //echo $val->getId();
-            $model = Mage::getModel('membership/chosenservices')->load($val->getId());
-            $options[] = array(
-                'servicename' => $model->getServiceName(),
-                'amount' => $model->getAmount(),
-                'timestamp' => $model->getTimestamp()
-            );
+                $model = Mage::getModel('membership/chosenservices')->load($val->getId());
+                $options[] = array(
+                    'servicename' => $model->getServiceName(),
+                    'amount' => $model->getAmount(),
+                    'timestamp' => $model->getTimestamp()
+                );
+            }
         }
-         }
         return $options;
     }
 

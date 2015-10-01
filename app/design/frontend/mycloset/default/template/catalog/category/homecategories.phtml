@@ -49,7 +49,17 @@ $all_sub_cat = explode(',', $subcats);
     if (!$hide_pickup && (Mage::getSingleton('customer/session')->isLoggedIn())) {
         ?>
         <div class="alignCenter">
+                <?php
+                $customer = Mage::getModel('customer/customer')->load($userid);
+             $groupid= $customer->getGroupId();      
+         if($groupid === '15'){ ?>
+                <a class="button" href="<?php echo $this->getUrl('') ?>mycloset/payment"> Pick up my clothing</a>
+         <?php    } else if($groupid === '1') {
+            ?>
             <a class="button" href="<?php echo $this->getUrl('') ?>mycloset/pickup"> Pick up my clothing</a>
+              <?php
+    }
+    ?>
         </div>
         <?php
     }
