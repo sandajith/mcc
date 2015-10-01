@@ -1,9 +1,14 @@
 <?php
-$cusgroup = Mage::getModel('customer/customer')->load(Mage::app()->getRequest()->getParam('id'))->getGroupId();
+$cusgroup = Mage::getModel('customer/customer')->load(Mage::app()->getRequest()->getParam('id'))->getGroupId(); // get customer group id
+$group = Mage::getModel('customer/group')->load($cusgroup); //Get customer Group name
+$info=$this->getCustomerpayment();
+$info['customer_pro_id'];
+$info['customer_payment_id'];
+ $info['customer_address_id'];
+ $info['membership_id'];
+ $info['getmembership_type'];
+$info['getamount'];
 ?>
-
-
-
 <table cellspacing="0" class="form-edit">
     <tr>
         <td class="payment-section">
@@ -11,54 +16,47 @@ $cusgroup = Mage::getModel('customer/customer')->load(Mage::app()->getRequest()-
                 <h4 class="icon-head head-customer-address-list"><?php echo Mage::helper('customer')->__('Membership Information') ?></h4>
             </div>   
 
-            <div class="fieldset">
+            <div class="fieldset">                              
                 <input type="hidden" name="return_url" value="<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/customer/edit/id', array('id' => Mage::app()->getRequest()->getParam('id'))) ?>" />
                 <input type="hidden" name="customer_entity_id" value="<?php echo Mage::app()->getRequest()->getParam('id'); ?>" />
-                <?php
-                $pay = explode('-', $this->getCustomerpayment());
-                print_r($pay);
-                $time = date("d/m/Y h:i:s A", $pay['5']);
-                ?>
 
+                <?php if ($cusgroup === '1') {//members group  ?>
 
- <!--edited by neenu-->
-                    <?php if ($cusgroup === '15'):                       
-                        //Get customer Group name
-                        $group = Mage::getModel('customer/group')->load($cusgroup);
-                    
-                    ?>
-                        <h4> <label>Membership Status</label>: <?php echo $group->getCode(); ?></h4>                   
-                    <!--edited by neenu END-->
-                <?php elseif ($cusgroup == 5): ?>
-                    <h4 style="color: #DF280A;"> Membership Closed</h4>
-                    
-                <?php else : ?>
-                    
-                    <?php if ($pay['4'] == ''): ?>
+                    <h4> Membership Status :<?php echo $group->getCode(); ?></h4>
+                    <h4> Membership type - <?php echo $info['getmembership_type'] ?> </h4>
+                    <h4> Membership amount - <?php echo Mage::app()->getLocale()->currency($currency_code)->getSymbol() . '&nbsp;' . $info['getamount'] ?> </h4>
+                    <input type="checkbox" checked="checked" id="add5" value="<?php echo $info['getamount']; ?>"  onclick="UpdateCost();"> &nbsp;Include membership charge for payment
 
-                        <h4> Membership Status : Waiting list</h4>
-                        <input type="checkbox" id="add5" value="0"  style="display:none;">
+                <?php } elseif ($cusgroup === '4') {//Waiting List group   ?>
 
-                    <?php else: ?>
-                        <h4> Membership type - <?php echo $pay['4'] ?> </h4>
-                        <h4> Membership amount - <?php echo Mage::app()->getLocale()->currency($currency_code)->getSymbol() . '&nbsp;' . $pay['5'] ?> </h4>
-                        <input type="checkbox" id="add5" value="<?php echo $pay['5']; ?>"  onclick="UpdateCost();"> &nbsp;Include membership charge for payment
-                    <?php endif; ?>
-                    <?php if ($cusgroup == 6): ?>
-                        <h4 style="color: #DF280A;"> Membership is in notice</h4>
-                    <?php endif; ?>
-                   
-                <?php endif; ?>
+                    <h4 style="color: #DF280A;"> <?php echo $group->getCode(); ?></h4>
 
+                <?php } elseif ($cusgroup === '15') {//Non paid member groop  ?>
+
+                    <h4> <label>Membership Status</label>: <?php echo $group->getCode(); ?></h4>
+
+                <?php } elseif ($cusgroup === '5') {//membership closed group   ?>
+
+                    <h4 style="color: #DF280A;"> <?php echo $group->getCode(); ?></h4>
+
+                <?php } elseif ($cusgroup === '6') {// notice period group   ?>
+
+                    <h4 style="color: #DF280A;"> <?php echo $group->getCode(); ?></h4>
+
+                <?php } else { ?>
+
+                    <h4 style="color: #DF280A;"> <?php echo $group->getCode(); ?></h4>
+
+                <?php } ?>
 
 
 
    <!--                <form action="<?php echo Mage::getBaseUrl(); ?>membership/payment/payme" type="post">-->
-                <input type="hidden" name="mem_type_name" value="<?php echo $pay['4'] ?>"/>
-                <input type="hidden" name="customer_pro_id" value="<?php echo $pay['0'] ?>"/>
-                <input type="hidden" name="customer_payment_id" value="<?php echo $pay['1'] ?>"/>
-                <input type="hidden" name="customer_address_id" value="<?php echo $pay['2'] ?>"/>
-                <input type="hidden" id="mem_choose_price" value="<?php echo $pay['3'] ?>"/>
+                <input type="hidden" name="mem_type_name" value="<?php echo $info['getmembership_type'] ?>"/>
+                <input type="hidden" name="customer_pro_id" value="<?php echo $info['customer_pro_id'] ?>"/>
+                <input type="hidden" name="customer_payment_id" value="<?php echo $info['customer_payment_id'] ?>"/>
+                <input type="hidden" name="customer_address_id" value="<?php echo $info['customer_address_id'] ?>"/>
+                <input type="hidden" id="mem_choose_price" value="<?php echo $info['getamount'] ?>"/>
                 <input type="hidden" id="finalamount" value="<?php echo array_sum($price); ?>" name="amount" />
 
                 <!--                <button type="Submit" class="scalable" value="Pay for this customer" onclick="setLocation('http://localhost/bridge-member/index.php/membership/payment/payme/')">Pay for the customer</button>-->
@@ -71,36 +69,6 @@ $cusgroup = Mage::getModel('customer/customer')->load(Mage::app()->getRequest()-
 
 
 
-<script type="text/javascript">
-    function Getplan(mem) {
-        document.getElementById("planup").value = mem;
-    }
-</script>
-
-<script type="text/javascript">
-    function UpdateCost() {
-        var sum = 0;
-        var input, elem, element, memsum = 0;
-        element = document.getElementById('add5');
-        if (element.checked == true) {
-            memsum = element.value;
-        }
-        else {
-            memsum = 0;
-        }
-        for (i = 0; i < 6; i++) {
-            input = 'add' + i;
-            elem = document.getElementById(input);
-            if (elem.checked == true) {
-                sum += Number(elem.value);
-            }
-        }
-        sumtot = parseFloat(sum) + parseFloat(document.getElementById('servicesum').value) + parseFloat(document.getElementById('addvalue').value);
-        document.getElementById("priceholder").innerHTML = sum + parseFloat(document.getElementById('addvalue').value) - parseFloat(memsum);
-        document.getElementById("finalamount").value = sumtot.toFixed(2);
-        document.getElementById("finalpricedisplay").innerHTML = sumtot.toFixed(2);
-    }
-</script>
 
 <div class="payment-sections">
     <div id="customer_info_tabs_Membership payments_content" style="width: 38%; float: left; padding-right: 22px;">
@@ -112,15 +80,15 @@ $cusgroup = Mage::getModel('customer/customer')->load(Mage::app()->getRequest()-
                         </div>   
 
                         <div class="fieldset">
-                            <input type="checkbox" id='add0' value="5"  onclick="UpdateCost()">&nbsp;Third party storage<br>
-                            <input type="checkbox" id='add1' value="10" onclick="UpdateCost()">&nbsp;Shipping charges<br>
-                            <input type="checkbox" id='add2' value="15" onclick="UpdateCost()">&nbsp;Delivery charges<br>
-                            <input type="checkbox" id='add3' value="20" onclick="UpdateCost()">&nbsp;Secondary fees<br>
-                            <input type="checkbox" id='add4' value="25" onclick="UpdateCost()">&nbsp;Parking fees<br>
+                            <input type="checkbox" id='add0' name="third_party" value="5"  onclick="UpdateCost()">&nbsp;Third party storage<br>
+                            <input type="checkbox" id='add1' name="shipping_charges" value="10" onclick="UpdateCost()">&nbsp;Shipping charges<br>
+                            <input type="checkbox" id='add2' name="delivery_charges"  value="15" onclick="UpdateCost()">&nbsp;Delivery charges<br>
+                            <input type="checkbox" id='add3' name="secondary_fees"  value="20" onclick="UpdateCost()">&nbsp;Secondary fees<br>
+                            <input type="checkbox" id='add4' name="parking_fees"  value="25" onclick="UpdateCost()">&nbsp;Parking fees<br>
                             <div id="additional-amt" style="border: 1px solid #d6d6d6;padding: 10px;margin: 10px 0;">
                                 <b>Additional payments</b> <br>
                                 <textarea rows="3" cols="50" name="comment" style="resize: none;">Enter your comments here</textarea><br>
-                                Amount for the service<br><input type="text" id='addvalue' value="0" style="width: 30px;"onkeyup="UpdateCost()" ><br>
+                                Amount for the service<br><input type="text" id="addvalue" value="0" style="width: 30px;" onkeyup="UpdateCost()" /><br>
 
                             </div>
                             <div id="price"><h4>Total cost for additional services $ <span id="priceholder">0</span></h4></div>
@@ -208,7 +176,7 @@ $cusgroup = Mage::getModel('customer/customer')->load(Mage::app()->getRequest()-
 
 
 <div class="sss" style="float: left ; width: 100%;">
-    <h2 id="final">Total amount to be paid : <span id="currency" style="color: #ff0033;"><?php echo Mage::app()->getLocale()->currency($currency_code)->getSymbol(); ?></span>&nbsp;<span id="finalpricedisplay" style="color: #ff0033;"><?php echo $pay['5'] ?></span></h2>
+    <h2 id="final">Total amount to be paid : <span id="currency" style="color: #ff0033;"><?php echo Mage::app()->getLocale()->currency($currency_code)->getSymbol(); ?></span>&nbsp;<span id="finalpricedisplay" style="color: #ff0033;"><?php echo $info['getamount'] ?></span></h2>
     <button type='submit' class="scalable" value='Submit' onclick='this.form.action = "<?php echo Mage::getBaseUrl(); ?>membership/payment/payme/";' value="Submit">Pay for the customer</button>
 </div>
 
@@ -219,6 +187,60 @@ $cusgroup = Mage::getModel('customer/customer')->load(Mage::app()->getRequest()-
 
 
 
+<script type="text/javascript">
+    function Getplan(mem) {
+        document.getElementById("planup").value = mem;
+    }
+
+    function UpdateCost() {
+        var sum = 0;
+        var input, elem, element, memsum = 0;
+        element = document.getElementById('add5');
+        if (element.checked == true) {
+            memsum = element.value;
+        }
+        else {
+            memsum = 0;
+        }
+        var parameters="name="+sum;
+        
+        for (i = 0; i < 6; i++) {
+            input = 'add' + i;
+            elem = document.getElementById(input);
+           
+            if (elem.checked == true) {
+                
+                sum += Number(elem.value);
+                
+                    var xmlhttp;
+                    if (window.XMLHttpRequest)
+                    {// code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttp = new XMLHttpRequest();
+                    }
+                    else
+                    {// code for IE6, IE5
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function ()
+                    { 
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+                        {
+                        
+//                         
+                        }
+                    }
+                    xmlhttp.open("POST", "<?php echo Mage::getBaseUrl(); ?>membership/payment/payme/", true);
+                    xmlhttp.send(parameters);
+               
+            }
+        }
+        sumtot = parseFloat(sum) + parseFloat(document.getElementById('servicesum').value) + parseFloat(document.getElementById('addvalue').value);
+
+        document.getElementById("priceholder").innerHTML = sum + parseFloat(document.getElementById('addvalue').value) - parseFloat(memsum);
+        document.getElementById("finalamount").value = sumtot.toFixed(2);
+        document.getElementById("finalpricedisplay").innerHTML = sumtot.toFixed(2);
+    }
+</script>
 
 <?php if ($this->getRequest()->getParam('q') == success): ?>
 
