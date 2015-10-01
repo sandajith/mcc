@@ -103,7 +103,7 @@ class Mycloset_Membership_AccountController extends Mage_Core_Controller_Front_A
      * Login post action
      */
     public function loginPostAction() {
-         if (!$this->_validateFormKey()) {
+        if (!$this->_validateFormKey()) {
             $this->_redirect('*/*/');
             return;
         }
@@ -117,7 +117,7 @@ class Mycloset_Membership_AccountController extends Mage_Core_Controller_Front_A
         $customer = Mage::getModel('customer/customer')
                 ->setWebsiteId(Mage::app()->getStore()->getWebsiteId())
                 ->loadByEmail($login['username']);
-        $group = $customer->getGroupId();        
+        $group = $customer->getGroupId();
         if (($group == '4') || ($group == '6')) {
             $session = $this->_getSession();
             $message = 'Your membership is not activated or it has been closed';
@@ -207,7 +207,7 @@ class Mycloset_Membership_AccountController extends Mage_Core_Controller_Front_A
     public function logoutAction() {
         //Cleaning the front form values before logging in
         Mage::getSingleton('customer/session')->unsetAll();
-        
+
         $session = $this->_getSession();
         $session->logout()->renewSession();
         if (Mage::getStoreConfigFlag(Mage_Customer_Helper_Data::XML_PATH_CUSTOMER_STARTUP_REDIRECT_TO_DASHBOARD)) {
@@ -257,13 +257,10 @@ class Mycloset_Membership_AccountController extends Mage_Core_Controller_Front_A
             $this->_redirectError($errUrl);
             return;
         }
-$postdata = $this->getRequest()->getPost();
+        $postdata = $this->getRequest()->getPost();
         $customer = $this->_getCustomer();
         //load customer session based on id               
         $customer->load(Mage::getSingleton('customer/session')->getMemID());
-
-
-
 
 
         try {
@@ -272,15 +269,13 @@ $postdata = $this->getRequest()->getPost();
                 $customer->cleanPasswordsValidationData();
                 if (Mage::getStoreConfig(self::PATH_GATE_THRESHOLD) == no) {
                     $customer->setGroupId('4');
-                }elseif($postdata['mem_type']=='0')
-                {
-                     $customer->setGroupId('15');
-                }
-                
+                } 
+//                
+
                 //Check if nonpaid customer
-                
-                
-                
+
+
+
                 $customer->isConfirmationRequired(FALSE);
                 $customer->save();
                 $this->_dispatchRegisterSuccess($customer);
@@ -333,11 +328,12 @@ $postdata = $this->getRequest()->getPost();
      * @return Mage_Customer_AccountController
      */
     protected function _successProcessRegistration(Mage_Customer_Model_Customer $customer) {
-        
+
 
         if (Mage::getStoreConfig(self::PATH_GATE_THRESHOLD) == yes) {
-            
+
             //edited by neenu
+       $customerid=  Mage::getSingleton('customer/session')->getMemID();
             $model = Mage::getModel('customer/customer')->load(Mage::getSingleton('customer/session')->getMemId());
             $memtypeid = $model->getMemType();
 //        $one = Mage::getModel('membership/types')->load($memtypeid);
@@ -357,7 +353,7 @@ $postdata = $this->getRequest()->getPost();
                 try {
                     $model->setId($customerid)->save();
                 } catch (Exception $e) {
-                   echo $e->getMessage();
+                    echo $e->getMessage();
                 }
                 //changing customer group end
                 $session->setCustomerAsLoggedIn($customer);
@@ -367,12 +363,22 @@ $postdata = $this->getRequest()->getPost();
 //                 $url = Mage::getUrl('home'); 
                 //Mage::getSingleton('customer/session')->unsetAll();
             } else {
+
+                $jyuy = Mage::getModel('membership/customermembership');
+                      $jyuy->setCustomerId($customerid)                        
+                        ->setMembershipId($memtypeid)
+                        ->save();
+                      $membershiphistory = Mage::getModel('membership/membershiphistory');
+                      $membershiphistory->setCustomerId($customerid)                        
+                                        ->setMembershipId($memtypeid)
+                                        ->save();
+//                  
 //            redirect to registration second page
                 //redirecting to payment page (second page of registration)       
                 $url = Mage::getUrl('mycloset/payment', array('_secure' => true));
-           }
+            }
 //edited by neenu end
-            //
+        //
         } else {
             // clearing all session variables upon threshold and redirect to success pages
             Mage::getSingleton('customer/session')->unsetAll();
@@ -1002,10 +1008,9 @@ $postdata = $this->getRequest()->getPost();
         return $this->_getHelper('customer/address')->isVatValidationEnabled($store);
     }
 
-    public function existsAction(){
-         $this->loadLayout();
+    public function existsAction() {
+        $this->loadLayout();
         $this->renderLayout();
     }
 
-    
 }
