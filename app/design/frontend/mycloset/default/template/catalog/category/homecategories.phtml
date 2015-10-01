@@ -52,9 +52,10 @@ $all_sub_cat = explode(',', $subcats);
                 <?php
                 $customer = Mage::getModel('customer/customer')->load($userid);
              $groupid= $customer->getGroupId();      
+            echo  Mage::getSingleton('customer/session')->getThreshold();
          if($groupid === '15'){ ?>
                 <a class="button" href="<?php echo $this->getUrl('') ?>mycloset/payment"> Pick up my clothing</a>
-         <?php    } else if($groupid === '1') {
+         <?php    } else if($groupid === '1' ) {
             ?>
             <a class="button" href="<?php echo $this->getUrl('') ?>mycloset/pickup"> Pick up my clothing</a>
               <?php

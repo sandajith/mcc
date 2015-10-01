@@ -28,3 +28,18 @@ SimpleXMLElement Object
 
     [directResponse] => 2,4,37,The credit card number is invalid.,,P,7523127907,INV185928747,,1.00,CC,auth_only,144221144872,Test,Q,,,,,,,456546,,test@red.com,Test,Q,dgnhkjhdsgkjh,,,,,,,,0.00,,,6700A3AAF68D370BD2B3D252400F6A45,,,,,,,,,,,,,XXXX0027,Visa,,,,,,,,,,,,,,,,,208188016
 )
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00027
+                    [text] => The credit card number is invalid.
+                )
+
+        )
+
+    [directResponse] => 2,4,37,The credit card number is invalid.,,P,7573554390,MCC188673854,,10.00,CC,auth_only,144368901361,robin,robin,,,,,,,3562535352568,,robin@gmail.com,robin,robin,test,,,,,,,,0.00,,,9B1832F082B35F03F2306142C23AC01A,,,,,,,,,,,,,XXXX0027,Visa,,,,,,,,,,,,,,,,,211762497
+)
