@@ -70,6 +70,12 @@
                       <pickupdetails>
                         <table>pickup_details</table>
                     </pickupdetails>
+                    <customermembership>
+                        <table>mycloset_customer_membership</table>
+                    </customermembership>
+                    <membershiphistory>
+                        <table>mycloset_membership_history</table>
+                    </membershiphistory>
                 </entities>
             </membership_mysql4>
         </models> 
