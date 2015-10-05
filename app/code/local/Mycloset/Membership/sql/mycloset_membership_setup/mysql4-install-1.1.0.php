@@ -24,6 +24,33 @@ $attribute->setData('is_user_defined', 0);
 $attribute->save();
 
 
+/*
+ * reference field in the customer registration 1st form
+ * edited by neenu
+ * 
+ */
+ $this->addAttribute('customer', 'cus_reference', array(
+    'type' => 'varchar',  
+    'label' => 'If you have a referral code, please enter it here',
+    'input' => 'text',
+    'position' => 600,
+    'required' => false, //or true
+    'is_system' => 0,
+    'visible_on_front' => 1
+   
+));
+$attribute = Mage::getSingleton('eav/config')->getAttribute('customer', 'cus_reference');
+$attribute->setData('used_in_forms', array(
+    'adminhtml_customer',
+    'checkout_register',
+    'customer_account_create',
+    'customer_account_edit',
+));
+$attribute->setData('is_user_defined', 0);
+$attribute->save();
+
+
+
 
 /**
  *  Membership Type
@@ -91,7 +118,7 @@ $this->addAttributeToSet(
 $installer = $this;
 $installer->startSetup();
 $installer->run("
-   CREATE TABLE `closet_pickup_details` (
+CREATE TABLE IF NOT EXISTS `closet_pickup_details` (
 `pickup_id` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `pickup_user_id` INT( 10 ) NOT NULL ,
 `pickup_category_id` INT( 10 ) NOT NULL ,

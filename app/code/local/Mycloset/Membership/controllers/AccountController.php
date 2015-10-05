@@ -285,6 +285,7 @@ class Mycloset_Membership_AccountController extends Mage_Core_Controller_Front_A
                 Mage::getSingleton('customer/session')->setMemLname($customer->getLastname());
                 Mage::getSingleton('customer/session')->setMemEmail($customer->getEmail());
                 Mage::getSingleton('customer/session')->setMemCustele($customer->getCus_tele());
+                Mage::getSingleton('customer/session')->setMemCusReference($customer->getCusReference());
 
                 $billingaddressId = $customer->getDefaultBilling();
                 if ($billingaddressId) {

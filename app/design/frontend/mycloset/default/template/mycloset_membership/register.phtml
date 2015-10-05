@@ -26,14 +26,14 @@
 ?>
 
 <div class="account-create">
- 
+
     <div class="page-title subhead ">
         <h2><?php echo $this->__('LOGIN OR CREATE ACCOUNT') ?></h2>  
-        
+
     </div>
     <?php echo $this->getChildHtml('form_fields_before') ?>
     <?php echo $this->getMessagesBlock()->toHtml() ?>
-      <div class="row loginRegister">
+    <div class="row loginRegister">
         <div class="col-sm-6 loginBox">
             <form action="<?php echo $this->getUrl('membership/account/createPost') ?>" method="post" id="form-validate">
                 <div class="col-md-12 bordered">
@@ -60,8 +60,15 @@
                                         <input type="text" name="cus_tele" id="cus_tele" value="<?php echo Mage::getSingleton('customer/session')->getMemCustele(); ?>" title="<?php echo $this->__('Customer telephone') ?>" class="input-text" />
                                     </div>
                                 </li>
+<!--edited by neenu
+ If you have a referral code, please enter it here-->
 
-
+                                <li>
+                                    <label for="cus_reference"><?php echo $this->__('If you have a referral code, please enter it here') ?></label>
+                                    <div class="input-box">
+                                        <input type="text" name="cus_reference" id="cus_reference" value="<?php echo Mage::getSingleton('customer/session')->getMemCusreference(); ?>" title="<?php echo $this->__('If you have a referral code, please enter it here') ?>" class="input-text" />
+                                    </div>
+                                </li>
 
 
 
@@ -76,27 +83,27 @@
 <!--                                            <select id="mem_type" name="mem_type" title="" onchange="GetPrice(this.value);">
 
                                                 <option value="0">Select membership</option>
-                                                <?php
+                                            <?php
 //                                                $model = Mage::getModel('membership/types');
 //                                                $data = $model->getCollection()->getData();
 //                                                foreach ($data as $options) {
-                                                    ?>
-                                                    <option value="<?php // echo $options['membership_id']; ?>"><?php echo $options['membership_type']; ?></option>
-                                                <?php // } ?>
-                                                <?php // echo $this->getMemberships(); ?>
+                                            ?>
+                                                    <option value="<?php // echo $options['membership_id'];  ?>"><?php echo $options['membership_type']; ?></option>
+                                            <?php // } ?>
+                                            <?php // echo $this->getMemberships(); ?>
                                             </select> -->
-                                            
-                                                   <?php
-                                                $model = Mage::getModel('membership/types');
-                                                $data = $model->getCollection()->getData();
-                                                foreach ($data as $options) {
-                                                    ?>
-                                            <input type="radio" name="mem_type" value="<?php echo $options['membership_id']; ?>" onclick="GetPrice(this.value);" />&nbsp;<?php echo $options['membership_type']; ?><br>
-                                                <?php } ?>
+
+                                            <?php
+                                            $model = Mage::getModel('membership/types');
+                                            $data = $model->getCollection()->getData();
+                                            foreach ($data as $options) {
+                                                ?>
+                                                <input type="radio" name="mem_type" value="<?php echo $options['membership_id']; ?>" onclick="GetPrice(this.value);" />&nbsp;<?php echo $options['membership_type']; ?><br>
+                                            <?php } ?>
                                             <input type="radio" name="mem_type" checked="checked" value="0" onclick="GetPrice(this.value);" />&nbsp;I wish to pay later<br>
 
-                                            
-                                           
+
+
                                         </div>
                                     </div>
                                     <div class="field">
@@ -106,7 +113,7 @@
                                             <?php echo "&nbsp; " . Mage::app()->getStore()->getCurrentCurrencyCode(); ?>
 
                                             <div id="price_change" style="float: left;">
-                                            <?php echo $this->__('0') ?> <!--amount here-->
+                                                <?php echo $this->__('0') ?> <!--amount here-->
                                             </div>                        </div>
                                     </div>
                                 </li>
@@ -114,31 +121,31 @@
 
 
 
-     <script type="text/javascript">
+                                <script type="text/javascript">
 
-            function GetPrice(memid)
-    {
+                                    function GetPrice(memid)
+                                    {
 
-        new Ajax.Request('<?php echo Mage::getBaseUrl() . "membership/payment/Getprice?memid=" ?>' + memid,
-                {
-                    method: "get",
-                    onSuccess: function (transport) {
-                        var response = transport.responseText || "no response text";
-                        node = $("price_change");
-                        //$("price_change").update = response;
-                        node.update(response);
-  $('mem_amt').writeAttribute('value', response);
-                    },
-                    onFailure: function () {
-                        alert("Something went wrong...")
-                    }
-                });
+                                        new Ajax.Request('<?php echo Mage::getBaseUrl() . "membership/payment/Getprice?memid=" ?>' + memid,
+                                                {
+                                                    method: "get",
+                                                    onSuccess: function (transport) {
+                                                        var response = transport.responseText || "no response text";
+                                                        node = $("price_change");
+                                                        //$("price_change").update = response;
+                                                        node.update(response);
+                                                        $('mem_amt').writeAttribute('value', response);
+                                                    },
+                                                    onFailure: function () {
+                                                        alert("Something went wrong...")
+                                                    }
+                                                });
 
 
-    }
-  </script>
-              
-                <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
+                                    }
+                                </script>
+
+                                <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
                                 <?php if ($_dob->isEnabled()): ?>
                                     <li><?php echo $_dob->setDate($this->getFormData()->getDob())->toHtml() ?></li>
                                 <?php endif ?>
@@ -149,12 +156,12 @@
                                 <?php $_gender = $this->getLayout()->createBlock('customer/widget_gender') ?>
                                 <?php if ($_gender->isEnabled()): ?>
                                     <li><?php echo $_gender->setGender($this->getFormData()->getGender())->toHtml() ?></li>
-<?php endif ?>
+                                <?php endif ?>
                             </ul>
                         </div>
                     </div>
 
-<?php if (!$this->getShowAddressFields()): ?>
+                    <?php if (!$this->getShowAddressFields()): ?>
                         <div class="fieldset ">
                             <input type="hidden" name="create_address" value="1" />
                             <h2 class="legend"><?php echo $this->__('Address Information') ?></h2>
@@ -174,7 +181,7 @@
                                             </div>
                                         </div>
                                     </li>
-    <?php $_streetValidationClass = $this->helper('customer/address')->getAttributeValidationClass('street'); ?>
+                                    <?php $_streetValidationClass = $this->helper('customer/address')->getAttributeValidationClass('street'); ?>
                                     <li class="wide">
                                         <label for="street_1" class="required"><?php echo $this->__('Street Address') ?><em>*</em></label>
                                         <div class="input-box">
@@ -182,13 +189,13 @@
                                         </div>
                                     </li>
                                     <?php $_streetValidationClass = trim(str_replace('required-entry', '', $_streetValidationClass)); ?>
-    <?php for ($_i = 2, $_n = $this->helper('customer/address')->getStreetLines(); $_i <= $_n; $_i++): ?>
+                                    <?php for ($_i = 2, $_n = $this->helper('customer/address')->getStreetLines(); $_i <= $_n; $_i++): ?>
                                         <li class="wide">
                                             <div class="input-box">
                                                 <input type="text" name="street[]" value="<?php echo Mage::getSingleton('customer/session')->getMemStreet2(); ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Street Address %s', $_i)) ?>" id="street_<?php echo $_i ?>" class="input-text <?php echo $_streetValidationClass ?>" />
                                             </div>
                                         </li>
-    <?php endfor; ?>
+                                    <?php endfor; ?>
                                     <li class="fields">
                                         <div class="field">
                                             <label for="city" class="required"><?php echo $this->__('City') ?><em>*</em></label>
@@ -221,16 +228,18 @@
                                         <div class="field">
                                             <label for="country" class="required"><?php echo $this->__('Country') ?><em>*</em></label>
                                             <div class="input-box">
-    <?php echo $this->getCountryHtmlSelect() ?>
+                                                <?php echo $this->getCountryHtmlSelect() ?>
                                             </div>
                                         </div>
                                     </li>
+
+
                                 </ul>
                                 <input type="hidden" name="default_billing" value="1" />
                                 <input type="hidden" name="default_shipping" value="1" />
                             </div>
                         </div>
-<?php endif; ?>
+                    <?php endif; ?>
                     <div class="fieldset">
                         <h2 class="legend"><?php echo $this->__('Login Information') ?></h2>
                         <div class="content">
@@ -250,42 +259,42 @@
                                     </div>
                                 </li>
                                 <?php echo $this->getChildHtml('form.additional.info'); ?>
-<?php echo $this->getChildHtml('persistent.remember.me'); ?>
+                                <?php echo $this->getChildHtml('persistent.remember.me'); ?>
                             </ul>
                         </div>
-<?php echo $this->getChildHtml('persistent.remember.me.tooltip'); ?>
+                        <?php echo $this->getChildHtml('persistent.remember.me.tooltip'); ?>
                     </div>
 
-        <!-- bridge fields-->
+                    <!-- bridge fields-->
 
-        <!--friday deleted-->
+                    <!--friday deleted-->
 
-        <!-- bridge fields-->
-
-
+                    <!-- bridge fields-->
 
 
-      
-    
-        
-        
-        
-</div>
-        
-        
-        
-         <div class="buttons-set">
+
+
+
+
+
+
+
+                </div>
+
+
+
+                <div class="buttons-set">
                     <p class="required"><?php echo $this->__('* Required Fields') ?></p>
                     <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>" class="back-link"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
                     <button type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Submit')) ?>" class="button"><span><span><?php echo $this->__('Next') ?></span></span></button>
-                 </div>
-  <?php if (Mage::helper('checkout')->isContextCheckout()): ?>
+                </div>
+                <?php if (Mage::helper('checkout')->isContextCheckout()): ?>
                     <input name="context" type="hidden" value="checkout" />
-<?php endif; ?>
+                <?php endif; ?>
             </form>
-         </div>
-       
-      </div>
+        </div>
+
+    </div>
     <script type="text/javascript">
         //<![CDATA[
         var dataForm = new VarienForm('form-validate', true);
