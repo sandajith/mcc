@@ -19,8 +19,9 @@ $all_sub_cat = explode(',', $subcats);
                 ->addAttributeToFilter('customer_id', $userid)
               //  ->addAttributeToFilter('customer_name', $userid)
                 ->addCategoryFilter($category)
-                //->load()
+                ->load()
                 ;
+      
         if (!Mage::getSingleton('customer/session')->isLoggedIn() && ($categories->count() > 0 )) {
             $hide_pickup = true;
             ?>

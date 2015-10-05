@@ -33,9 +33,16 @@
 ?>
 <?php
 $_productCollection = $this->getLoadedProductCollection();
+$current_cat = Mage::getSingleton('catalog/layer')->getCurrentCategory();
+
+$path = $current_cat->getPath();
+$ids = explode('/', $path);
+if (isset($ids[2])){
+    $topParent = $ids[2];
+}
+
 $_helper = $this->helper('catalog/output');
 $_product1 = $this->getProduct();
-
 ?>
 
 <script type="text/javascript">
@@ -74,137 +81,93 @@ $_product1 = $this->getProduct();
         <?php $_columnCount = $this->getColumnCount(); ?>
         <?php
         $i = 0;
-        foreach ($_productCollection as $_product):
-//            echo '<pre>';
-//            print_r($_product);
-//            exit;
-            // $productowner = Mage::getModel('catalog/product')->load($_product->getId())->getCustomerName(); // product owner id
-            $productowner = Mage::getModel('catalog/product')->load($_product->getId())->getCustomerName();
-            // product owner session id  
-            Mage::getSingleton('core/session')->setProductOwner($productowner); // set session for product owner
-            $customerid = Mage::getSingleton('core/session')->getProductOwner();
+        foreach ($_productCollection as $product):
 
+            $_product = Mage::getModel('catalog/product')->load($product->getId());
 
-            $shop = Mage::getModel('catalog/product')->load($_product->getId())->getProductStatus();
-
-            if (empty($shop)) {
+            $ProductStatus = $_product->getProductStatus();
+            $ProductSustomer = $_product->getCustomerId();
+            //shopp
+            if ($topParent!=16) {// shop product
                 ?>
-
+                
 
                 <div class="col-sm-4 itemList">
-                             <div class="row">
-                            <div class="col-sm-12 col-xs-6">
-                    <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);"  title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
-                            </div>
-                    <div class="col-sm-12 col-xs-6">
-                    <ul>
-                        <li>  <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></br></li>
-                        <li>Price:$<?php echo $_helper->productAttribute($_product, $_product->getPrice(), 'price') ?></li>
-                        <li><a href="#">View Details</a></li>
-                    </ul>
-                    <div class="actionsWrapper">                     
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-6">
+                            <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);"  title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+                        </div>
+                        <div class="col-sm-12 col-xs-6">
+                            <ul>
+                                <li>  <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></br></li>
+                                <li>Price:$<?php echo $_helper->productAttribute($_product, $_product->getPrice(), 'price') ?></li>
+                                <li><a href="#">View Details</a></li>
+                            </ul>
+                            <div class="actionsWrapper">                     
 
-  <a type="button" title="<?php echo $this->__('ADD TO BAG') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
-     <?php echo $this->__('ADD TO BAG') ?></a>
-                        <div class="customDropDown">
-                            <div class="dropContentBox">
-                                <span>QTY</span>
-                                <ul>
-                                    <?php
-                                    $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
-                                    for ($x = 1; $x <= $stock['qty']; $x++) {
-                                        ?>
-                                        <li class="selected"><?php echo $x; ?></li>
-                                    <?php } ?>
-                                </ul>
-                                <b aria-hidden="true" class="glyphicon glyphicon-chevron-down"></b>
+                                <a type="button" title="<?php echo $this->__('ADD TO BAG') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
+                                    <?php echo $this->__('ADD TO BAG') ?></a>
+                                <div class="customDropDown">
+                                    <div class="dropContentBox">
+                                        <span>QTY</span>
+                                        <ul>
+                                            <?php
+                                            $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+                                            for ($x = 1; $x <= $stock['qty']; $x++) {
+                                                ?>
+                                                <li class="selected"><?php echo $x; ?></li>
+                                            <?php } ?>
+                                        </ul>
+                                        <b aria-hidden="true" class="glyphicon glyphicon-chevron-down"></b>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                             </div>
-                </div>
-
-                <?php
-            }
-            if (!$userid && !empty($shop)) {
-                ?>
+        <?php } else {  //Product details  ?>
                 <div class="col-sm-4 itemList">
-                      <div class="row">
-                            <div class="col-sm-12 col-xs-6">
-                    <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);"  title="<?php echo $this->stripTags($this->getImageLabel($_product, 'thumbnail'), null, true) ?>" class="product-image">
-                        <img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail')->resize(200); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'thumbnail'), null, true) ?>" /></a>
-                            </div>
-                           <div class="col-sm-12 col-xs-6">
-                    <ul>
-                        <li>
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-6">
+                            <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);"  title="<?php echo $this->stripTags($this->getImageLabel($_product, 'thumbnail'), null, true) ?>" class="product-image">
+                                <img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail')->resize(200); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'thumbnail'), null, true) ?>" /></a>
+                        </div>
+                        <div class="col-sm-12 col-xs-6">
+                            <ul>
+                                <li>
+            <?php echo $_product->getAttributeText('designer'); ?></br>                                          
+                                    <?php echo $_product->getAttributeText('color'); ?></br>
+                                    <label>Size :</label><?php echo $_helper->productAttribute($_product, $_product->getSize(), 'size') ?></br>
+                                    <?php if ($_product->getAttributeText('product_status') !== 'Shipping To'): ?>
+                                        <label>Status :</label><?php echo $_product->getAttributeText('product_status'); ?></br>
+                                    <?php else: ?>
+                                        <label>Status :</label><?php echo $_product->getAttributeText('product_status') . ' ' . $_helper->productAttribute($_product, $_product->getShipped_to(), 'shipped_to'); ?></br>
+                                    <?php endif; ?>
+                                </li>
+                            </ul>
+            <?php if (!$ProductSustomer) { ////add to my bag ?>
+                                <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') {
+                                    ?>
+                                    <button class="button" data-toggle="modal" data-target=".bs-example-modal-sm" title="<?php echo $this->__('Deliver Me') ?>" ><?php echo $this->__('Deliver Me') ?></button>
+                                <?php } else if ($_product->isSaleable()) { ?>
+                                    <button class="button" data-toggle="modal" data-target=".bs-example-modal-sm"  title="<?php echo $this->__('Pick Me Up') ?>"  ><?php echo $this->__('Pick Me Up') ?></button>  
+                                <?php } ?> 
+                            <?php } else { //Popup to sign up  ?>
 
-<!--<div><?php // echo $_product->getData('size'); ?></div>-->
-                            <?php echo $_product->getAttributeText('designer'); ?></br>                                          
-                            <?php echo $_product->getAttributeText('color'); ?></br>
-                            <label>Size :</label><?php echo $_helper->productAttribute($_product, $_product->getSize(), 'size') ?></br>
-                             <?php if ($_product->getAttributeText('product_status') !== 'Shipping To'): ?>
-                                    <label>Status :</label><?php echo $_product->getAttributeText('product_status'); ?></br>
-                                <?php else: ?>
-                                      <label>Status :</label><?php echo  $_product->getAttributeText('product_status') . ' ' . $_helper->productAttribute($_product, $_product->getShipped_to(), 'shipped_to');  ?></br>
-                                <?php endif; ?>
-                        </li>
-                    </ul>
+                                <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') { ?>
+                                    <button type="button" title="<?php echo $this->__('Deliver Me') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Deliver Me') ?></span></span></button>
+                                <?php } else if ($_product->isSaleable()) { ?>
+                                    <button title="<?php echo $this->__('Pick Me Up') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')" ><?php echo $this->__('Pick Me Up') ?></button>  
+                                <?php } ?> 
 
-                    <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') { ?>
-                        <button class="button" data-toggle="modal" data-target=".bs-example-modal-sm" title="<?php echo $this->__('Deliver Me') ?>" ><?php echo $this->__('Deliver Me') ?></button>
-                    <?php } else if ($_product->isSaleable()) { ?>
-                        <button class="button" data-toggle="modal" data-target=".bs-example-modal-sm"  title="<?php echo $this->__('Pick Me Up') ?>"  ><?php echo $this->__('Pick Me Up') ?></button>  
-                     <?php } ?> 
-                           </div>
-                </div> 
+                            <?php } ?>
+
+                        </div>
+                    </div> 
                 </div>
 
 
-                <?php
-            } if ($userid && !empty($shop)) {
-                
-                    ?>
-                    <div class="col-sm-4 itemList">
-                        <div class="row">
-                            <div class="col-sm-12 col-xs-6">
-                        <a class="show"  onclick="SubmitRequest(<?php echo $_product->getId(); ?>);" 
-                           title="<?php echo $this->stripTags($this->getImageLabel($_product, 'thumbnail'), null, true) ?>"
-                           class="product-image">
-                            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail')->resize(200); ?>"  alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'thumbnail'), null, true) ?>" />
-                        </a>
-                            </div>
-                            <div class="col-sm-12 col-xs-6">
-                        <ul>
-                            <li>
-
-
-                                <?php echo $_product->getAttributeText('designer'); ?></br>                                          
-                                <?php echo $_product->getAttributeText('color'); ?></br>
-                                <label>Size :</label><?php echo $_helper->productAttribute($_product, $_product->getSize(), 'size') ?></br>
-                                <?php if ($_product->getAttributeText('product_status') !== 'Shipping To'): ?>
-                                    <label>Status :</label><?php echo $_product->getAttributeText('product_status'); ?></br>
-                                <?php else: ?>
-                                      <label>Status :</label><?php echo  $_product->getAttributeText('product_status') . ' ' . $_helper->productAttribute($_product, $_product->getShipped_to(), 'shipped_to');  ?></br>
-                                <?php endif; ?>
-                            </li>
-                        </ul>
-                            
-                    
-                        <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') { ?>
-                            <button type="button" title="<?php echo $this->__('Deliver Me') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Deliver Me') ?></span></span></button>
-                        <?php } else if ($_product->isSaleable()) { ?>
-                            <button title="<?php echo $this->__('Pick Me Up') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')" ><?php echo $this->__('Pick Me Up') ?></button>  
-                         <?php } ?> 
-                            </div>
-                    </div> 
-                        </div>
-                    <?php
-                }
-            
-            ?>
-
-            <?php
+        <?php }       
         endforeach;
         ?>
     </div>
@@ -237,7 +200,7 @@ $_product1 = $this->getProduct();
 
 
     <div class="bottomToolbar">
-        <?php echo $this->getToolbarHtml() ?>
+    <?php echo $this->getToolbarHtml() ?>
     </div>
 
 <?php endif; ?>
