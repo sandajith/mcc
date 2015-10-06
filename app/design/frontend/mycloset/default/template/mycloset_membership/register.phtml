@@ -60,22 +60,6 @@
                                         <input type="text" name="cus_tele" id="cus_tele" value="<?php echo Mage::getSingleton('customer/session')->getMemCustele(); ?>" title="<?php echo $this->__('Customer telephone') ?>" class="input-text" />
                                     </div>
                                 </li>
-<!--edited by neenu
- If you have a referral code, please enter it here-->
-
-                                <li>
-                                    <label for="cus_reference"><?php echo $this->__('If you have a referral code, please enter it here') ?></label>
-                                    <div class="input-box">
-                                        <input type="text" name="cus_reference" id="cus_reference" value="<?php echo Mage::getSingleton('customer/session')->getMemCusreference(); ?>" title="<?php echo $this->__('If you have a referral code, please enter it here') ?>" class="input-text" />
-                                    </div>
-                                </li>
-
-
-
-
-
-
-
                                 <li class="fields">
                                     <div class="field">
                                         <label for="membership_plan" class="required"><?php echo $this->__('Choose your membership type') ?><em>*</em></label>
@@ -88,7 +72,7 @@
 //                                                $data = $model->getCollection()->getData();
 //                                                foreach ($data as $options) {
                                             ?>
-                                                    <option value="<?php // echo $options['membership_id'];  ?>"><?php echo $options['membership_type']; ?></option>
+                                                    <option value="<?php // echo $options['membership_id'];   ?>"><?php echo $options['membership_type']; ?></option>
                                             <?php // } ?>
                                             <?php // echo $this->getMemberships(); ?>
                                             </select> -->
@@ -232,6 +216,16 @@
                                             </div>
                                         </div>
                                     </li>
+
+<!--edited by neenu
+ If you have a referral code, please enter it here-->
+
+                                <li>
+                                    <i><label for="cus_reference"><?php echo $this->__('If you have a referral code, please enter it here') ?>:</label></i>
+                                    <div class="input-box">
+                                        <input type="text" name="cus_reference" id="cus_reference" value="<?php echo Mage::getSingleton('customer/session')->getMemCusreference(); ?>" title="<?php echo $this->__('If you have a referral code, please enter it here') ?>" class="input-text" />
+                                    </div>
+                                </li>
 
 
                                 </ul>

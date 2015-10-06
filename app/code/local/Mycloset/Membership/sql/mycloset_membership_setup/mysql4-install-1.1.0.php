@@ -80,37 +80,37 @@ $attribute->save();
  *  Cutomer Attribute in product information
  * */
 
-
-
-$data = array(
-    'type' => 'text',
-    'label' => 'Customer Name',
-    'input' => 'select',
-
-    'sort_order' => 001, // YOU MIGHT NEED TO CHANGE THIS VALUE TO PUT THE ATTRIBUTE IN THE FIRST POSITION
-    
-    'global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
-    'required' => '0',
-    'comparable' => '0',
-    'searchable' => '0',
-    'is_configurable' => '1',
-    'user_defined' => '1',
-    'visible_on_front' => 0, //want to show on frontend?
-    'visible_in_advanced_search' => 0,
-    'is_html_allowed_on_front' => 0,
-    'required' => 1,
-    'unique' => false,
-    'apply_to' => 'simple', //simple,configurable,bundled,grouped,virtual,downloadable
-    'is_configurable' => false,
-    'source' => 'membership/entity_userdetails'
-);
-
-$this->addAttribute('catalog_product', 'customer_name', $data);
-
-$this->addAttributeToSet(
-        'catalog_product', 'Default', 'General', 'customer_name'
-); //Default = attribute set, General = attribute group
-
+//
+//
+//$data = array(
+//    'type' => 'text',
+//    'label' => 'Customer Name',
+//    'input' => 'select',
+//
+//    'sort_order' => 001, // YOU MIGHT NEED TO CHANGE THIS VALUE TO PUT THE ATTRIBUTE IN THE FIRST POSITION
+//    
+//    'global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_GLOBAL,
+//    'required' => '0',
+//    'comparable' => '0',
+//    'searchable' => '0',
+//    'is_configurable' => '1',
+//    'user_defined' => '1',
+//    'visible_on_front' => 0, //want to show on frontend?
+//    'visible_in_advanced_search' => 0,
+//    'is_html_allowed_on_front' => 0,
+//    'required' => 1,
+//    'unique' => false,
+//    'apply_to' => 'simple', //simple,configurable,bundled,grouped,virtual,downloadable
+//    'is_configurable' => false,
+//    'source' => 'membership/entity_userdetails'
+//);
+//
+//$this->addAttribute('catalog_product', 'customer_name', $data);
+//
+//$this->addAttributeToSet(
+//        'catalog_product', 'Default', 'General', 'customer_name'
+//); //Default = attribute set, General = attribute group
+//
 
 /**
  *  Cutomer Attribute in product information
