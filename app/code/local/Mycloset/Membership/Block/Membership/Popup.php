@@ -1,6 +1,6 @@
 <?php
 
-class Mycloset_Membership_Block_Membership_Popup extends Mage_Core_Block_Template {
+class Mycloset_Membership_Block_Membership_Popup extends Mage_Catalog_Block_Product_Abstract {
 
     public function getProductdetails() {
 

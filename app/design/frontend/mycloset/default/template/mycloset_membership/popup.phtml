@@ -1,4 +1,3 @@
-  
 <?php
 $p = $this->getProductdetails();
 $userid = Mage::getSingleton('customer/session')->getId(); // login user id
@@ -60,9 +59,9 @@ $_product = Mage::registry('current_product');
             if ($userid) {
                 if ($p['product_status'] == 'We Have It') {
                     ?>
-                    <button type="button" title="<?php echo $this->__('Deliver Me') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getUrl('') ?>checkout/cart/delete/id/<?php echo $product; ?>')"><span><span><?php echo $this->__('Deliver Me') ?></span></span></button>
+                    <button type="button" title="<?php echo $this->__('Deliver Me') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($product) ?>')"><span><span><?php echo $this->__('Deliver Me') ?></span></span></button>
                 <?php } else { ?>
-                    <button title="<?php echo $this->__('Pick Me Up') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getUrl('') ?>checkout/cart/id/<?php echo $product; ?>')" ><?php echo $this->__('Pick Me Up') ?></button>  
+                    <button title="<?php echo $this->__('Pick Me Up') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($product) ?>')" ><?php echo $this->__('Pick Me Up') ?></button>
                     <?php
                 }
             } else {
