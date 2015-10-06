@@ -678,17 +678,39 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', end
 .button.submit { margin:5px 0; min-width: 100px}
 .dataTable { border-top: 1px solid #ccc; border-right: 1px solid #ccc;}
 .dataTable > .row { overflow: hidden; height: 100px; }
+.dataTable > .row .thumb {
+    border: 1px solid #ccc;
+}
 .dataTable > .row > div { float: left; height: 100%; display:inline-block; border-left: 1px solid #ccc; border-bottom: 1px solid #ccc; overflow: auto; padding: 10px;  text-align:center;}
 .dataTable > .row.th { background: #eee; border-bottom: 1px solid #ccc; border-left:1px solid #ccc; height: auto;}
 .dataTable > .row.th > div { border: 1px solid #eee;}
+.dataTable > .row .product-name {
+    font-size: 15px;
+    line-height: 19px;
+    text-align: left;
+}
+.dataTable > .row > div h4 {margin: 0 ;
+text-align: left;}
 .dataTable > .row > div img { max-width: 100%}
-.dataTable > .row.th.foot a.cartButton { background: #b3b3b3; border: 1px solid #9d9d9d; padding: 5px 10px; color: #fff}
-.dataTable > .row.th.foot a.cartButton:hover { background: #666666}
-.dataTable > .row.th.foot a.cartButton.pull-right { margin-left: 10px;}
+.dataTable > .row.th.foot .cartButton { background: #b3b3b3; border: 1px solid #9d9d9d; padding: 5px 10px; color: #fff}
+.dataTable > .row.th.foot .cartButton:hover { background: #666666}
+.dataTable > .row.th.foot .cartButton.pull-right { margin-left: 10px;}
+.dataTable a.btn-remove {background: #ccc none repeat scroll 0 0;
+    border-radius: 100%;
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 auto;
+    text-align: center;
+    width: 30px;}
 .dataTable .a.button, 
 .dataTable button.button, 
 .dataTable input.button { margin:10px 0;}
-.dataTable .input-text { width: 50px; max-width: 100%;}
+.dataTable .input-text { background: #eee none repeat scroll 0 0;
+    max-width: 100%;
+    padding: 5px;
+    text-align: center;
+    width: 50px;}
 .myBag h4 { margin-top: 23px;}
 .totalBox  { background: #ebebeb; padding: 15px; margin: 15px 0;  border: 1px solid #c3c3c3; text-align: right;}
 .totalBox .button { margin:20px 0 0 0; width: 100%; text-align: center;}

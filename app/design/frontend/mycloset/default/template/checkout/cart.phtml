@@ -61,27 +61,29 @@
                     $product_status = $custom->getAttributeText('product_status');
                     if ($product_status == 'We Have It') {
                         ?>
-                    <div class="row">
+                        <div class="row">
                             <div class="col-sm-1">
                                 <div class="thumb">
-                                    <img src="<?php echo $custom->getImageUrl(); //echo $custom->getProductThumbnail()->resize(75);  ?>" width="75" height="75"  />
+                                    <img src="<?php echo $custom->getImageUrl(); //echo $custom->getProductThumbnail()->resize(75);    ?>" width="75" height="75"  />
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <?php //Get category name by product id
+                                <?php
+                                //Get category name by product id
 
 
-$cats = $custom->getCategoryIds();
-foreach($cats as $categoryId) {
-    $category = Mage::getModel('catalog/category')->load($categoryId);
-    echo $category->getName();
-}?>
- 
+                                $cats = $custom->getCategoryIds();
+                                foreach ($cats as $categoryId) {
+                                    $category = Mage::getModel('catalog/category')->load($categoryId);
+                                    echo $category->getName();
+                                }
+                                ?>
+
                             </div>
                             <div class="col-sm-4"><?php echo $custom->getAttributeText('designer'); ?></div>
                             <div class="col-sm-1"><?php echo $custom->getAttributeText('color'); ?></div>
                             <div class="col-sm-1"><?php echo $custom['size']; ?></div>
-                            <div class="col-sm-1"><a href="<?php echo $this->getDeleteUrl() ?>" title="<?php echo $this->__('Remove item') ?>" class="btn-remove btn-remove2"><?php echo $this->__('Remove item') ?></a></div>
+                            <div class="col-sm-1"><a href="<?php echo $this->getUrl('') ?>checkout/cart/delete/id/<?php echo$_item->getId(); ?>" title="<?php echo $this->__('Remove item') ?>" class="btn-remove btn-remove2">X</a></div>
                         </div>
                         <?php
                     }
@@ -90,15 +92,13 @@ foreach($cats as $categoryId) {
                 <div class="row th foot">
                     <div class="col-xs-12">
                         <a href="#" class="pull-left cartButton">
-                            Continue Shoping
+                            choose items to deliver
                         </a>
 
-                        <a href="#" class="pull-right cartButton">
-                            Update Shoping Cart
-                        </a>
 
-                        <a href="#" class="pull-right cartButton">
-                            Clear Shoping Cart
+
+                        <a href="<?php echo $this->getUrl('') ?>checkout/cart/delete"  class="pull-right cartButton">
+                            Clear all items
                         </a>                                   
                     </div>
                 </div>
@@ -132,24 +132,27 @@ foreach($cats as $categoryId) {
                         <div class="row">
                             <div class="col-sm-1">
                                 <div class="thumb">
-                                    <img src="<?php echo $custom->getImageUrl(); //echo $custom->getProductThumbnail()->resize(75);  ?>" width="75" height="75"  />
+                                    <img src="<?php echo $custom->getImageUrl(); //echo $custom->getProductThumbnail()->resize(75);    ?>" width="75" height="75"  />
                                 </div>
                             </div>
-                             <div class="col-sm-4">
-                                <?php //Get category name by product id
+                            <div class="col-sm-4">
+                                <?php
+                                //Get category name by product id
 
 
-$cats = $custom->getCategoryIds();
-foreach($cats as $categoryId) {
-    $category = Mage::getModel('catalog/category')->load($categoryId);
-    echo $category->getName();
-}?>
- 
+                                $cats = $custom->getCategoryIds();
+                                foreach ($cats as $categoryId) {
+                                    $category = Mage::getModel('catalog/category')->load($categoryId);
+                                    echo $category->getName();
+                                }
+                                ?>
+
                             </div>
                             <div class="col-sm-4"><?php echo $custom->getAttributeText('designer'); ?></div>
                             <div class="col-sm-1"><?php echo $custom->getAttributeText('color'); ?></div>
                             <div class="col-sm-1"><?php echo $custom['size']; ?></div>
-                            <div class="col-sm-1"><a href="<?php echo $this->getDeleteUrl() ?>" title="<?php echo $this->__('Remove item') ?>" class="btn-remove btn-remove2"><?php echo $this->__('Remove item') ?></a></div>
+                            <div class="col-sm-1"><a href="<?php echo $this->getUrl('') ?>checkout/cart/delete/id/<?php echo$_item->getId(); ?>" title="<?php echo $this->__('Remove item') ?>" class="btn-remove btn-remove2">X</a></div>
+
                         </div>
 
                         <?php
@@ -159,14 +162,12 @@ foreach($cats as $categoryId) {
                 <div class="row th foot">                    
                     <div class="col-xs-12">
                         <a href="#" class="pull-left cartButton">
-                            Continue Shoping
+                            choose items to pickup
                         </a>
-                        <a href="#" class="pull-right cartButton">
-                            Update Shoping Cart
-                        </a>
-                        <a href="#" class="pull-right cartButton">
-                            Clear Shoping Cart
-                        </a>                                   
+
+                     <button type="submit" name="update_cart_action" value="empty_cart" title="<?php echo $this->__('Clear all items'); ?>" class=" btn-empty pull-right cartButton" id="empty_cart_button">
+                            <span><span><?php echo $this->__('Clear all items'); ?></span></span>
+                        </button>                                   
                     </div>
                 </div>
             </div>
@@ -176,14 +177,14 @@ foreach($cats as $categoryId) {
 
 
         <div class="row myBag">
-            <h4><?php echo $this->__('Product') ?></h4>
+            <h4><?php echo $this->__('Products') ?></h4>
             <div class="col-md-12 dataTable">
                 <div class="row th">
                     <div class="col-sm-1"></div>
-                    <div class="col-sm-7"><?php echo $this->__('Product Name') ?></div>
-                    <div class="col-sm-1"><?php echo $this->__('Unit Price') ?></div>
-                    <div class="col-sm-1"><?php echo $this->__('Qty') ?></div>
-                    <div class="col-sm-1"><?php echo $this->__('Subtotal') ?></div>
+                    <div class="col-sm-7"><?php echo $this->__('PRODUCT NAME') ?></div>
+                    <div class="col-sm-1"><?php echo $this->__('UNIT PRICE') ?></div>
+                    <div class="col-sm-1"><?php echo $this->__('QTY') ?></div>
+                    <div class="col-sm-1"><?php echo $this->__('SUBTOTAL') ?></div>
                     <div class="col-sm-1"></div>
                 </div>
 
@@ -201,11 +202,14 @@ foreach($cats as $categoryId) {
                 <div class="row th foot">
                     <div class="col-xs-12">
                         <?php if ($this->getContinueShoppingUrl()): ?>
-                            <button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button btn-continue pull-left cartButton" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+                            <a  title="<?php echo $this->__('Continue Shopping') ?>" class=" btn-continue pull-left cartButton" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></a>
                         <?php endif;
                         ?>
-                        <button type="submit" name="update_cart_action" value="update_qty" title="<?php echo $this->__('Update Shopping Cart'); ?>" class="button btn-update pull-right cartButton"><span><span><?php echo $this->__('Update Shopping Cart'); ?></span></span></button>                 
-                        <button type="submit" name="update_cart_action" value="empty_cart" title="<?php echo $this->__('Clear Shopping Cart'); ?>" class="button btn-empty pull-right cartButton" id="empty_cart_button"><span><span><?php echo $this->__('Clear Shopping Cart'); ?></span></span></button>
+
+                        <button  name="update_cart_action" value="update_qty" title="<?php echo $this->__('Update Shopping Cart'); ?>" class=" pull-right cartButton btn-update"><span><span><?php echo $this->__('Update Shopping Cart'); ?></span></span></button>
+                        <button type="submit" name="update_cart_action" value="empty_cart" title="<?php echo $this->__('Clear Shopping Cart'); ?>" class=" btn-empty pull-right cartButton" id="empty_cart_button">
+                            <span><span><?php echo $this->__('Clear Shopping Cart'); ?></span></span>
+                        </button>
 
                         <!--[if lt IE 8]>
                         <input type="hidden" id="update_cart_action_container" />
@@ -234,7 +238,7 @@ foreach($cats as $categoryId) {
             </div>
         </div>
 <!--            <script type="text/javascript">decorateTable('shopping-cart-table')</script>-->
-        <?php // endif;     ?>
+        <?php // endif;      ?>
     </form>
     <div class="row">
         <div class="col-sm-5 col-md-4 col-lg-3 totalBox pull-right">
