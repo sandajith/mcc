@@ -9,10 +9,11 @@ class Hardik_Ajaxcart_Model_Observer {
         if (!$request->getParam('in_cart') && !$request->getParam('is_checkout')) {
 
             Mage::getSingleton('checkout/session')->setNoCartRedirect(true);
-
             $_response = Mage::getModel('ajaxcart/response')
                     ->setProductName($observer->getProduct()->getName())
-                    ->setMessage(Mage::helper('checkout')->__('%s was added into cart.', $observer->getProduct()->getName()));
+                  //  ->setMessage(Mage::helper('checkout')->__('%s was added into cart.', $observer->getProduct()->getName()))
+                   ->setMessage(Mage::helper('checkout')->__('Item was added into cart.'))
+                            ;
 
             //append updated blocks
             $_response->addUpdatedBlocks($_response);
@@ -25,7 +26,10 @@ class Hardik_Ajaxcart_Model_Observer {
 
             $_response = Mage::getModel('ajaxcart/response')
                     ->setProductName($observer->getProduct()->getName())
-                    ->setMessage(Mage::helper('checkout')->__('%s was added into cart.', $observer->getProduct()->getName()));
+                  //  ->setMessage(Mage::helper('checkout')->__('%s was added into cart.', $observer->getProduct()->getName()))
+                    ->setMessage(Mage::helper('checkout')->__('Item was added into cart.'))
+                      ;
+
             $_response->send();
         }
     }
