@@ -13,7 +13,7 @@ class Hardik_Ajaxcart_Checkout_CartController extends Mage_Checkout_CartControll
         try {
             if (isset($params['qty'])) {
                 $filter = new Zend_Filter_LocalizedToNormalized(
-                                array('locale' => Mage::app()->getLocale()->getLocaleCode())
+                        array('locale' => Mage::app()->getLocale()->getLocaleCode())
                 );
                 $params['qty'] = $filter->filter($params['qty']);
             }
@@ -94,7 +94,7 @@ class Hardik_Ajaxcart_Checkout_CartController extends Mage_Checkout_CartControll
         try {
             if (isset($params['qty'])) {
                 $filter = new Zend_Filter_LocalizedToNormalized(
-                                array('locale' => Mage::app()->getLocale()->getLocaleCode())
+                        array('locale' => Mage::app()->getLocale()->getLocaleCode())
                 );
                 $params['qty'] = $filter->filter($params['qty']);
             }
@@ -164,6 +164,26 @@ class Hardik_Ajaxcart_Checkout_CartController extends Mage_Checkout_CartControll
      */
     public function deleteAction() {
         $id = (int) $this->getRequest()->getParam('id');
+        $status = $this->getRequest()->getParam('status');
+        $cart = Mage::getModel('checkout/cart')->getQuote();
+        foreach ($cart->getAllItems() as $item) {
+            $productid = $item->getProduct()->getId();
+            $custom = Mage::getModel('catalog/product')->load($item->getProductId());
+            $custom_status = $custom->getProductStatus();
+//          echo $productstatus = $item->getProduct()->getProductStatus();
+            if ($custom_status == $status || $custom_status== '21') {
+            $itemid = $item->getId();
+             $this->_getCart()->removeItem($itemid)
+                           ->save();
+
+            }else if($custom_status=''){
+                $itemid = $item->getId();
+             $this->_getCart()->removeItem($itemid)
+                           ->save();  
+            }
+        }
+//exit;
+
         if ($id) {
             try {
                 $this->_getCart()->removeItem($id)

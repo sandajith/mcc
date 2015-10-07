@@ -49,8 +49,9 @@
  $url = Mage::getSingleton('core/url')->parseUrl($currentUrl);
  $path = $url->getPath();
 $keyword = explode('/mgn/magento/', $path);
-if($keyword[1]!='home'){ 
-                        ?> class="container" <?php } ?>>
+
+if($keyword[1]=='home' || $keyword[1]=='' ){ 
+                        ?> class="" <?php } else {?> class="container"<?php } ?>>
 
                             
                                 <?php //echo $this->getChildHtml('breadcrumbs') ?>

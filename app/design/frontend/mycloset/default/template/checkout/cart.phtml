@@ -91,15 +91,13 @@
                 ?> 
                 <div class="row th foot">
                     <div class="col-xs-12">
-                        <a href="#" class="pull-left cartButton">
+                        <a href="<?php echo $this->getUrl('') ?>my-closet.html" class="pull-left cartButton">
                             choose items to deliver
                         </a>
 
 
 
-                        <a href="<?php echo $this->getUrl('') ?>checkout/cart/delete"  class="pull-right cartButton">
-                            Clear all items
-                        </a>                                   
+                        <a href="<?php echo $this->getUrl('') ?>checkout/cart/delete/?status=19" class=" btn-empty pull-right cartButton" >clear all items</a>                                  
                     </div>
                 </div>
             </div>
@@ -119,20 +117,23 @@
                     <div class="col-sm-1"></div>
                 </div>
                 <?php
+//               echo'itemid'. $this->getItems();
+              
+               
                 foreach ($this->getItems() as $_item):
-                    $custom = Mage::getModel('catalog/product')->load($_item->getProductId());
-//                    echo '<pre>';   
-//                var_dump($custom);
-
-
+               
+                     $custom = Mage::getModel('catalog/product')->load($_item->getProductId());
+                 
                     $product_status = $custom->getAttributeText('product_status');
-                    if ($product_status == 'You Have It') {
+                    if ($product_status == 'You Have It' || $product_status == 'Shipped To' ) {
+                          
                         ?>
 
                         <div class="row">
                             <div class="col-sm-1">
                                 <div class="thumb">
                                     <img src="<?php echo $custom->getImageUrl(); //echo $custom->getProductThumbnail()->resize(75);    ?>" width="75" height="75"  />
+                              
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -151,7 +152,7 @@
                             <div class="col-sm-4"><?php echo $custom->getAttributeText('designer'); ?></div>
                             <div class="col-sm-1"><?php echo $custom->getAttributeText('color'); ?></div>
                             <div class="col-sm-1"><?php echo $custom['size']; ?></div>
-                            <div class="col-sm-1"><a href="<?php echo $this->getUrl('') ?>checkout/cart/delete/id/<?php echo$_item->getId(); ?>" title="<?php echo $this->__('Remove item') ?>" class="btn-remove btn-remove2">X</a></div>
+                            <div class="col-sm-1"><a href="<?php echo $this->getUrl('') ?>checkout/cart/delete/id/<?php echo $_item->getId(); ?>" title="<?php echo $this->__('Remove item') ?>" class="btn-remove btn-remove2">X</a></div>
 
                         </div>
 
@@ -161,13 +162,11 @@
                 ?> 
                 <div class="row th foot">                    
                     <div class="col-xs-12">
-                        <a href="#" class="pull-left cartButton">
+                        <a href="<?php echo $this->getUrl('') ?>my-closet.html" class="pull-left cartButton">
                             choose items to pickup
                         </a>
 
-                     <button type="submit" name="update_cart_action" value="empty_cart" title="<?php echo $this->__('Clear all items'); ?>" class=" btn-empty pull-right cartButton" id="empty_cart_button">
-                            <span><span><?php echo $this->__('Clear all items'); ?></span></span>
-                        </button>                                   
+                        <a href="<?php echo $this->getUrl('') ?>checkout/cart/delete/?status=20" class=" btn-empty pull-right cartButton" >clear all items</a>
                     </div>
                 </div>
             </div>
@@ -202,15 +201,15 @@
                 <div class="row th foot">
                     <div class="col-xs-12">
                         <?php if ($this->getContinueShoppingUrl()): ?>
-                            <a  title="<?php echo $this->__('Continue Shopping') ?>" class=" btn-continue pull-left cartButton" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></a>
+                            <a href="<?php echo $this->getUrl('') ?>shop.html" title="<?php echo $this->__('Continue Shopping') ?>" class=" btn-continue pull-left cartButton" ><span><span><?php echo $this->__('Continue Shopping') ?></span></span></a>
                         <?php endif;
                         ?>
 
                         <button  name="update_cart_action" value="update_qty" title="<?php echo $this->__('Update Shopping Cart'); ?>" class=" pull-right cartButton btn-update"><span><span><?php echo $this->__('Update Shopping Cart'); ?></span></span></button>
-                        <button type="submit" name="update_cart_action" value="empty_cart" title="<?php echo $this->__('Clear Shopping Cart'); ?>" class=" btn-empty pull-right cartButton" id="empty_cart_button">
-                            <span><span><?php echo $this->__('Clear Shopping Cart'); ?></span></span>
-                        </button>
-
+<!--                        <button type="submit" name="update_cart_action" value="empty_cart" title="<?php// echo $this->__('Clear Shopping Cart'); ?>" class=" btn-empty pull-right cartButton" id="empty_cart_button">
+                            <span><span><?php //echo $this->__('Clear Shopping Cart'); ?></span></span>
+                        </button>-->
+ <a href="<?php echo $this->getUrl('') ?>checkout/cart/delete/?status" class=" btn-empty pull-right cartButton" >clear Shopping Cart</a>
                         <!--[if lt IE 8]>
                         <input type="hidden" id="update_cart_action_container" />
                         <script type="text/javascript">
