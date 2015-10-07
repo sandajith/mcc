@@ -37,7 +37,7 @@ $current_cat = Mage::getSingleton('catalog/layer')->getCurrentCategory();
 
 $path = $current_cat->getPath();
 $ids = explode('/', $path);
-if (isset($ids[2])){
+if (isset($ids[2])) {
     $topParent = $ids[2];
 }
 
@@ -88,9 +88,9 @@ $_product1 = $this->getProduct();
             $ProductStatus = $_product->getProductStatus();
             $ProductSustomer = $_product->getCustomerId();
             //shopp
-            if ($topParent!=16) {// shop product
+            if ($topParent != 16) {// shop product
                 ?>
-                
+
 
                 <div class="col-sm-4 itemList">
                     <div class="row">
@@ -125,7 +125,7 @@ $_product1 = $this->getProduct();
                         </div>
                     </div>
                 </div>
-        <?php } else {  //Product details  ?>
+            <?php } else {  //Product details  ?>
                 <div class="col-sm-4 itemList">
                     <div class="row">
                         <div class="col-sm-12 col-xs-6">
@@ -135,18 +135,14 @@ $_product1 = $this->getProduct();
                         <div class="col-sm-12 col-xs-6">
                             <ul>
                                 <li>
-            <?php echo $_product->getAttributeText('designer'); ?></br>                                          
+                                    <?php echo $_product->getAttributeText('designer'); ?></br>                                          
                                     <?php echo $_product->getAttributeText('color'); ?></br>
-                                    <?php $_product->getAttributeText('shipped_to'); 
-                            
-                                    ?></br>
-                                    <label>Size :</label><?php echo $_helper->productAttribute($_product, $_product->getSize(), 'size') ?></br>
-                                    
-                                        <label>Status :</label><?php echo $_product->getAttributeText('product_status').'  '.$_helper->productAttribute($_product, $_product->getShippedTo(), 'shipped_to'); ?></br>
-                                  
+                                    <label>Size :</label><?php echo $_product->getAttributeText('size'); ?></br>
+                                    <label>Status :</label><?php echo $_product->getAttributeText('product_status') . '  ' . $_helper->productAttribute($_product, $_product->getShippedTo(), 'shipped_to'); ?></br>
+
                                 </li>
                             </ul>
-            <?php if (!$ProductSustomer) { ////add to my bag ?>
+                            <?php if (!$ProductSustomer) { ////add to my bag  ?>
                                 <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') {
                                     ?>
                                     <button class="button" data-toggle="modal" data-target=".bs-example-modal-sm" title="<?php echo $this->__('Deliver Me') ?>" ><?php echo $this->__('Deliver Me') ?></button>
@@ -168,7 +164,8 @@ $_product1 = $this->getProduct();
                 </div>
 
 
-        <?php }       
+            <?php
+            }
         endforeach;
         ?>
     </div>
@@ -201,7 +198,7 @@ $_product1 = $this->getProduct();
 
 
     <div class="bottomToolbar">
-    <?php echo $this->getToolbarHtml() ?>
+        <?php echo $this->getToolbarHtml() ?>
     </div>
 
 <?php endif; ?>
