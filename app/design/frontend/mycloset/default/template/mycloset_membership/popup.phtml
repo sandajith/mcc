@@ -97,7 +97,7 @@ $_product = Mage::registry('current_product');
                                         ->addAttributeToFilter('visibility', 4);
                                 $products = Mage::getModel('catalog/product')
                                         ->getCollection()
-                                        ->addAttributeToFilter('customer_name', $userid)
+                                        ->addAttributeToFilter('customer_id', $userid)
                                         ->addCategoryFilter($category)
                                         ->load();
 
@@ -158,7 +158,7 @@ $_product = Mage::registry('current_product');
                         ->addAttributeToFilter('visibility', 4);
                 $products = Mage::getModel('catalog/product')
                         ->getCollection()
-                        ->addAttributeToFilter('customer_name', $userid)
+                        ->addAttributeToFilter('customer_id', $userid)
                         ->addCategoryFilter($category)
                         ->load();
                 if (($products->count() > 0 ) && ($userid)) {

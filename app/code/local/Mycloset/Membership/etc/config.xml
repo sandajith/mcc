@@ -78,6 +78,11 @@
                     </membershiphistory>
                 </entities>
             </membership_mysql4>
+            <directory>
+                <rewrite>
+                    <currency>Mycloset_Membership_Model_currency</currency>
+                </rewrite>
+            </directory>
         </models> 
         
         <blocks> 

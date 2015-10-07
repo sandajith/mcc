@@ -20,7 +20,7 @@ class Mycloset_Membership_PickupController extends Mage_Core_Controller_Front_Ac
                 $userid = Mage::getSingleton('customer/session')->getId();
                 $values = Mage::app()->getRequest()->getParams();
                 $products = Mage::getModel('catalog/product')->getCollection()
-                        ->addAttributeToFilter('customer_name', $userid);
+                        ->addAttributeToFilter('customer_id', $userid);
 
                 if (Mage::getSingleton('customer/session')->isLoggedIn()) {
                     $final = array();

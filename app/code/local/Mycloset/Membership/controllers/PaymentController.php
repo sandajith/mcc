@@ -315,7 +315,7 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
         $products = Mage::getModel('catalog/category')->load()
                 ->getProductCollection()
                 ->addAttributeToSelect('entity_id')
-                ->addAttributeToFilter('customer_name', $customerid)
+                ->addAttributeToFilter('customer_id', $customerid)
                 ->addAttributeToFilter('status', 1)
                 ->addAttributeToFilter('visibility', 4);
         $payment_details['product_count'] = $products->count();

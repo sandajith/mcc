@@ -22,7 +22,7 @@ class Mycloset_Membership_PopupController extends Mage_Core_Controller_Front_Act
             <ul class="slides">
                 <?php
                 foreach ($collection as $_product):
-                    $productowner = Mage::getModel('catalog/product')->load($_product->getId())->getCustomerName();                    
+                    $productowner = Mage::getModel('catalog/product')->load($_product->getId())->getCustomerId();                    
                     Mage::getSingleton('core/session')->setProductOwner($productowner); 
                     $customerid = Mage::getSingleton('core/session')->getProductOwner();
                     if ($userid == $customerid) {
