@@ -50,7 +50,7 @@
  $path = $url->getPath();
 $keyword = explode('/mgn/magento/', $path);
 
-if($keyword[1]=='home' || $keyword[1]=='' ){ 
+if($keyword[1]=='home' || $keyword[1]=='' || $keyword[1]=='index.php' ){ 
                         ?> class="" <?php } else {?> class="container"<?php } ?>>
 
                             

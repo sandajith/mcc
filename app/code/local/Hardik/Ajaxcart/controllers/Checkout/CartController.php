@@ -165,24 +165,26 @@ class Hardik_Ajaxcart_Checkout_CartController extends Mage_Checkout_CartControll
     public function deleteAction() {
         $id = (int) $this->getRequest()->getParam('id');
         $status = $this->getRequest()->getParam('status');
+        // 19=>we have it; 20=> you have it; 21=> shiped to ; null case must be product
         $cart = Mage::getModel('checkout/cart')->getQuote();
         foreach ($cart->getAllItems() as $item) {
             $productid = $item->getProduct()->getId();
             $custom = Mage::getModel('catalog/product')->load($item->getProductId());
             $custom_status = $custom->getProductStatus();
 //          echo $productstatus = $item->getProduct()->getProductStatus();
-            if ($custom_status == $status || $custom_status== '21') {
-            $itemid = $item->getId();
-             $this->_getCart()->removeItem($itemid)
-                           ->save();
-
-            }else if($custom_status=''){
+            if ($custom_status == $status || $custom_status == '21') {
                 $itemid = $item->getId();
-             $this->_getCart()->removeItem($itemid)
-                           ->save();  
+                $this->_getCart()->removeItem($itemid)
+                        ->save();
+            } else if ($status === '30') {
+                if ($custom_status != ('19' && '20' && '21')) {
+                    $itemid = $item->getId();
+                    $this->_getCart()->removeItem($itemid)
+                            ->save();
+                }
             }
         }
-//exit;
+
 
         if ($id) {
             try {

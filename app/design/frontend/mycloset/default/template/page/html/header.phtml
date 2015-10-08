@@ -101,6 +101,7 @@
                                             ->addAttributeToSelect('entity_id')
                                             ->addAttributeToFilter('status', 1)
                                             ->addAttributeToFilter('visibility', 4);
+                               
                                     $products = Mage::getModel('catalog/product')
                                             ->getCollection()
                                             ->addAttributeToFilter('customer_id', $userid)
@@ -109,7 +110,7 @@
                                     if (($products->count() > 0)) {
                                         ?>
                                         <li >
-                                            <a class="" href="<?php echo $this->getUrl('') ?>my-closet/accessories.html"><?php echo $category->name; ?> </a>
+                                            <a class="" href="<?php echo $category->getUrl() ?>"><?php echo $category->name; ?> </a>
                                         </li>
                                         <?php
                                     }
