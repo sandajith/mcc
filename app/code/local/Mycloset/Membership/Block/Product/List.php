@@ -54,8 +54,7 @@ class Mycloset_Membership_Block_Product_List extends Mage_Catalog_Block_Product_
      * @return Mage_Eav_Model_Entity_Collection_Abstract
      */
     protected function _getProductCollection()
-    {	
-		
+    {
         if (is_null($this->_productCollection)) {
             $layer = $this->getLayer();
             /* @var $layer Mage_Catalog_Model_Layer */
@@ -85,20 +84,30 @@ class Mycloset_Membership_Block_Product_List extends Mage_Catalog_Block_Product_
                     $this->addModelTags($category);
                 }
             }
-			
-			
-			$userid = Mage::getSingleton('customer/session')->getId();					
             $this->_productCollection = $layer->getProductCollection();
 
+            $current_cat = Mage::getSingleton('catalog/layer')->getCurrentCategory();
+$path = $current_cat->getPath();
+$ids = explode('/', $path);
+$topParent = 0;
+if (isset($ids[2])) {
+    $topParent = $ids[2];
+} 
+if($topParent=='16'){
+       
+                    	$userid = Mage::getSingleton('customer/session')->getId();	
 			if($userid){
 			   $this->_productCollection->addAttributeToFilter('customer_id', $userid);
-			}
+			}   
+                }
+            
+            
+            
             $this->prepareSortableFieldsByCategory($layer->getCurrentCategory());
 
             if ($origCategory) {
                 $layer->setCurrentCategory($origCategory);
             }
-			
         }
 
         return $this->_productCollection;

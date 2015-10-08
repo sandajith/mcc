@@ -54,7 +54,10 @@
         </thead>
         <?php echo $this->getChildHtml('totals'); ?>
         <tbody>
-        <?php foreach($this->getItems() as $_item): ?>
+        <?php foreach($this->getItems() as $_item):
+     print_r($_item);
+            
+            ?>
             <?php echo $this->getItemHtml($_item)?>
         <?php endforeach ?>
         </tbody>
