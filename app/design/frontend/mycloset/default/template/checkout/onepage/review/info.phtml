@@ -25,41 +25,197 @@
  */
 ?>
 <?php echo $this->getChildHtml('items_before'); ?>
-<div id="checkout-review-table-wrapper">
-    <table class="data-table" id="checkout-review-table">
-        <?php if ($this->helper('tax')->displayCartBothPrices()): $colspan = $rowspan = 2; else: $colspan = $rowspan = 1; endif; ?>
-        <col />
-        <col width="1" />
-        <col width="1" />
-        <col width="1" />
-        <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
-        <col width="1" />
-        <col width="1" />
-        <?php endif; ?>
-        <thead>
-            <tr>
-                <th rowspan="<?php echo $rowspan ?>"><?php echo $this->__('Product Name') ?></th>
-                <th colspan="<?php echo $colspan ?>" class="a-center"><?php echo $this->__('Price') ?></th>
-                <th rowspan="<?php echo $rowspan ?>" class="a-center"><?php echo $this->__('Qty') ?></th>
-                <th colspan="<?php echo $colspan ?>" class="a-center"><?php echo $this->__('Subtotal') ?></th>
-            </tr>
-            <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
-                <tr>
-                    <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
-                    <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
-                    <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
-                    <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
-                </tr>
-            <?php endif; ?>
-        </thead>
-        <?php echo $this->getChildHtml('totals'); ?>
-        <tbody>
-        <?php foreach($this->getItems() as $_item): ?>
-            <?php echo $this->getItemHtml($_item)?>
-        <?php endforeach ?>
-        </tbody>
-    </table>
+<!--new design-->
+
+
+<div class="row myBag">
+
+    <div class="col-md-12 dataTable" id="checkout-review-table">
+
+        <div class="row th">
+            <div class="col-sm-3">Articles to ship</div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-2">price</div>
+            <div class="col-sm-1">Qty</div>
+            <div class="col-sm-2">subtotal</div>
+
+        </div>
+        <?php
+        foreach ($this->getItems() as $_item):
+            $custom = Mage::getModel('catalog/product')->load($_item->getProductId());
+            $product_status = $custom->getAttributeText('product_status');
+            $product_price = $custom->getAttributeText('price');
+            $product_designer = $custom->getAttributeText('designer');
+            $product_color = $custom->getAttributeText('color');
+            $product_size = $custom->getAttributeText('size');
+
+            if ($product_status == 'We Have It') {
+                ?>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="thumb">
+                            <img src="<?php echo $custom->getImageUrl(); //echo $custom->getProductThumbnail()->resize(75);       ?>" width="100" height="100"  />
+                        </div>
+                    </div>
+                    <div class="col-sm-4 product-name">
+                        Designer: <?php echo $product_designer; ?><br>
+                        Size:<?php echo $product_size; ?> <br>
+                        Color:<?php echo $product_color; ?><br>
+                        Status:<?php echo $product_status; ?>
+                    </div>
+                    <div class="col-sm-2">Included</div>
+                    <div class="col-sm-1"><?php echo $_item->getQty() ?></div>
+                    <div class="col-sm-2">Included</div>
+
+                </div>
+                <?php
+            }
+        endforeach;
+        ?> 
+    </div>
 </div>
+
+<div class="row myBag">
+
+    <div class="col-md-12 dataTable" id="checkout-review-table">
+
+        <div class="row th">
+            <div class="col-sm-3">Articles to pickup</div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-2">price</div>
+            <div class="col-sm-1">Qty</div>
+            <div class="col-sm-2">subtotal</div>
+
+        </div>
+        <?php
+        foreach ($this->getItems() as $_item):
+            $custom = Mage::getModel('catalog/product')->load($_item->getProductId());
+            $product_status = $custom->getAttributeText('product_status');
+            $product_price = $custom->getAttributeText('price');
+            $product_designer = $custom->getAttributeText('designer');
+            $product_color = $custom->getAttributeText('color');
+            $product_size = $custom->getAttributeText('size');
+            if ($product_status == 'You Have It') {
+                ?>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="thumb">
+                            <img src="<?php echo $custom->getImageUrl(); //echo $custom->getProductThumbnail()->resize(75);       ?>" width="100" height="100"  />
+                        </div>
+                    </div>
+                    <div class="col-sm-4 product-name">
+                        Designer: <?php echo $product_designer; ?><br>
+                        Size:<?php echo $product_size; ?> <br>
+                        Color:<?php echo $product_color; ?><br>
+                        Status:<?php echo $product_status; ?>
+                    </div>
+                    <div class="col-sm-2">Included</div>
+                    <div class="col-sm-1"><?php echo $_item->getQty() ?></div>
+                    <div class="col-sm-2">Included</div>
+
+                </div>
+                <?php
+            }
+        endforeach;
+        ?> 
+    </div>
+</div>
+<div class="row myBag">
+
+    <div class="col-md-12 dataTable" id="checkout-review-table">
+
+        <div class="row th">
+            <div class="col-sm-3">Articles to shipped </div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-2">price</div>
+            <div class="col-sm-1">Qty</div>
+            <div class="col-sm-2">subtotal</div>
+
+        </div>
+        <?php
+        foreach ($this->getItems() as $_item):
+            $custom = Mage::getModel('catalog/product')->load($_item->getProductId());
+
+            $product_status = $custom->getAttributeText('product_status');
+            $product_price = $custom->getAttributeText('price');
+            $product_designer = $custom->getAttributeText('designer');
+            $product_color = $custom->getAttributeText('color');
+            $product_size = $custom->getAttributeText('size');
+            if ($product_status == 'Shipped To') {
+                ?>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="thumb">
+                            <img src="<?php echo $custom->getImageUrl(); //echo $custom->getProductThumbnail()->resize(75);       ?>" width="100" height="100"  />
+                        </div>
+                    </div>
+                    <div class="col-sm-4 product-name">
+                        Designer: <?php echo $product_designer; ?><br>
+                        Size:<?php echo $product_size; ?> <br>
+                        Color:<?php echo $product_color; ?><br>
+                        Status:<?php echo $product_status; ?>
+                    </div>
+                    <div class="col-sm-2">Included</div>
+                    <div class="col-sm-1"><?php echo $_item->getQty() ?></div>
+                    <div class="col-sm-2">Included</div>
+
+                </div>
+                <?php
+            }
+        endforeach;
+        ?> 
+    </div>
+</div>
+<div class="row myBag">
+
+    <div class="col-md-12 dataTable" id="checkout-review-table">
+
+        <div class="row th">
+            <div class="col-sm-3">Product</div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-2">price</div>
+            <div class="col-sm-1">Qty</div>
+            <div class="col-sm-2">subtotal</div>
+
+        </div>
+        <?php
+        foreach ($this->getItems() as $_item):
+                $custom = Mage::getModel('catalog/product')->load($_item->getProductId())
+                        ->getAttributeText('product_status');
+                if (empty($custom)) {
+                    echo $this->getItemHtml($_item);
+                }
+            endforeach
+        ?> 
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!--old design-->
+
+      
+    
+
+            <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+        <div class="row myBag">
+                  <div class="row th"> <?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></div>
+                  <div class="row th"><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></div>
+                     <div class="row th"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></div>
+                     <div class="row th"><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></div>
+             </div>
+            <?php endif; ?>
+    
+        <?php echo $this->getChildHtml('totals'); ?>
+  
 <?php echo $this->getChildHtml('items_after'); ?>
 <script type="text/javascript">
 //<![CDATA[
@@ -77,8 +233,8 @@
         </span>
     </div>
     <script type="text/javascript">
-    //<![CDATA[
+        //<![CDATA[
         review = new Review('<?php echo $this->getUrl('checkout/onepage/saveOrder', array('form_key' => Mage::getSingleton('core/session')->getFormKey())) ?>', '<?php echo $this->getUrl('checkout/onepage/success') ?>', $('checkout-agreements'));
-    //]]>
+        //]]>
     </script>
 </div>

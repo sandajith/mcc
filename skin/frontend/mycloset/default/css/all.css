@@ -684,6 +684,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', end
 .button.submit { margin:5px 0; min-width: 100px}
 .dataTable { border-top: 1px solid #ccc; border-right: 1px solid #ccc;}
 .dataTable > .row { overflow: hidden; height: 100px; }
+.dataTable > .rowcheckout { overflow: hidden; height: 200px; }
 .dataTable > .row .thumb {
     border: 1px solid #ccc;
 }
@@ -991,4 +992,7 @@ ul.messages li.error-msg > ul > li{text-align:center; padding:5px;background:#FA
 ul.messages li.error-msg > ul > li span{padding-left:25px;background:url("../images/errorico.png") no-repeat left center;width:20px; height:20px;}
 .dropContentBox ul li ul{
 margin-left:10px;
+}
+.step-title{
+    background-color: #ccc;
 }

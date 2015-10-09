@@ -83,6 +83,11 @@
                     <currency>Mycloset_Membership_Model_currency</currency>
                 </rewrite>
             </directory>
+            <catalog>
+                  <rewrite>
+                    <product>Mycloset_Membership_Model_Product</product>
+                </rewrite>
+            </catalog>
         </models> 
         
         <blocks> 
