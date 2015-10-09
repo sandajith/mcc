@@ -20,21 +20,25 @@ $_product = Mage::registry('current_product');
 ?>
 
 <div class="popupHead">
-    <div class="sku dress-code"> <?php echo $p['sku']; ?></div>
+    <div class="sku dress-code hidden-xs"> <?php echo $p['sku']; ?></div>
     <a class="close" style="float: right;">X</a>
 </div>
 
 <div class="popupContent">
     <div class="row productdata" id="productdata">
+         <div class="col-sm-12 visible-xs center-align">
+            <h2><?php echo $catname;?></h2>
+            <p class="signature visible-xs"><?php echo $p['designer']; ?></p>
+        </div>
         <div class="col-sm-7 image " style="min-height: 200px;">
+           
             <img alt="" src="<?php echo $p['ImageUrl']; ?>"/>                                                                                
         </div>
         <div class="col-sm-5 details">
             <!--category name-->
-            <h2><?php echo $catname;
-?>
-            </h2>
-            <p class="signature"><?php echo $p['designer']; ?></p>
+            <h2 class="hidden-xs"><?php echo $catname;?></h2>
+            <p class="visible-xs productId"> <b>Product ID</b> : <?php echo $p['sku']; ?></p>
+            <p class="signature hidden-xs"><?php echo $p['designer']; ?></p>
             <div class="colorBox">
                 <a style=" background:<?php echo $p['color']; ?>"></a>
             </div>

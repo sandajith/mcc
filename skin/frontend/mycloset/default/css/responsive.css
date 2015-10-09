@@ -109,6 +109,10 @@
 .itemList a.button, .itemList button.button, .itemList input.button{margin:10px 0px;}
 
  footer .mainMenu .nav li a { padding: 15px 7px;} 
+ .popupBox {
+    width:768px;
+    margin-left: -384px;
+ }
 
     }
 
@@ -154,7 +158,7 @@
             margin:0
         }
 
-        header .loginDetails .links { float: left;}
+        header .loginDetails .links { float: left; margin-top: 0}
         .mainMenu {
             margin-top: 5px;
         }
@@ -298,6 +302,14 @@
         }
         .popupContent .carousel { border: 0}
         .productdata {  margin-left: -15px; margin-right: -15px;}
+        .popupContent .image {
+            padding:20px 0;
+            border-top:1px solid #ccc;
+            border-bottom:1px solid #ccc;
+            margin: 20px 0;
+        }
+        .signature.visible-xs { color: #666666}
+        .productdata { margin-bottom: 20px;}
     }
     
 
