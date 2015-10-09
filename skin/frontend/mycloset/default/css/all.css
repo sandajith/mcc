@@ -54,7 +54,7 @@
     src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(../fonts/HkF_qI1x_noxlxhrhMQYEFtXRa8TVwTICgirnJhmVJw.woff2) format('woff2'), url(http://fonts.gstatic.com/s/lato/v11/HkF_qI1x_noxlxhrhMQYED8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
 }
 a,
-html,body{ height: 100%; line-height: 23px;}
+html,body{ height: 100%; line-height: 26px;}
 body { background: #ffffff; color: #000; font-family: Lato; font-size: 16px; margin: 0}
 a,
 a:hover { text-decoration: none; outline: none !important;color: #000; cursor: pointer}
@@ -315,7 +315,7 @@ a.button, button.button, input.button {
 .homeGrid p { 
     font-style: italic; 
     font-weight: 300; 
-    min-height: 135px;
+    min-height: 156px;
 }
 .homeGrid a { 
     font-weight: 300; 
@@ -803,7 +803,7 @@ footer .social a { margin-left: 5px;}
 .popupContent .details p.status { font-style: italic;}
 .popupContent .details p.status b { font-style: normal;}
 .popupContent .details a.button { margin:25px 0 0 0; display: block; text-align: center;}
-.popupContent .flex-direction-nav a { margin: -33px 0 0 0;}
+.popupContent .flex-direction-nav a { margin:0;}
 
 .popupContent .carousel { border: 0; margin: 0; padding:55px 0 0 0;}
 .popupContent .carousel .flex-direction-nav .flex-prev { background:url("../images/slide-prev-popup.png") no-repeat scroll 0 0; left: 10px; opacity: 1}

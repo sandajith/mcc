@@ -56,6 +56,14 @@
         
         footer .mainMenu .nav li a { padding: 15px 20px;}
 
+        .homeGrid h4 {
+            font-size: 35px;
+        }
+
+        .homeGrid p{
+            min-height: 208px;
+        }
+
     }
 
     /* Medium Devices, Desktops */
@@ -113,6 +121,7 @@
     width:768px;
     margin-left: -384px;
  }
+ .homeGrid p {  min-height: 138px;}
 
     }
 
@@ -162,8 +171,11 @@
         .mainMenu {
             margin-top: 5px;
         }
-        
 
+        .homeGrid p {
+            min-height: auto;
+        }
+        
     }
 
 
