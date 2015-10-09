@@ -805,7 +805,7 @@ footer .social a { margin-left: 5px;}
 .popupContent .details a.button { margin:25px 0 0 0; display: block; text-align: center;}
 .popupContent .flex-direction-nav a { margin: -33px 0 0 0;}
 
-.popupContent .carousel { border: 0; margin: 0; padding: 0 50px;}
+.popupContent .carousel { border: 0; margin: 0; padding:55px 0 0 0;}
 .popupContent .carousel .flex-direction-nav .flex-prev { background:url("../images/slide-prev-popup.png") no-repeat scroll 0 0; left: 10px; opacity: 1}
 .popupContent .carousel .flex-direction-nav .flex-next { background:url("../images/slide-next-popup.png") no-repeat scroll right 0; opacity: 1; right: 10px}
 .productdata { margin: 0 20px}
