@@ -956,6 +956,9 @@ p.required { font-size:11px; text-align:right; color:#EB340A; }
  .about h3{margin-top: 0px;}
  .about p{font-family:"Lato"; font-size: 1em;}
  
+ .popupContent-1{border:1px solid #c7c7c7; height: 460px; padding: 0 25px; overflow-y: auto;}
+ .popupContent-1 p{font: 13px/20px 'Lato';}
+ 
  
  @media only screen and (max-width : 768px) {
         .align_center .dataTable > .row{font-size:12px; line-height: 30px; }
@@ -981,3 +984,6 @@ margin-left:10px;
 .step-title{
     background-color: #ccc;
 }
+
+
+

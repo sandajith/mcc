@@ -72,7 +72,7 @@
 //                                                $data = $model->getCollection()->getData();
 //                                                foreach ($data as $options) {
                                             ?>
-                                                    <option value="<?php // echo $options['membership_id'];   ?>"><?php echo $options['membership_type']; ?></option>
+                                                    <option value="<?php // echo $options['membership_id'];          ?>"><?php echo $options['membership_type']; ?></option>
                                             <?php // } ?>
                                             <?php // echo $this->getMemberships(); ?>
                                             </select> -->
@@ -216,16 +216,22 @@
                                             </div>
                                         </div>
                                     </li>
+                                    <li class="control">
+                                        <div class="input-box">
+                                            <input type="checkbox" name="is_subscribed" title="<?php echo $this->__('Sign Up for Newsletter') ?>" value="1" id="is_subscribed"<?php if ($this->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox" /><label for="is_subscribed"><?php echo $this->__('Sign Up for Newsletter') ?></label>
+                                        </div>
 
-<!--edited by neenu
- If you have a referral code, please enter it here-->
+                                    </li>
 
-                                <li>
-                                    <i><label for="cus_reference"><?php echo $this->__('If you have a referral code, please enter it here') ?>:</label></i>
-                                    <div class="input-box">
-                                        <input type="text" name="cus_reference" id="cus_reference" value="<?php echo Mage::getSingleton('customer/session')->getMemCusreference(); ?>" title="<?php echo $this->__('If you have a referral code, please enter it here') ?>" class="input-text" />
-                                    </div>
-                                </li>
+                                    <!--edited by neenu
+                                     If you have a referral code, please enter it here-->
+
+                                    <li>
+                                        <i><label for="cus_reference"><?php echo $this->__('If you have a referral code, please enter it here') ?>:</label></i>
+                                        <div class="input-box">
+                                            <input type="text" name="cus_reference" id="cus_reference" value="<?php echo Mage::getSingleton('customer/session')->getMemCusreference(); ?>" title="<?php echo $this->__('If you have a referral code, please enter it here') ?>" class="input-text" />
+                                        </div>
+                                    </li>
 
 
                                 </ul>
@@ -266,16 +272,44 @@
                     <!-- bridge fields-->
 
 
+                    <li class="fields">
 
+                        <div class="field">
 
+                                <input type="checkbox" name="termservices"  id="termservices" class=" required-entry "><div class="show" onclick="SubmitRequest();"><label for="termservices" class="required"><?php echo $this->__('I agree to ') ?>:Terms and Conditions</label></div>
+                        </div>                           
+                        
+                        <div class="popupWrapper">
+                            <div class="popupBox" id="popupBox">
+                            </div>
+                            <!--        <div class="popClose"></div>-->
+                        </div> 
+                    </li>
+                    <script type="text/javascript">
+                        jqCustom(".show").click(function () {
+                            jqCustom(".popupWrapper").fadeIn();
+                        });
 
+                        function SubmitRequest()
+                        {
+                            new Ajax.Request('<?php echo Mage::getBaseUrl() . "mycloset/termservices" ?>',
+                                    {
+                                        method: "get",
+                                        onSuccess: function (transport) {
+                                            var response = transport.responseText || "no response text";
+                                            //cashorcard_webnmobile_apikey
+                                            node = $("popupBox");
+                                            node.update(response);
+                                        },
+                                        onFailure: function () {
+                                            node = $("popupBox");
+                                            node.update('');
+                                        }
+                                    });
 
-
-
-
+                        }
+                    </script>
                 </div>
-
-
 
                 <div class="buttons-set">
                     <p class="required"><?php echo $this->__('* Required Fields') ?></p>
