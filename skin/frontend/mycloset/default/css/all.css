@@ -349,12 +349,12 @@ a.button, button.button, input.button {
 .flex-direction-nav a:after { content: "" !important}
 .flex-direction-nav .flex-next { 
     background:url(../images/slide-next.png) no-repeat;
-    right: 10px;
+    right: 25px;
 }
 
 .flex-direction-nav .flex-prev { 
     background:url(../images/slide-prev.png) no-repeat;
-    left:10px;
+    left:25px;
     width:79px;
         
 }
@@ -953,7 +953,7 @@ p.required { font-size:11px; text-align:right; color:#EB340A; }
 .gift-messages-form .item:after,
 .send-friend .form-list li p:after { display:block; content:"."; clear:both; font-size:0; line-height:0; height:0; overflow:hidden; }
 /* ======================================================================================= */
-/*saneesh*/
+
 
 .intro p.alrdyMember{font: 14px/20px arial;}
 .block-subscribe .actions{text-align: center;}
@@ -970,8 +970,13 @@ p.required { font-size:11px; text-align:right; color:#EB340A; }
  .about h2{margin-top: 6px;}
  .about h3{margin-top: 0px;}
  .about p{font-family:"Lato"; font-size: 1em;}
+ .about p img{margin-top:12px;}
  
+ /*service page*/
+ .service-subtitle{font-family: 'Lato'; font-size: 20px;}
+ .itemList img {max-width: 100%; border: 0px solid #c3c3c3;}
  
+
  @media only screen and (max-width : 768px) {
         .align_center .dataTable > .row{font-size:12px; line-height: 30px; }
         .align_center{text-align: center; margin: 0 auto; width: 100%; padding: 0 10px;}
