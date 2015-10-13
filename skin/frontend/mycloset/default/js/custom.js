@@ -51,7 +51,14 @@ jqCustom(document).ready(function () {
         }
 
     });
-
+   
+    jqCustom(".customDropDown ul li.selected").each(function(){
+        var customDropSelected = jqCustom(this).html();
+        
+       // console.log(customDropSelected);
+        jqCustom(this).parent("ul").siblings("span").html(customDropSelected);
+    });
+    
     jqCustom(".customDropDown ul li").click(function () {
         jqCustom(".customDropDown ul li.selected").removeClass("selected");
         var thisHtml = jqCustom(this).html();

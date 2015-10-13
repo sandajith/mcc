@@ -32,8 +32,9 @@ Default layout, loads most of the pages
 
 <default>
     <reference name="head">
-        <action method="addItem"><type>skin_js</type><name>js/jquery-ui.min.js</name><params/></action>
+        
         <action method="addItem"><type>skin_js</type><name>js/jquery.js</name><params/></action>
+        <action method="addItem"><type>skin_js</type><name>js/jquery-ui.min.js</name><params/></action>
         <action method="addItem"><type>skin_js</type><name>js/jquery.flexslider-min.js</name><params/></action>
         <action method="addItem"><type>skin_js</type><name>js/custom.js</name><params/></action>
         <action method="addItem"><type>skin_js</type><name>js/bootstrap.min.js</name><params/></action>
