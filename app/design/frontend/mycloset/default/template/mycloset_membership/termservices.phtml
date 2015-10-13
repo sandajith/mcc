@@ -2,7 +2,7 @@
 
 <div class="popupHead-1 clearfix">
     <h3 style="float: left; font:20px/24px 'Lato'; margin-top: 0px;">Terms And Conditions</h3>
-    <a class="close" style="float: right;">X</a>
+    <a class="terms-popupclose">X</a>
 </div>
 
 <div class="popupContent-1">
@@ -157,7 +157,7 @@
     var jqCustom = jQuery.noConflict();
     jqCustom(document).ready(function () {
 
-        jqCustom(".close,.popClose").click(function () {
+        jqCustom(".terms-popupclose").click(function () {
             jqCustom(".popupWrapper").fadeOut();
             jqCustom(".popupBox").empty();
         });

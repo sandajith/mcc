@@ -8,8 +8,11 @@ class Mycloset_Membership_Model_Entity_Userdetails extends Mage_Eav_Model_Entity
                 ->addAttributeToSelect('firstname')
                 ->addAttributeToSelect('lastname');
         if ($this->_options === null) {
-            $this->_options = array();
-
+            
+$this->_options[] = array(
+                    'value' => '0',
+                    'label' => 'Sample Closet'
+                );
             foreach ($users as $user) {
                 $this->_options[] = array(
                     'value' => $user['entity_id'],

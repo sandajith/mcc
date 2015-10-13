@@ -96,9 +96,8 @@ if (isset($ids[2])) {
 if($topParent=='16'){
        
                     	$userid = Mage::getSingleton('customer/session')->getId();	
-			if($userid){
-			   $this->_productCollection->addAttributeToFilter('customer_id', $userid);
-			}   
+//			$user_id = ($userid?$userid:0);  
+                         $this->_productCollection->addAttributeToFilter('customer_id', $user_id);
                 }
             
             
