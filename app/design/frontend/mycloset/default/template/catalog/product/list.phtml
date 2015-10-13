@@ -67,7 +67,7 @@ $_product1 = $this->getProduct();
 
     }
 </script>
-<?php if (!$_productCollection->count()): ?>
+<?php if (!$_productCollection->count()): echo 'test count null'?>
     <p class="note-msg align_center"><?php echo $this->__('There are no products matching the selection.') ?></p>
 <?php else: ?>
     <div class="topToolbar">
