@@ -578,10 +578,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', end
 }
 
 .customDropDown { position: relative; z-index: 10; cursor: pointer; font-size: 14px;}
+.customDropDown:after{
+    content: "";
+    font-family: "Glyphicons Halflings";
+}
 .dropContentBox { position: relative; float: left;}
 .dropContentBox  b { font-weight: normal;}
 .customDropDown span { margin: 0 20px 0 20px; position: relative;}
-.customDropDown ul { position: absolute; left: 0; background: #ffffff; border: 1px solid #ccc; list-style: none; padding: 0; top: -5px; right: 0; display: none; margin-left: 66px; width: -moz-min-content; width: -webkit-min-content; width: min-content; z-index: 5;}
+.customDropDown ul { position: absolute;  background:rgba(256,256,256,0.8); border: 1px solid #ccc; list-style: none; padding: 0; top: -5px; right: 0; display: none; width: -moz-min-content; width: -webkit-min-content; width: min-content; z-index: 5;}
 .customDropDown ul li { padding: 5px 17px; font-style: italic;  white-space: nowrap;}
 .customDropDown ul li b { font-weight: bold; margin-bottom: 5px; display: block}
 .customDropDown ul li ul { position: relative; border:0;}
