@@ -24,18 +24,19 @@ class Mycloset_Membership_PopupController extends Mage_Core_Controller_Front_Act
                 foreach ($collection as $_product):
                     $productowner = Mage::getModel('catalog/product')->load($_product->getId())->getCustomerId();                    
                     Mage::getSingleton('core/session')->setProductOwner($productowner); 
-                    $customerid = Mage::getSingleton('core/session')->getProductOwner();
-                    if ($userid == $customerid) {
+                  $customerid = Mage::getSingleton('core/session')->getProductOwner();
+                 
+                    if ($userid===$customerid) {
                         $i++;
                         ?>
                         <li>
-                            <a userid="<?php echo $userid; ?>" attr="<?php echo $customerId; ?>"  class="getproductid" rel="<?php echo $_product->getId(); ?>" >
+                            <a userid="<?php echo $userid; ?>" attr="<?php echo $customerid; ?>"  class="getproductid" rel="<?php echo $_product->getId(); ?>" >
                                 <img src="<?php echo Mage::helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" alt=""/></a>
                         </li>  
                         <?php
                     }  else {?>
                             <li>
-                            <a attr="<?php echo $customerId; ?>"  class="getproductid" rel="<?php echo $_product->getId(); ?>" >
+                            <a attr="<?php echo $customerid; ?>"  class="getproductid" rel="<?php echo $_product->getId(); ?>" >
                                 <img src="<?php echo Mage::helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" alt=""/></a>
                         </li> 
                    <?php }

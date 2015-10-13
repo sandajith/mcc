@@ -80,6 +80,17 @@
             <block type="membership/membership_popup" name="membership_popup" template="mycloset_membership/popup.phtml"/>              
         </reference>                
     </membership_popup_index>
+    <!--for terms and condition popup-->
+     <membership_termservices_index>
+        <reference name="root">   
+            <action method="setTemplate">
+                <template>page/empty.phtml</template>
+            </action>   
+        </reference>         
+        <reference name="content">   
+            <block type="membership/membership_termservices" name="membership_termservices" template="mycloset_membership/termservices.phtml"/>              
+        </reference>                
+    </membership_termservices_index>
     <!--product pop-->
     
     <!--listname in home page-->

@@ -976,9 +976,15 @@ p.required { font-size:11px; text-align:right; color:#EB340A; }
  .about p{font-family:"Lato"; font-size: 1em;}
  .about p img{margin-top:12px;}
  
+
  /*service page*/
  .service-subtitle{font-family: 'Lato'; font-size: 20px;}
  .itemList img {max-width: 100%; border: 0px solid #c3c3c3;}
+
+ .popupContent-1{border:1px solid #c7c7c7; height: 460px; padding: 0 25px; overflow-y: auto;}
+ .popupContent-1 p{font: 13px/20px 'Lato';}
+ 
+
  
 
  @media only screen and (max-width : 768px) {
@@ -1005,3 +1011,6 @@ margin-left:10px;
 .step-title{
     background-color: #ccc;
 }
+
+
+
