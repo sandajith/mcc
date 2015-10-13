@@ -142,7 +142,7 @@ $_product1 = $this->getProduct();
 
                                 </li>
                             </ul>
-                            <?php if (!$ProductSustomer) { ////add to my bag  ?>
+                            <?php if (!$userid) { ////add to my bag  ?>
                                 <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') {
                                     ?>
                                     <button class="button" data-toggle="modal" data-target=".bs-example-modal-sm" title="<?php echo $this->__('Deliver Me') ?>" ><?php echo $this->__('Deliver Me') ?></button>

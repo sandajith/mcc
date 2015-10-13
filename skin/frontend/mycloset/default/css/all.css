@@ -671,13 +671,59 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', end
     border: 2px solid #dcdcdc;
     margin-bottom: 20px;
 }
-.loginRegister .bordered h4 { font-weight: bold;}
+
+.loginRegister .bordered h4 { font-weight: bold; margin: 30px 0 15px}
+.loginRegister .bordered h4.m-t-0 { margin-top: 25px;}
 .loginRegister .bordered .content { min-height: 200px; margin-bottom: 15px;}
+
 .loginRegister .bordered .content label { display: block; margin:0}
 .loginRegister .loginBox .bordered .content label { margin: 20px 0 0 0}
 .loginRegister .bordered .content .txt { border: 1px solid #dcdcdc; width: 250px;}
 .loginRegister .bordered  .select,
 .loginRegister .bordered  .input-text { border: 1px solid #dcdcdc; width: 250px; border-radius: 0; padding:5px;}
+
+.loginRegister .bordered .content label { display: block; padding:5px 0; margin:7px 0 -1px 0; font-weight:normal}
+.loginRegister .loginBox .bordered .content label { margin: 5px 0 0; padding:10px 0 5px}
+.loginRegister .bordered .content .txt { border: 1px solid #dcdcdc; width: 265px;}
+.loginRegister .bordered  select,
+.loginRegister .bordered  .input-text { border: 1px solid #dcdcdc; width: 250px; border-radius: 0; padding:1px 5px; margin-bottom:8px;}
+.loginRegister .form-list label.required em { float: none; color: #000000}
+.loginRegister .input-box {
+    float: left;
+    position: relative;
+}
+.loginRegister label input[type="checkbox"]{
+    float: left; margin:7px 10px 0 0;
+}
+.loginRegister u.show { cursor: pointer;
+    display: inline-block !important;
+    margin: 12px 0 0 5px;}
+.loginRegister .bordered  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+}
+.custom-select { position:relative; float:left;}
+.custom-select::after {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid #000;
+    content: "";
+    height: 0;
+    position: absolute;
+    right: 9px;
+    top: 8px;
+    width: 0;
+}
+.custom-select select { padding-right:25px !important; }
+
+.loginRegister .buttons-set { margin-bottom: 50px;}
+.terms-popupclose {
+    float: right;
+    margin: -14px -7px 0 0;
+}
+
 
 .divFooter { background: #dadada; display: block; overflow: hidden; margin: 0 -15px;}
 .divFooter .btn { background: #b3b3b3; margin: 5px; border-radius:0; color: #ffffff}
