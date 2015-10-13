@@ -673,8 +673,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', end
 }
 .loginRegister .bordered h4 { font-weight: bold;}
 .loginRegister .bordered .content { min-height: 200px; margin-bottom: 15px;}
-.loginRegister .bordered .content label { display: block; margin: 20px 0 0 0}
+.loginRegister .bordered .content label { display: block; margin:0}
+.loginRegister .loginBox .bordered .content label { margin: 20px 0 0 0}
 .loginRegister .bordered .content .txt { border: 1px solid #dcdcdc; width: 250px;}
+.loginRegister .bordered  .select,
+.loginRegister .bordered  .input-text { border: 1px solid #dcdcdc; width: 250px; border-radius: 0; padding:5px;}
+
 .divFooter { background: #dadada; display: block; overflow: hidden; margin: 0 -15px;}
 .divFooter .btn { background: #b3b3b3; margin: 5px; border-radius:0; color: #ffffff}
 .divFooter .btn:hover { background: #333; color: #fff}
