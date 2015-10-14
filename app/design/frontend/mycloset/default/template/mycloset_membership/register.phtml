@@ -297,15 +297,15 @@
                         <input name="context" type="hidden" value="checkout" />
 <?php endif; ?>
                 </div>
-
-
-            </form>
-
-            <div class="buttons-set">
+<div class="buttons-set">
                 <p class="required"><?php echo $this->__('* Required Fields') ?></p>
                 <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>" class="back-link"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
                 <button type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Submit')) ?>" class="button"><span><span><?php echo $this->__('Next') ?></span></span></button>
             </div>
+
+            </form>
+
+            
         </div>
 
     </div>
@@ -342,9 +342,7 @@
     }
 
 
-    function SubmitRequest(val) {
-        alert(val);
-    }
+  
 </script>
 
 

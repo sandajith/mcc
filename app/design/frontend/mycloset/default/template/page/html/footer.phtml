@@ -71,8 +71,10 @@
                         ?>
                         <li><a href="<?php echo $this->getUrl('') ?>careers">Careers</a></li>  
 <?php } ?>
+<?php $emailid= Mage::getStoreConfig('trans_email/ident_support/email');
 
-                    <li><a href="mailto:neenurobin28@gmail.com?subject=Message from My Closet Concierge Visitor">Contact</a></li>  
+?>
+                    <li><a href="mailto:<?php  echo $emailid;?>?subject=Message from My Closet Concierge Visitor">Contact</a></li>  
                     <?php
                     $_page = Mage::getModel('cms/page')->load('termservices', 'identifier');
 
