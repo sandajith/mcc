@@ -15,26 +15,35 @@
 
 
 
-    <form method="post" onSubmit="checkForm()" id="paymentform" action="<?php echo Mage::getBaseUrl(); ?>membership/payment/authorizepayment/" >
+    <form method="post"  id="paymentform" action="<?php echo Mage::getBaseUrl(); ?>membership/payment/authorizepayment/" >
         <div class="form-list">
             <?php
             if ((empty($mem_id)) && ($group_id === '15')) {
                 ?>
-                <div id="previous_membership">
-                    <h3 style="color: #e76200;"><?php echo "I wish to pay later"; ?></h3>
-                    <h2 style="color: #e76200;"><?php echo "0 USD"; ?></h2>
-                </div>
+
+            <div id="previous_membership">
+                 <h3 style="color: #e76200;"><?php echo "Guest"; ?></h3>
+            <h2 style="color: #e76200;"> <?php
+    $currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
+           $currency_symbol = Mage::app()->getLocale()->currency( $currency_code )->getSymbol();
+    echo $currency_symbol.$this->__('0') ?></h2>
+            </div>
+           
 
                 <li class="fields">
                     <div class="field">
                         <label for="membership_plan" class="required"><?php echo $this->__('Choose your membership type') ?><em>*</em></label>
                         <div class="input-box">
-                            <?php
-                            $model = Mage::getModel('membership/types');
-                            $data = $model->getCollection()->getData();
-                            foreach ($data as $options) {
-                                ?>
-                                <input type="radio" name="mem_type" value="<?php echo $options['membership_id']; ?>" onclick="javascript:GetPrice(this.value);" />&nbsp;<?php echo $options['membership_type']; ?><br>
+                           <?php
+                                                $collection = Mage::getModel('membership/types')->getCollection()
+                                                        ->setOrder('oder', 'ASC')
+                                                        ->addFieldToFilter('status','1')
+;
+                                                foreach ($collection as $types) {
+                                                    $id_m = $types->getId();
+                                                    $options= Mage::getModel('membership/types')->load($id_m);
+                                                    ?>
+                                <input type="radio" name="mem_type" value="<?php echo $options->getMembershipId(); ?>" onclick="javascript:GetPrice(this.value);" />&nbsp;<?php echo $options->getMembershipType(); ?><br>
                             <?php } ?>
                         </div>
                     </div>
@@ -42,7 +51,7 @@
                         <label for="membership_plan" class="required"><?php echo $this->__('Membership price') ?></label>
 
                         <div class="input-box" style="font-size: 15px;">
-                            <?php echo "&nbsp; " . Mage::app()->getStore()->getCurrentCurrencyCode(); ?>
+  
 
                             <div id="price_change" style="float: left;">
                                 <?php echo $this->__('0') ?> <!-- amount here -->
@@ -190,7 +199,7 @@
 
         <div class="buttons-set">
 
-            <button type="submit" title="Submit" class="button"><span><span>Submit</span></span></button>
+            <button type="submit" onclick="checkForm()" title="Submit" class="button"><span><span>Submit</span></span></button>
         </div>
     </form>
 
@@ -204,7 +213,6 @@
 <script>
     var jqCustom = jQuery.noConflict();
     function termsSelect() {
-
         //termservices
         if (jqCustom("#termservices").prop('checked') === true)
         {
@@ -215,7 +223,7 @@
         }
     }
 
-    function checkForm(e)
+    function checkForm()
     {
          jqCustom('#paymentform').submit(function(e) {
         // DO STUFF

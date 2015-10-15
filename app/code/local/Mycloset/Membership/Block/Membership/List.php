@@ -38,8 +38,7 @@ class Mycloset_Membership_Block_Membership_List extends Mage_Core_Block_Template
            $data['membership_id'] = $membership_id;
           $data['membership_type'] = $one->getMembershipType();
            $data['membership_price'] = $one->getMembershipPrice();
-            
-
+          
 
             return $data;
        

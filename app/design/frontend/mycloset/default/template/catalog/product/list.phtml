@@ -76,7 +76,7 @@ $_product1 = $this->getProduct();
     <?php
     $userid = Mage::getSingleton('customer/session')->getId(); // login user id
     ?>
-    <div class="row products-grid">      
+    <div class="row products-grid">
         <?php $_collectionSize = $_productCollection->count() ?>
         <?php $_columnCount = $this->getColumnCount(); ?>
         <?php
@@ -103,7 +103,7 @@ $_product1 = $this->getProduct();
                                 <li>Price:$<?php echo $_helper->productAttribute($_product, $_product->getPrice(), 'price') ?></li>
                                 <li><a href="#">View Details</a></li>
                             </ul>
-                            <div class="actionsWrapper">                     
+                            <div class="actionsWrapper">
 
                                 <a type="button" title="<?php echo $this->__('ADD TO BAG') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
                                     <?php echo $this->__('ADD TO BAG') ?></a>
@@ -135,11 +135,16 @@ $_product1 = $this->getProduct();
                         <div class="col-sm-12 col-xs-6">
                             <ul>
                                 <li>
-                                    <?php echo $_product->getAttributeText('designer'); ?></br>                                          
-                                    <?php echo $_product->getAttributeText('color'); ?></br>
-                                    <label>Size :</label><?php echo $_product->getAttributeText('size'); ?></br>
-                                    <label>Status :</label><?php echo $_product->getAttributeText('product_status') . '  ' . $_helper->productAttribute($_product, $_product->getShippedTo(), 'shipped_to'); ?></br>
-
+                                    <?php echo $_product->getAttributeText('designer'); ?>
+                                </li>
+                                <li>
+                                    <?php echo $_product->getAttributeText('color'); ?>
+                                </li>
+                                <li>
+                                   Size: <?php echo $_product->getAttributeText('size'); ?>
+                                </li>
+                                <li>
+                                   Status: <?php echo $_product->getAttributeText('product_status') . '  ' . $_helper->productAttribute($_product, $_product->getShippedTo(), 'shipped_to'); ?>
                                 </li>
                             </ul>
                             <?php if (!$userid) { ////add to my bag  ?>
@@ -147,20 +152,20 @@ $_product1 = $this->getProduct();
                                     ?>
                                     <button class="button" data-toggle="modal" data-target=".bs-example-modal-sm" title="<?php echo $this->__('Deliver Me') ?>" ><?php echo $this->__('Deliver Me') ?></button>
                                 <?php } else if ($_product->isSaleable()) { ?>
-                                    <button class="button" data-toggle="modal" data-target=".bs-example-modal-sm"  title="<?php echo $this->__('Pick Me Up') ?>"  ><?php echo $this->__('Pick Me Up') ?></button>  
-                                <?php } ?> 
+                                    <button class="button" data-toggle="modal" data-target=".bs-example-modal-sm"  title="<?php echo $this->__('Pick Me Up') ?>"  ><?php echo $this->__('Pick Me Up') ?></button>
+                                <?php } ?>
                             <?php } else { //Popup to sign up  ?>
 
                                 <?php if ($_product->isSaleable() && $_product->getAttributeText('product_status') == 'We Have It') { ?>
                                     <button type="button" title="<?php echo $this->__('Deliver Me') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Deliver Me') ?></span></span></button>
                                 <?php } else if ($_product->isSaleable()) { ?>
-                                    <button title="<?php echo $this->__('Pick Me Up') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')" ><?php echo $this->__('Pick Me Up') ?></button>  
-                                <?php } ?> 
+                                    <button title="<?php echo $this->__('Pick Me Up') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')" ><?php echo $this->__('Pick Me Up') ?></button>
+                                <?php } ?>
 
                             <?php } ?>
 
                         </div>
-                    </div> 
+                    </div>
                 </div>
 
 
@@ -174,7 +179,7 @@ $_product1 = $this->getProduct();
         <div class="popupBox" id="popupBox">
         </div>
         <div class="popClose"></div>
-    </div>                  
+    </div>
     <!--end pop up div-->
     <!--non logged user popup notification-->
     <!--    <div class="pop-up-outer-alert">
