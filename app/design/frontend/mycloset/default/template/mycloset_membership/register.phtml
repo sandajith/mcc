@@ -203,23 +203,28 @@
                                         <div class="field">                                        
                                             <div class="input-box">
                                                 <?php
-                                                $model = Mage::getModel('membership/types');
-                                                $data = $model->getCollection()->getData();
-                                                foreach ($data as $options) {
+                                                $collection = Mage::getModel('membership/types')->getCollection()
+                                                        ->setOrder('oder', 'ASC')
+                                                        ->addFieldToFilter('status','1')
+;
+                                                foreach ($collection as $types) {
+                                                    $id_m = $types->getId();
+                                                    $options= Mage::getModel('membership/types')->load($id_m);
                                                     ?>
-                                                    <input type="radio" name="mem_type" value="<?php echo $options['membership_id']; ?>" onclick="GetPrice(this.value);" />&nbsp;<?php echo $options['membership_type']; ?><br>
+                                                    <input type="radio" name="mem_type" value="<?php echo $options->getMembershipId(); ?>" onclick="GetPrice(this.value);" />&nbsp;<?php echo $options->getMembershipType(); ?><br>
     <?php } ?>
-                                                <input type="radio" name="mem_type" checked="checked" value="0" onclick="GetPrice(this.value);" />&nbsp;I wish to pay later<br>
+                                                <input type="radio" name="mem_type" checked="checked" value="0" onclick="GetPrice(this.value);" />&nbsp;Guest<br>
                                             </div>
-                                        </div>
+                                        </div>Guest
                                         <div class="field">
                                             <label for="membership_plan" class="required"><?php echo $this->__('Membership price') ?></label>
 
                                             <div class="input-box" style="font-size: 15px;">
-    <?php echo "&nbsp; " . Mage::app()->getStore()->getCurrentCurrencyCode(); ?>
-
                                                 <div id="price_change" style="float: left;">
-    <?php echo $this->__('0') ?> <!--amount here-->
+    <?php
+    $currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
+           $currency_symbol = Mage::app()->getLocale()->currency( $currency_code )->getSymbol();
+    echo $currency_symbol.$this->__('0') ?> <!--amount here-->
                                                 </div>                        </div>
                                         </div>
                                     </li>

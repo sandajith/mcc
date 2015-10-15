@@ -27,13 +27,16 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
     }
 
     public function GetpriceAction() {
-        $mode = 0;
+        $finalPrice = 0;
         $value = Mage::app()->getRequest()->getParam('memid');
         if ($value) {
             $model = Mage::getModel('membership/types')->load($value);
-            $mode = $model->getMembershipPrice();
+           $finalPrice = $model->getMembershipPrice();
+           $details = $model->getDetails();
         }
-        echo $mode;
+           $currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
+           $currency_symbol = Mage::app()->getLocale()->currency( $currency_code )->getSymbol();
+           echo $currency_symbol.$finalPrice.'<br>'.$details;
     }
 
     public function confirmpaymentAction() {
