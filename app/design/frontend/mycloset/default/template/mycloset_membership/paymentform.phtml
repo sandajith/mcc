@@ -1,30 +1,30 @@
 
 <div class='fieldset'>
     <h2 class="legend">Make Payment</h2>
-      <?php
+    <?php
     $membership = $this->getMembershipdetails();
-  
+
     $var = $this->getSettings();
     $gateurl = $var['a'];
     $api_login_id = $var['b'];
     $transaction_key = $var['d'];
-$amount =  $membership['membership_price']; // membership amount
-$mem_id =  $membership['membership_id']; // membership id  
-$group_id= $membership['customer_group'];// groupid 
+    $amount = $membership['membership_price']; // membership amount
+    $mem_id = $membership['membership_id']; // membership id  
+    $group_id = $membership['customer_group']; // groupid 
     ?>
-  
-  
 
-    <form method="post" action="<?php echo Mage::getBaseUrl(); ?>membership/payment/authorizepayment/">
+
+
+    <form method="post" onSubmit="checkForm()" id="paymentform" action="<?php echo Mage::getBaseUrl(); ?>membership/payment/authorizepayment/" >
         <div class="form-list">
             <?php
-            if ((empty($mem_id)) && ($group_id === '15')) {         
+            if ((empty($mem_id)) && ($group_id === '15')) {
                 ?>
-            <div id="previous_membership">
-                 <h3 style="color: #e76200;"><?php echo "I wish to pay later"; ?></h3>
-            <h2 style="color: #e76200;"><?php echo "0 USD"; ?></h2>
-            </div>
-           
+                <div id="previous_membership">
+                    <h3 style="color: #e76200;"><?php echo "I wish to pay later"; ?></h3>
+                    <h2 style="color: #e76200;"><?php echo "0 USD"; ?></h2>
+                </div>
+
                 <li class="fields">
                     <div class="field">
                         <label for="membership_plan" class="required"><?php echo $this->__('Choose your membership type') ?><em>*</em></label>
@@ -56,26 +56,26 @@ $group_id= $membership['customer_group'];// groupid
                 </li>
 
 
-            <?php } else if(!empty($mem_id) && ($group_id ==='15')) {   ?>    
+            <?php } else if (!empty($mem_id) && ($group_id === '15')) { ?>    
                 <div id="previous_membership">
-                            <?php echo $this->__('You Chose'); ?>
-            <h3 style="color: #e76200;"><?php echo $membership['membership_type']; ?></h3>
-            <?php echo $this->__('Amount to be paid'); ?>
-            <h2 style="color: #e76200;"><?php echo $membership['membership_price'] . " USD"; ?></h2>
+                    <?php echo $this->__('You Chose'); ?>
+                    <h3 style="color: #e76200;"><?php echo $membership['membership_type']; ?></h3>
+                    <?php echo $this->__('Amount to be paid'); ?>
+                    <h2 style="color: #e76200;"><?php echo $membership['membership_price'] . " USD"; ?></h2>
 
                 </div>           
-                 <li class="fields">
+                <li class="fields">
                     <div class="field">
                         <label for="membership_plan" class="required"><?php echo $this->__('Choose your membership type') ?><em>*</em></label>
                         <div class="input-box">
-                            
-                            
+
+
                             <?php
                             $model = Mage::getModel('membership/types');
                             $data = $model->getCollection()->getData();
                             foreach ($data as $options) {
                                 ?>
-                            <input type="radio" checked="checked"name="mem_type" value="<?php echo $options['membership_id']; ?>" onclick="javascript:GetPrice(this.value);" />&nbsp;<?php echo $options['membership_type']; ?><br>
+                                <input type="radio" checked="checked"name="mem_type" value="<?php echo $options['membership_id']; ?>" onclick="javascript:GetPrice(this.value);" />&nbsp;<?php echo $options['membership_type']; ?><br>
                             <?php } ?>
                         </div>
                     </div>
@@ -86,7 +86,7 @@ $group_id= $membership['customer_group'];// groupid
                             <?php echo "&nbsp; " . Mage::app()->getStore()->getCurrentCurrencyCode(); ?>
 
                             <div id="price_change" style="float: left;">
-                                <?php echo $membership['membership_price']  ?> <!-- amount here -->
+                                <?php echo $membership['membership_price'] ?> <!-- amount here -->
                             </div>    
                             <input type="hidden" name="amt" id="mem_amt" value=" <?php echo $this->__('0') ?>"/>
 
@@ -95,20 +95,20 @@ $group_id= $membership['customer_group'];// groupid
 
 
                 </li>
-                
-          <?php   } else if(!empty ($mem_id) && ($group_id!=='15')) {                ?>
+
+            <?php } else if (!empty($mem_id) && ($group_id !== '15')) { ?>
                 <input type="hidden" name="mem_type" value="<?php echo $membership['membership_type']; ?>" />
                 <input type="hidden" name="amt" value="<?php echo $amount; ?>" />
                 <input type="hidden" name="mem_table_id" value="<?php echo $mem_id; ?>" />
-           
-                   <div id="previous_membership">
-                            <?php echo $this->__('You Chose'); ?>
-            <h3 style="color: #e76200;"><?php echo $membership['membership_type']; ?></h3>
-            <?php echo $this->__('Amount to be paid'); ?>
-            <h2 style="color: #e76200;"><?php echo $membership['membership_price'] . " USD"; ?></h2>
+
+                <div id="previous_membership">
+                    <?php echo $this->__('You Chose'); ?>
+                    <h3 style="color: #e76200;"><?php echo $membership['membership_type']; ?></h3>
+                    <?php echo $this->__('Amount to be paid'); ?>
+                    <h2 style="color: #e76200;"><?php echo $membership['membership_price'] . " USD"; ?></h2>
 
                 </div>
-                 <?php } ?>
+            <?php } ?>
             <div>
                 <label for="card_number">Credit Card Number</label>
                 <div class="input-box">
@@ -172,7 +172,20 @@ $group_id= $membership['customer_group'];// groupid
                     </div>
                 </div>
             </div>
+            <div class="fields">
+                <div class="field">
 
+                    <label for="termservices" class="required pull-left">
+                        <u class="show" onclick="SubmitRequest();">Terms and Conditions</u>   <input type="hidden" required  value="" name="terms" id="termstext" />                                          
+                    </label>
+
+
+                </div>                           
+                <div class="popupWrapper">
+                    <div class="popupBox" id="popupBox">
+                    </div>                         
+                </div> 
+            </div>
         </div>
 
         <div class="buttons-set">
@@ -187,7 +200,61 @@ $group_id= $membership['customer_group'];// groupid
 
 
 </div>
-<script type="text/javascript">
+
+<script>
+    var jqCustom = jQuery.noConflict();
+    function termsSelect() {
+
+        //termservices
+        if (jqCustom("#termservices").prop('checked') === true)
+        {
+            jqCustom("#termstext").val('1');//insert 1
+        } else
+        {
+            jqCustom("#termstext").val(''); //insert '';
+        }
+    }
+
+    function checkForm(e)
+    {
+         jqCustom('#paymentform').submit(function(e) {
+        // DO STUFF
+         // return false to cancel form action
+  
+        var checkboxdata = jqCustom("#termstext").val();
+        if (!checkboxdata) {
+            alert("Please read the Terms and Conditions");
+            e.preventDefault();
+            return false ;
+        } else {
+            return true;
+        }
+          });
+    }
+    jqCustom(".show").click(function () {
+        jqCustom(".popupWrapper").fadeIn();
+    });
+
+    function SubmitRequest()
+    {
+//                            var passvrb= val;         // sent value '1' for link click check                 
+        //  $('termstext').writeAttribute('value', passvrb);// change text box value 
+        new Ajax.Request('<?php echo Mage::getBaseUrl() . "mycloset/termservices" ?>',
+                {
+                    method: "get",
+                    onSuccess: function (transport) {
+                        var response = transport.responseText || "no response text";
+                        //cashorcard_webnmobile_apikey
+                        node = $("popupBox");
+                        node.update(response);
+                    },
+                    onFailure: function () {
+                        node = $("popupBox");
+                        node.update('');
+                    }
+                });
+
+    }
     function GetPrice(memid)
     {
         $('previous_membership').hide();
@@ -209,6 +276,7 @@ $group_id= $membership['customer_group'];// groupid
 
 
     }
+
 </script>
 
 

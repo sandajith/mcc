@@ -6,7 +6,7 @@
 </div>
 
 <div class="popupContent-1">
-    
+
     <div class="subhead">
         <h2 class="" style="text-align: center; font:14px/24px 'Lato'; padding: 0px;">STORAGE AND SERVICE AGREEMENT</h2>
     </div>
@@ -152,16 +152,22 @@
     <p>Date: ___________________</p>
     <p>&nbsp;</p>
 
+    <input type="checkbox" onclick="termsSelect();"  name="termservices" value=""  id="termservices" class=" required-entry "> 
+    <?php echo $this->__('I agree to : Terms and Conditions'); ?>
 </div>
 <script type="text/javascript">
-    var jqCustom = jQuery.noConflict();
-    jqCustom(document).ready(function () {
 
+
+    var jqCustom = jQuery.noConflict();
+
+    jqCustom(document).ready(function () {
         jqCustom(".terms-popupclose").click(function () {
             jqCustom(".popupWrapper").fadeOut();
             jqCustom(".popupBox").empty();
         });
 
     });
+
+
 
 </script>
