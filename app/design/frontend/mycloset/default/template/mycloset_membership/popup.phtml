@@ -1,7 +1,7 @@
 <?php
 $p = $this->getProductdetails();
-$userid = Mage::getSingleton('customer/session')->getId(); // login user id
-
+$user_id = Mage::getSingleton('customer/session')->getId(); // login user id
+$userid = ($user_id?$user_id:0);
 $cat = Mage::getModel('catalog/category')->load(16);
 $subcats = $cat->getChildren();
 $all_sub_cat = explode(',', $subcats);
@@ -18,7 +18,6 @@ $_product = Mage::registry('current_product');
 //   
 
 ?>
-
 <div class="popupHead">
     <div class="sku dress-code hidden-xs"> <?php echo $p['sku']; ?></div>
     <a class="close" style="float: right;">X</a>
@@ -153,33 +152,27 @@ $_product = Mage::registry('current_product');
         <ul class="slides">
             <?php
             foreach ($all_sub_cat as $cat_id) {
-                $userid = Mage::getSingleton('customer/session')->getId();
+              //  $userid = Mage::getSingleton('customer/session')->getId();
                 $category = Mage::getModel('catalog/category')->load($cat_id);
                 $categories = Mage::getModel('catalog/category')->load($category->getId())
                         ->getProductCollection()
                         ->addAttributeToSelect('entity_id')
                         ->addAttributeToFilter('status', 1)
                         ->addAttributeToFilter('visibility', 4);
+                
+
                 $products = Mage::getModel('catalog/product')
                         ->getCollection()
                         ->addAttributeToFilter('customer_id', $userid)
                         ->addCategoryFilter($category)
                         ->load();
-                if (($products->count() > 0 ) && ($userid)) {
+                if ($products->count() > 0 ) {
                     ?>              
                     <li >                       
                         <a class="getcatid" rel="<?php echo $category->getId(); ?>" ><img  src="<?php echo Mage::getBaseUrl('media') . 'catalog/category/' . $category->image; ?>" alt=""/></a> 
                     </li>    
 
-                <?php } else if (($categories->count() > 0) && (!$userid)) {
-                    ?>
-
-                    <li >                       
-                        <a class="getcatid" rel="<?php echo $category->getId(); ?>" ><img  src="<?php echo Mage::getBaseUrl('media') . 'catalog/category/' . $category->image; ?>" alt=""/></a> 
-                    </li> 
-
-                    <?php
-                }
+                <?php } 
             }
             ?>
         </ul>

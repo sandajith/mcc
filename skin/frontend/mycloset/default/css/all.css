@@ -701,7 +701,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', end
 }
 .loginRegister u.show { cursor: pointer;
     display: inline-block !important;
-    margin: 12px 0 0 5px;}
+    margin: 0 0 0 5px;}
 .loginRegister .bordered  select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -1061,6 +1061,9 @@ margin-left:10px;
 .step-title{
     background-color: #ccc;
 }
-
+  .validation-advice
+{
+    color:#eb340a;
+}
 
 

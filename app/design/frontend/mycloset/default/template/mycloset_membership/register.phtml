@@ -129,7 +129,7 @@
                                                     <select id="region_id"  name="region_id" title="<?php echo $this->__('State/Province') ?>" class="validate-select">
                                                         <option value=""><?php echo $this->__('Choose State') ?></option>
                                                         <?php
-                                                        $this->setData('country_id', 'US'); // or 'FR'..., default is 'US'
+                                                        //$this->setData('country_id', 'US'); // or 'FR'..., default is 'US'
                                                         $regions = $this->getRegionCollection();
                                                         foreach ($regions as $region) {
                                                             echo "<option value=$region[name]>" . $region['name'] . "</option>";
@@ -137,6 +137,7 @@
                                                         ?>
 
                                                     </select>
+                                                    <input type="text" id="region" name="region" value="<?php echo $this->escapeHtml($this->getRegion()) ?>" title="<?php echo $this->__('State/Province') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('region') ?>" style="display:none;"   />
                                                 </div>
 
 <!--                                                <li class="fields" style="display: none;">
@@ -153,9 +154,7 @@
                                                     //<![CDATA[
                                                     $('region_id').setAttribute('defaultValue', "<?php echo $this->getFormData()->getRegionId() ?>");
                                                     //]]>
-                                                </script>
-
-                                                <input type="text" id="region" name="region" value="<?php echo $this->escapeHtml($this->getRegion()) ?>" title="<?php echo $this->__('State/Province') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('region') ?>" style="display:none;"   />
+                                                </script>                                              
                                             </div>
                                         </div>
                                     </li>
@@ -177,6 +176,11 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <script type="text/javascript">
+    //<![CDATA[
+        new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>);
+    //]]>
+    </script>
                                     </li>
                                     <!--edited by neenu
                                    If you have a referral code, please enter it here-->
@@ -252,8 +256,9 @@
                                     <div class="field">
                                         <label for="termservices" class="required pull-left">
                                             <input type="checkbox" name="termservices"  id="termservices" class=" required-entry "> <?php echo $this->__('I agree to ') ?> :
-                                        </label>
                                         <u class="show" onclick="SubmitRequest();">Terms and Conditions</u>
+                                        </label>
+                                        
 
                                     </div>                           
                                     <div class="popupWrapper">
@@ -298,7 +303,6 @@
 <?php endif; ?>
                 </div>
 <div class="buttons-set">
-                <p class="required"><?php echo $this->__('* Required Fields') ?></p>
                 <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>" class="back-link"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
                 <button type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Submit')) ?>" class="button"><span><span><?php echo $this->__('Next') ?></span></span></button>
             </div>

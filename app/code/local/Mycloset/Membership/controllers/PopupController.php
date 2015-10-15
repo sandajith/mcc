@@ -10,8 +10,9 @@ class Mycloset_Membership_PopupController extends Mage_Core_Controller_Front_Act
     public function sliderAction() {
         $categoryIds = Mage::app()->getRequest()->getParam('categoryId');
 //        $customerId = Mage::app()->getRequest()->getParam('productowner');
-        $userid = Mage::getSingleton('customer/session')->getId();
-        if($userid){
+        $user_id = Mage::getSingleton('customer/session')->getId();
+        $userid = ($user_id?$user_id:0);
+        //if($userid){
             $collection = Mage::getModel('catalog/product')
                 ->getCollection()
                 ->joinField('category_id', 'catalog/category_product', 'category_id', 'product_id = entity_id', null, 'left')
@@ -19,16 +20,20 @@ class Mycloset_Membership_PopupController extends Mage_Core_Controller_Front_Act
                  ->addAttributeToFilter('customer_id', $userid)
                 ->addAttributeToFilter('category_id', array('in' => $categoryIds));
         $i = 0;
-        }else {
+       /* }else {
            $collection = Mage::getModel('catalog/product')
                 ->getCollection()
                 ->joinField('category_id', 'catalog/category_product', 'category_id', 'product_id = entity_id', null, 'left')
                 ->addAttributeToSelect('*')              
                 ->addAttributeToFilter('category_id', array('in' => $categoryIds));
         $i = 0; 
-        }
+        }*/
         
-        ?>   
+        ?>
+<?php
+
+    if($collection->count()>0){
+?>
         <div class="flexsliderPopup carousel">
             <ul class="slides">
                 <?php
@@ -56,7 +61,9 @@ class Mycloset_Membership_PopupController extends Mage_Core_Controller_Front_Act
                 ?>
             </ul>
         </div>
-
+<?php
+    }
+    ?>
         <script>
             var jqCustom = jQuery.noConflict();
             jqCustom('.getproductid').click(function () {
