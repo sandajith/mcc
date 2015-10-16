@@ -451,6 +451,7 @@ a.button, button.button, input.button {
     list-style: none;
     margin:10px 0 17px 0;
     padding: 0;
+    min-height: 80px;
 }
 .itemsWrapper .itemList ul li {
     font-size: 13px;
@@ -534,6 +535,7 @@ a.button, button.button, input.button {
     margin: 20px 0 5px 0;
     font-size: 15px;
     font-weight: bold;
+    cursor:pointer;
 }
 .filterBy .small-accordion h4 b { display: none}
 .filterBy .small-accordion label,
@@ -694,7 +696,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', end
 
 .loginRegister .bordered h4 { font-weight: bold; margin: 30px 0 15px}
 .loginRegister .bordered h4.m-t-0 { margin-top: 25px;}
-.loginRegister .bordered .content { min-height: 200px; margin-bottom: 15px;}
+.loginRegister .bordered .content { min-height: 290px; margin-bottom: 15px;}
 
 .loginRegister .bordered .content label { display: block; margin:0}
 .loginRegister .loginBox .bordered .content label { margin: 20px 0 0 0}
@@ -746,9 +748,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', end
 
 
 .divFooter { background: #dadada; display: block; overflow: hidden; margin: 0 -15px;}
-.divFooter .btn { background: #b3b3b3; margin: 5px; border-radius:0; color: #ffffff}
+.divFooter .btn { background: #b3b3b3; margin: 5px; border-radius:0; color: #ffffff; text-transform: uppercase;}
 .divFooter .btn:hover { background: #333; color: #fff}
-.divFooter .lnk { margin: 10px 0 0 15px; color: #000000}
+.divFooter .lnk { margin: 10px 0 0 15px; color: #000000; text-transform: uppercase;}
 .divFooter .lnk:hover { color:#666666;}
 .mtop30 { margin-top:30px;}
 .button.submit { margin:5px 0; min-width: 100px}
@@ -858,8 +860,8 @@ footer .social a { margin-left: 5px;}
 .popupHead a { margin-left: 20px; font-size: 17px; color: #000000; opacity: 1}
 .popupContent .image { text-align: center;}
 .popupContent .image img {max-height: 600px; max-width: 100%;}
-.popupContent .details { font-size: 16px}
-.popupContent  h2 { font-family: Lato; margin:0px 0 10px 0}/*20px*/
+.popupContent .details {font: italic 16px/26px 'Lato';}
+.popupContent  h2 { font: normal 27px 'Lato'; margin:0px 0 10px 0}/*20px*/
 .popupContent .details .colorBox { margin-bottom: 10px;}
 .popupContent .details .signature { font-size:17px;}
 .popupContent .details .tags { margin:10px 0 20px 0; display: block; width: 100%; float: left;}
@@ -869,13 +871,14 @@ footer .social a { margin-left: 5px;}
 .popupContent .details .tags span i { float: right; font-size: 12px; font-style: normal; margin: 3px 0 0 15px; font-weight: bold;}
 .popupContent .details .tags span a { color: #ffffff}
 .popupContent .details .tags span.add i { margin: 0; padding:1px; font-size: 14px;}
+.popupContent .details p{margin-bottom: 0px;}
 .popupContent .details p.description { font-style: italic;}
 .popupContent .details p.status { font-style: italic;}
 .popupContent .details p.status b { font-style: normal;}
 .popupContent .details a.button { margin:25px 0 0 0; display: block; text-align: center;}
 .popupContent .flex-direction-nav a { margin:0;}
 
-.popupContent .carousel { border: 0; margin: 0; border-top:1px solid #ccc; margin:55px 0 0 0;}
+.popupContent .carousel { border: 0; margin: 0; border-top:1px solid #ccc; margin:10px 0 0 0;}
 .popupContent .carousel .flex-direction-nav .flex-prev { background:url("../images/slide-prev-popup.png") no-repeat scroll 0 0; left: 10px; opacity: 1}
 .popupContent .carousel .flex-direction-nav .flex-next { background:url("../images/slide-next-popup.png") no-repeat scroll right 0; opacity: 1; right: 10px}
 .productdata { margin: 0 20px}
@@ -883,6 +886,11 @@ footer .social a { margin-left: 5px;}
 .dress-code{
     float: left;
     color: #ccc;
+}
+.sku.dress-code{
+    float: left;
+    color: #999;
+    font:normal 17px/18px 'Lato';
 }
 .popupContent{
     padding-top: 15px;
@@ -1083,3 +1091,17 @@ margin-left:10px;
 {
     color:#eb340a;
 }
+
+/*saneesh*/
+
+/* next level design
+.forgot-form {
+    border: 1px solid #999;
+    margin-bottom: 0;
+    padding: 0 25px 15px;
+}
+.forgot-title{font:27px/24px 'Lato'; letter-spacing: 5px;}
+.forgot-form h2.legend{font:24px/24px 'Lato'; letter-spacing: 1px;}
+.col-main{margin-top: 5%;}
+
+*/
