@@ -259,6 +259,7 @@ class Mycloset_Membership_AccountController extends Mage_Core_Controller_Front_A
         }
         $this->getRequest()->setPost('telephone',  $this->getRequest()->getPost('cus_tele'));
         $postdata = $this->getRequest()->getPost();
+     
         $customer = $this->_getCustomer();
         //load customer session based on id               
         $customer->load(Mage::getSingleton('customer/session')->getMemID());

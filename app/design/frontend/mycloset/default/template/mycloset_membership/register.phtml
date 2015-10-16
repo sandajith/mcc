@@ -132,8 +132,10 @@
                                                         //$this->setData('country_id', 'US'); // or 'FR'..., default is 'US'
                                                         $regions = $this->getRegionCollection();
                                                         foreach ($regions as $region) {
-                                                            echo "<option value=$region[name]>" . $region['name'] . "</option>";
-                                                        }
+                                                           
+                                                          
+                                                          echo'<option value='. $region["name"].'> '. $region["name"].'</option>';
+                                                       }
                                                         ?>
 
                                                     </select>
