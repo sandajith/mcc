@@ -21,28 +21,29 @@
             if ((empty($mem_id)) && ($group_id === '15')) {
                 ?>
 
-            <div id="previous_membership">
-                 <h3 style="color: #e76200;"><?php echo "Guest"; ?></h3>
-            <h2 style="color: #e76200;"> <?php
-    $currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
-           $currency_symbol = Mage::app()->getLocale()->currency( $currency_code )->getSymbol();
-    echo $currency_symbol.$this->__('0') ?></h2>
-            </div>
-           
+                <div id="previous_membership">
+                    <h3 style="color: #e76200;"><?php echo "Guest"; ?></h3>
+                    <h2 style="color: #e76200;"> <?php
+                        $currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
+                        $currency_symbol = Mage::app()->getLocale()->currency($currency_code)->getSymbol();
+                        echo $currency_symbol . $this->__('0')
+                        ?></h2>
+                </div>
+
 
                 <li class="fields">
                     <div class="field">
                         <label for="membership_plan" class="required"><?php echo $this->__('Choose your membership type') ?><em>*</em></label>
                         <div class="input-box">
-                           <?php
-                                                $collection = Mage::getModel('membership/types')->getCollection()
-                                                        ->setOrder('oder', 'ASC')
-                                                        ->addFieldToFilter('status','1')
-;
-                                                foreach ($collection as $types) {
-                                                    $id_m = $types->getId();
-                                                    $options= Mage::getModel('membership/types')->load($id_m);
-                                                    ?>
+                            <?php
+                            $collection = Mage::getModel('membership/types')->getCollection()
+                                    ->setOrder('oder', 'ASC')
+                                    ->addFieldToFilter('status', '1')
+                            ;
+                            foreach ($collection as $types) {
+                                $id_m = $types->getId();
+                                $options = Mage::getModel('membership/types')->load($id_m);
+                                ?>
                                 <input type="radio" name="mem_type" value="<?php echo $options->getMembershipId(); ?>" onclick="javascript:GetPrice(this.value);" />&nbsp;<?php echo $options->getMembershipType(); ?><br>
                             <?php } ?>
                         </div>
@@ -51,7 +52,7 @@
                         <label for="membership_plan" class="required"><?php echo $this->__('Membership price') ?></label>
 
                         <div class="input-box" style="font-size: 15px;">
-  
+
 
                             <div id="price_change" style="float: left;">
                                 <?php echo $this->__('0') ?> <!-- amount here -->
@@ -168,16 +169,28 @@
                 <div class="field">
                     <label for="First Name">First Name</label>
                     <div class="input-box">
-                        <input type="text" class="input-text" size="15" name="x_first_name" value="<?php echo Mage::getSingleton('customer/session')->getMemFname(); ?>" readonly></input>
-
+                        <?php
+                        if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+                       
+                            ?>
+                            <input type="text" class="input-text" size="15" name="x_first_name" value="<?php echo Mage::getSingleton('customer/session')->getCustomer()->getFirstname(); ?>" readonly></input>
+                        <?php } else { ?>
+                            <input type="text" class="input-text" size="15" name="x_first_name" value="<?php echo Mage::getSingleton('customer/session')->getMemFname(); ?>" readonly></input>
+                        <?php }
+                        ?>
                     </div>
                 </div>
                 <div class="field">
                     <label for="Last Name">Last Name</label>
 
                     <div class="input-box">
-                        <input type="text" class="input-text" size="14" name="x_last_name" value="<?php echo Mage::getSingleton('customer/session')->getMemLname(); ?>" readonly></input>
-
+                        <?php
+                          if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+                            ?>
+                            <input type="text" class="input-text" size="14" name="x_last_name" value="<?php echo Mage::getSingleton('customer/session')->getCustomer()->getLastname(); ?>" readonly></input>
+                        <?php } else { ?>
+                            <input type="text" class="input-text" size="14" name="x_last_name" value="<?php echo Mage::getSingleton('customer/session')->getMemLname(); ?>" readonly></input>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -191,7 +204,7 @@
 
                 </div>                           
                 <div class="popupWrapper">
-                    <div class="popupBox" id="popupBox">
+                    <div class="popupBox-1" id="popupBox">
                     </div>                         
                 </div> 
             </div>
@@ -225,19 +238,19 @@
 
     function checkForm()
     {
-         jqCustom('#paymentform').submit(function(e) {
-        // DO STUFF
-         // return false to cancel form action
-  
-        var checkboxdata = jqCustom("#termstext").val();
-        if (!checkboxdata) {
-            alert("Please read the Terms and Conditions");
-            e.preventDefault();
-            return false ;
-        } else {
-            return true;
-        }
-          });
+        jqCustom('#paymentform').submit(function (e) {
+            // DO STUFF
+            // return false to cancel form action
+
+            var checkboxdata = jqCustom("#termstext").val();
+            if (!checkboxdata) {
+                alert("Please read the Terms and Conditions");
+                e.preventDefault();
+                return false;
+            } else {
+                return true;
+            }
+        });
     }
     jqCustom(".show").click(function () {
         jqCustom(".popupWrapper").fadeIn();
@@ -245,7 +258,7 @@
 
     function SubmitRequest()
     {
-//                            var passvrb= val;         // sent value '1' for link click check                 
+        //                            var passvrb= val;         // sent value '1' for link click check                 
         //  $('termstext').writeAttribute('value', passvrb);// change text box value 
         new Ajax.Request('<?php echo Mage::getBaseUrl() . "mycloset/termservices" ?>',
                 {
