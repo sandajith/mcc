@@ -707,7 +707,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', end
 .loginRegister .bordered .content .txt { border: 1px solid #dcdcdc; width: 265px;}
 .loginRegister .bordered  select,
 .loginRegister .bordered  .input-text { border: 1px solid #dcdcdc; width: 250px; border-radius: 0; padding:1px 5px; margin-bottom:8px;}
-.loginRegister .form-list label.required em { float: none; color: #000000}
+.loginRegister .form-list label.required em { float: none; color: #000000;}
 .loginRegister .input-box {
     float: left;
     position: relative;
@@ -1088,4 +1088,12 @@ margin-left:10px;
 .validation-advice
 {
     color:#eb340a;
+}
+/* saneesh*/
+
+.terms-cont{
+    cursor: pointer;
+}
+.verify{
+    margin: 20px 0 6px;
 }
