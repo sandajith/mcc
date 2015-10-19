@@ -1106,6 +1106,9 @@ margin-left:10px;
 .verify{
     margin: 20px 0 6px;
 }
+.login-info{
+    min-height:165px!important;
+}
 
 
 /*saneesh*/
