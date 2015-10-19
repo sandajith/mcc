@@ -286,9 +286,12 @@
                     onSuccess: function (transport) {
                         var response = transport.responseText || "no response text";
                         node = $("price_change");
-                        //$("price_change").update = response;
-                        node.update(response);
-                        $('mem_amt').writeAttribute('value', response);
+                         var res = response.split("@");
+                        var details = res[0];
+                        node.update(details);
+
+                        var amt = res[1];
+                        $('mem_amt').writeAttribute('value', amt);
                     },
                     onFailure: function () {
                         alert("Something went wrong...")
