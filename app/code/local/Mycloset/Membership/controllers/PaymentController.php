@@ -31,12 +31,12 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
         $value = Mage::app()->getRequest()->getParam('memid');
         if ($value) {
             $model = Mage::getModel('membership/types')->load($value);
-           $finalPrice = $model->getMembershipPrice();
-           $details = $model->getDetails();
+            $finalPrice = $model->getMembershipPrice();
+            $details = $model->getDetails();
         }
-           $currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
-           $currency_symbol = Mage::app()->getLocale()->currency( $currency_code )->getSymbol();
-           echo $currency_symbol.$finalPrice.'<br>'.$details.'@'.$finalPrice;
+        $currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
+        $currency_symbol = Mage::app()->getLocale()->currency($currency_code)->getSymbol();
+        echo $currency_symbol . $finalPrice . '<br>' . $details . '@' . $finalPrice;
     }
 
     public function confirmpaymentAction() {
@@ -44,7 +44,26 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
         $this->renderLayout();
     }
 
+  
     public function authorizepaymentAction() {
+        if (Mage::getSingleton('customer/session')->getMemID() === '') {// if session data is available
+            $fname = Mage::getSingleton('customer/session')->getMemFname();
+            $lname = Mage::getSingleton('customer/session')->getMemLname();
+            $telephone = Mage::getSingleton('customer/session')->getMemCustele();
+            $emailid = Mage::getSingleton('customer/session')->getMemEmail();
+            $customerid = Mage::getSingleton('customer/session')->getMemID();
+        } else { // session data is not availabe then using post data
+            $fname = $this->getRequest()->getPost('x_first_name');
+            $lname = $this->getRequest()->getPost('x_first_name');
+            $telephone = $this->getRequest()->getPost('custelephone');
+            $emailid = $this->getRequest()->getPost('emailid');
+            $customerid = $this->getRequest()->getPost('cust_id');
+        }
+
+
+
+
+
 
         $g_loginname = Mage::getStoreConfig(self::PATH_API_LOGIN); // Keep this secure.
         $g_transactionkey = Mage::getStoreConfig(self::PATH_TRANS_KEY); // Keep this secure.
@@ -58,8 +77,8 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
                 MerchantAuthenticationBlock($g_loginname, $g_transactionkey) .
                 "<profile>" .
                 "<merchantCustomerId>" . time() . rand(1, 100) . "</merchantCustomerId>" . // Your own identifier for the customer.
-                "<description>" . $this->getRequest()->getPost('mem_type') . " of " . Mage::getSingleton('customer/session')->getMemFname() . "</description>" .
-                "<email>" . Mage::getSingleton('customer/session')->getMemEmail() . "</email>" .
+                "<description>" . $this->getRequest()->getPost('mem_type') . " of " . $fname. "</description>" .
+                "<email>" . $emailid . "</email>" .
                 "</profile>" .
                 "</createCustomerProfileRequest>";
 
@@ -78,9 +97,9 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
                 "<customerProfileId>" . $parsed_customer_id . "</customerProfileId>" .
                 "<paymentProfile>" .
                 "<billTo>" .
-                "<firstName>" . Mage::getSingleton('customer/session')->getMemFname() . "</firstName>" .
-                "<lastName>" . Mage::getSingleton('customer/session')->getMemLname() . "</lastName>" .
-                "<phoneNumber>" . Mage::getSingleton('customer/session')->getMemCustele() . "</phoneNumber>" .
+                "<firstName>" . $fname. "</firstName>" .
+                "<lastName>" . $lname . "</lastName>" .
+                "<phoneNumber>" . $telephone . "</phoneNumber>" .
                 "</billTo>" .
                 "<payment>" .
                 "<creditCard>" .
@@ -105,10 +124,10 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
                 MerchantAuthenticationBlock($g_loginname, $g_transactionkey) .
                 "<customerProfileId>" . $parsed_customer_id . "</customerProfileId>" .
                 "<address>" .
-                "<firstName>" . Mage::getSingleton('customer/session')->getMemFname() . "</firstName>" .
-                "<lastName>" . Mage::getSingleton('customer/session')->getMemLname() . "</lastName>" .
+                "<firstName>" . $fname. "</firstName>" .
+                "<lastName>" . $lname . "</lastName>" .
                 "<company>" . Mage::getSingleton('customer/session')->getMemCompany() . "</company>" .
-                "<phoneNumber>" . Mage::getSingleton('customer/session')->getMemCustele() . "</phoneNumber>" .
+                "<phoneNumber>" . $telephone . "</phoneNumber>" .
                 "</address>" .
                 "</createCustomerShippingAddressRequest>";
 
@@ -127,7 +146,7 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
                 MerchantAuthenticationBlock($g_loginname, $g_transactionkey) .
                 "<transaction>" .
                 "<profileTransAuthOnly>" .
-                "<amount>" . $this->getRequest()->getPost('amt'). "</amount>" . // should include tax, shipping, and everything.
+                "<amount>" . $this->getRequest()->getPost('amt') . "</amount>" . // should include tax, shipping, and everything.
                 "<shipping>" .
                 "<amount>0.00</amount>" .
                 "<name>Free Shipping</name>" .
@@ -136,7 +155,7 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
                 "<lineItems>" .
                 "<itemId>" . time() . "</itemId>" .
                 "<name>" . $this->getRequest()->getPost('mem_type') . "</name>" .
-                "<description>" . $this->getRequest()->getPost('mem_type') . " of " . Mage::getSingleton('customer/session')->getMemFname() . "</description>" .
+                "<description>" . $this->getRequest()->getPost('mem_type') . " of " . $fname. "</description>" .
                 "<quantity>1</quantity>" .
                 "<unitPrice>" . $this->getRequest()->getPost('amt') . "</unitPrice>" .
                 "<taxable>false</taxable>" .
@@ -177,8 +196,8 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
 //           echo 'transactionid'.$directResponseFields[6];
             //Variables to send e-mail
             $z_firstname = Mage::getSingleton('customer/session')->getMemFname();
-            $z_lastname = Mage::getSingleton('customer/session')->getMemLname();
-            $z_email = Mage::getSingleton('customer/session')->getMemEmail();
+            $z_lastname = $lname;
+            $z_email = $emailid;
             $z_memtype = $this->getRequest()->getPost('mem_type');
             $z_amount = $this->getRequest()->getPost('amt');
 
@@ -197,7 +216,7 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
                 $paymentdetails = serialize($vars);
                 $date = date("Y-m-d H:i:s ", time());
                 $data = array(
-                    'customer_id' => Mage::getSingleton('customer/session')->getMemID(),
+                    'customer_id' => $customerid,
                     'customer_profile_id' => $parsed_customer_id,
                     'payment_profile_id' => $parsed_paymentprofile_id,
                     'shipping_address_id' => $parsed_address_id
@@ -211,7 +230,7 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
 
                 $j = Mage::getModel('membership/paymenthistory');
 
-                $j->setCustomerId(Mage::getSingleton('customer/session')->getMemID())
+                $j->setCustomerId($customerid)
                         ->setTransactionId($transId)
                         ->setPaymentId($payment_id)
                         ->setPaymentDetails($paymentdetails)
@@ -222,9 +241,9 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
 
                 //logging-in the customer after successful payment
                 $session = $this->_getSession();
-                $customer = Mage::getModel('customer/customer')->load(Mage::getSingleton('customer/session')->getMemID());
+                $customer = Mage::getModel('customer/customer')->load($customerid);
                 //changing customer group
-                $customerid = Mage::getSingleton('customer/session')->getMemID();
+                $customerid = $customerid;
                 $update = array(
                     'entity_id' => $customerid,
                     'group_id' => '1'
@@ -271,6 +290,9 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
         }
 //                }
     }
+
+  
+
 
     protected function _getSession() {
         return Mage::getSingleton('customer/session');
@@ -382,23 +404,23 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
                 ->load($customer_id, 'customer_id')
                 ->addData($update123);
         try {
-          $custmember->save();
+            $custmember->save();
         } catch (Exception $e) {
             echo $e->getMessage();
         }
-       
+
 // insert data in to history 
         $history_data = array(
             'customer_id' => $customer_id,
             'membership_id' => $upgrade_mem_id
         );
         $history = Mage::getModel('membership/membershiphistory')->load()->addData($history_data);
-         try {
-          $history->save();
+        try {
+            $history->save();
         } catch (Exception $e) {
             echo $e->getMessage();
         }
-      
+
 // lock membership
         $lock = array(
             'entity_id' => $customer_id,
@@ -455,10 +477,10 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
         } catch (Exception $e) {
             echo $e->getMessage();
         }
-        
-        
-        
-        
+
+
+
+
 //        $customerid = $this->getRequest()->getPost('customer_entity_id');
 //        $customer_pay_id = Mage::getModel('membership/payment')->load($this->getRequest()->getPost('customer_entity_id'), 'customer_id');
 //        $payment_id = $customer_pay_id->getPaymentId();

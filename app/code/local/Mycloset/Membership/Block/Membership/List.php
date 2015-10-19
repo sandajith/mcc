@@ -22,26 +22,24 @@ class Mycloset_Membership_Block_Membership_List extends Mage_Core_Block_Template
     public function getMembershipdetails() {
 
         $customer_id = Mage::getSingleton('customer/session')->getMemId();
-        if(!$customer_id)
-        {
-           $customer_id = Mage::getSingleton('customer/session')->getCustomer()->getId();
+        if (!$customer_id) {
+            $customer_id = Mage::getSingleton('customer/session')->getCustomer()->getId();
         }
-     
-     
-            $customer = Mage::getModel('customer/customer')->load($customer_id);
-            $data = array();
-            $data['customer_group'] = $customer->getGroupId();
-            $data['customer_id'] = $customer->getId();
-            $customer_membership = Mage::getModel('membership/customermembership')->load($customer_id, 'customer_id');
-            $membership_id = $customer_membership->getMembershipId();
-            $one = Mage::getModel('membership/types')->load($membership_id);
-           $data['membership_id'] = $membership_id;
-          $data['membership_type'] = $one->getMembershipType();
-           $data['membership_price'] = $one->getMembershipPrice();
-          
+        $customer = Mage::getModel('customer/customer')->load($customer_id);
+        $data = array();
+        $data['customer_email'] = $customer->getEmail();
+        $data['customer_custtele'] = $customer->getCusTele();
+        $data['customer_group'] = $customer->getGroupId();
+        $data['customer_id'] = $customer->getId();
+        $customer_membership = Mage::getModel('membership/customermembership')->load($customer_id, 'customer_id');
+        $membership_id = $customer_membership->getMembershipId();
+        $one = Mage::getModel('membership/types')->load($membership_id);
+        $data['membership_id'] = $membership_id;
+        $data['membership_type'] = $one->getMembershipType();
+        $data['membership_price'] = $one->getMembershipPrice();
 
-            return $data;
-       
+
+        return $data;
     }
 
     public function getSettings() {

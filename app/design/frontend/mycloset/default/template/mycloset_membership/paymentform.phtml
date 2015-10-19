@@ -11,12 +11,19 @@
     $amount = $membership['membership_price']; // membership amount
     $mem_id = $membership['membership_id']; // membership id  
     $group_id = $membership['customer_group']; // groupid 
+    $customer_email = $membership['customer_email']; // emailid
+    $customer_custtele = $membership['customer_custtele']; // customer telephone
+    $cust_id = $membership['customer_id']; // customer id
+  
     ?>
 
 
 
     <form method="post"  id="paymentform" action="<?php echo Mage::getBaseUrl(); ?>membership/payment/authorizepayment/" >
         <div class="form-list">
+            <input type="hidden" value="<?php echo $customer_email; ?>" name="emailid" id="emailid" />  
+            <input type="hidden" value="<?php echo $customer_custtele; ?>" name="custelephone" id="telephonenum" />  
+            <input type="hidden" value="<?php echo $cust_id; ?>" name="cust_id" id="cust_id" />  
             <?php
             if ((empty($mem_id)) && ($group_id === '15')) {
                 ?>
@@ -200,8 +207,8 @@
                     <label for="termservices" class="required pull-left">
                         <u class="show terms-cont" onclick="SubmitRequest();">Terms and Conditions</u>   <input type="hidden" required  value="" name="terms" id="termstext" />                                          
                     </label>
-
-
+         <!--neenu-->    
+                 
                 </div>                           
                 <div class="popupWrapper">
                     <div class="popupBox-1" id="popupBox">
