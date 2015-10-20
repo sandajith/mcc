@@ -62,7 +62,20 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
         if ($taxrate === '') {
             $mem_amount = $this->getRequest()->getPost('amt');
         } else {
-            $mem_amount = $this->getRequest()->getPost('amt') + $taxrate;
+          $taxrate;
+          $taxval= $taxrate/100;
+           $taxable_amount = $this->getRequest()->getPost('amt')*$taxval  ;
+           $amt=$this->getRequest()->getPost('amt');
+        $mem_amount = $amt+$taxable_amount;
+        
+//            You Chose Satndard closet
+//Membership amount : $150
+//Tax               : $y
+//Amount to be paid : $z
+//
+//150*8.75/100 = y
+//
+//150+y = z;
         }
 
 
@@ -201,7 +214,7 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
             $z_lastname = $lname;
             $z_email = $emailid;
             $z_memtype = $this->getRequest()->getPost('mem_type');
-            $z_amount = $mem_amount;
+         $z_amount = $mem_amount;
 
             if ("1" == $responseCode) {
                 //Email sending to the customer upon successful payment
@@ -236,7 +249,7 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
                         ->setTransactionId($transId)
                         ->setPaymentId($payment_id)
                         ->setPaymentDetails($paymentdetails)
-                        ->setAmountPaid($z_amount)
+                        ->setAmountPaid($mem_amount)
                         ->setTaxRate($taxrate)
                         ->setMembershipAmount($this->getRequest()->getPost('amt'))
                         ->save();

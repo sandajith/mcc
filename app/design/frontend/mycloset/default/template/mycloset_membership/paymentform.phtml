@@ -1,6 +1,6 @@
 
 <div class='fieldset'>
-    <h2 class="legend">Make Payment</h2>
+    <h2 class="legend"></h2>
     <?php
     $membership = $this->getMembershipdetails();
 
@@ -21,6 +21,8 @@
     $address = Mage::getModel('customer/address')->load($address_id);
 // $shippingId is the id you get from order object.     
 //    echo $country = $address->getCountry();
+    $currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
+    $currency_symbol = Mage::app()->getLocale()->currency($currency_code)->getSymbol();
     ?>
     <form method="post"  id="paymentform" action="<?php echo Mage::getBaseUrl(); ?>membership/payment/authorizepayment/" >
         <div class="form-list">
@@ -33,19 +35,23 @@
                 $request = $taxCalculation->getRateRequest($address, null, null);
                 $taxClassId = 2;
                 $taxRate = $taxCalculation->getRate($request->setProductClassId($taxClassId));
+                $taxval = $taxRate / 100;
+                $taxable_amount = $amount * $taxval;
+                $mem_amount = $amount + $taxable_amount;
                 ?>
-            <input type="hidden" value="<?php echo $taxRate; ?>" name="tax_rate" id="tax" />        
+
+                <input type="hidden" value="<?php echo $taxRate; ?>" name="tax_rate" id="tax" />        
+                <input type="hidden" value="<?php echo $taxval; ?>" name="tax_rate_val" id="tax_rate_val" />        
             <?php } ?>
             <?php
             if ((empty($mem_id)) && ($group_id === '15')) {
                 ?>
                 <div id="previous_membership">
-                    <h3 style="color: #e76200;"><?php echo "Guest"; ?></h3>
-                    <h2 style="color: #e76200;"> <?php
-                        $currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
-                        $currency_symbol = Mage::app()->getLocale()->currency($currency_code)->getSymbol();
-                        echo $currency_symbol . $this->__('0')
-                        ?></h2>
+                    <h3><?php echo $this->__('You Chose'); ?></h3><br>
+                    <label>Membership</label>:<?php echo "Guest"; ?><br>
+                    <label>Membership Amount</label>: <?php
+                    echo $currency_symbol . $this->__('0')
+                    ?>                                                      
                 </div>
 
 
@@ -79,17 +85,21 @@
 
                         </div>
                     </div>
-
-
                 </li>
+                <li>
+                    <?php if($taxRate !=''){ ?>
+                    <label>Tax</label>:<?php echo $currency_symbol ?><label id="amt123" for="mem_amt123" ><?php echo $this->__('0') ?></label><br>                   
+                    <label>Amount to be paid</label>:<?php echo $currency_symbol ?><label id="amountpaid" for="amountpaid" ><?php echo $this->__('0') ?></label><br>                   
+                    <?php }?>
+                </li>
+
 
 
             <?php } else if (!empty($mem_id) && ($group_id === '15')) { ?>    
                 <div id="previous_membership">
-                    <?php echo $this->__('You Chose'); ?>
-                    <h3 style="color: #e76200;"><?php echo $membership['membership_type']; ?></h3>
-                    <?php echo $this->__('Amount to be paid'); ?>
-                    <h2 style="color: #e76200;"><?php echo $membership['membership_price'] . " USD"; ?></h2>
+                    <h3><?php echo $this->__('You Chose'); ?></h3>
+                    <label>Membership</label>:<?php echo $membership['membership_type']; ?>                   
+                    <label>Membership Amount</label>: <?php echo $currency_symbol . $membership['membership_price']; ?>
 
                 </div>           
                 <li class="fields">
@@ -123,6 +133,12 @@
 
 
                 </li>
+                <li>
+                      <?php if($taxRate !=''){ ?>
+                    <label>Tax</label>:<?php echo $currency_symbol ?><label id="amt123" for="mem_amt123" ><?php echo $this->__('0') ?></label><br>                   
+                    <label>Amount to be paid</label>:<?php echo $currency_symbol ?><label id="amountpaid" for="amountpaid" ><?php echo $this->__('0') ?></label><br>                   
+                      <?php }?>
+                </li>
 
             <?php } else if (!empty($mem_id) && ($group_id !== '15')) { ?>
                 <input type="hidden" name="mem_type" value="<?php echo $membership['membership_type']; ?>" />
@@ -130,13 +146,17 @@
                 <input type="hidden" name="mem_table_id" value="<?php echo $mem_id; ?>" />
 
                 <div id="previous_membership">
-                    <?php echo $this->__('You Chose'); ?>
-                    <h3 style="color: #e76200;"><?php echo $membership['membership_type']; ?></h3>
-                    <?php echo $this->__('Amount to be paid'); ?>
-                    <h2 style="color: #e76200;"><?php echo $membership['membership_price'] . " USD"; ?></h2>
-
+                    <li>
+                        <h3><?php echo $this->__('You Chose'); ?></h3><br>
+                        <label>Membership</label>:<?php echo $membership['membership_type']; ?><br>
+                        <label>Membership Amount</label>:  <?php echo $currency_symbol . $membership['membership_price']; ?><br>
+                        <label>Tax</label>:<?php echo $currency_symbol . $taxable_amount ?> <br>         
+                        <label>Amount to be paid</label>:<?php echo $currency_symbol . $mem_amount; ?>
+                    </li>
                 </div>
             <?php } ?>
+
+
             <div>
                 <label for="card_number">Credit Card Number</label>
                 <div class="input-box">
@@ -304,11 +324,21 @@
                         var response = transport.responseText || "no response text";
                         node = $("price_change");
                         var res = response.split("@");
+
                         var details = res[0];
                         node.update(details);
 
                         var amt = res[1];
                         $('mem_amt').writeAttribute('value', amt);
+                        var tax_val = $$('[name="tax_rate_val"]')[0].value;
+                        var tax_paid = parseFloat(amt) * parseFloat(tax_val);
+                        var tax_paid1 = tax_paid.toFixed(2);
+
+                        $$('label[id="amt123"]').first().update(tax_paid1);
+
+                        var amount_paid = parseFloat(amt) + parseFloat(tax_paid);
+                        $$('label[id="amountpaid"]').first().update(amount_paid);
+
                     },
                     onFailure: function () {
                         alert("Something went wrong...")

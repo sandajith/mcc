@@ -1109,6 +1109,16 @@ margin-left:10px;
 .login-info{
     min-height:165px!important;
 }
+// for reg 2nd page table design
+.amount-details{width:100%; margin: 20px 0;}
+.amount-details h1{font:bold 16px/20px 'Lato'}
+.amount-details ul{width:100%; padding: 0px; list-style: none; border: 1px solid #999;}
+.amount-details ul li{border-bottom: 1px solid #999;  height: 30px;}
+.amount-details ul li:last-child{border-bottom: 0px solid #999;}
+.amount-details ul li label{width:50%; float: left; padding: 5px; margin-bottom: 0px; line-height: 20px; border-right: 1px solid #999;}
+.amount-details ul li div{width:50%; float:left; padding: 5px; line-height: 20px;}
+/*border: medium solid #ccc;*/
+
 
 
 /*saneesh*/
