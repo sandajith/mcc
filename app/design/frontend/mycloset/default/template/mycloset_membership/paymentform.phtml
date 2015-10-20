@@ -14,20 +14,31 @@
     $customer_email = $membership['customer_email']; // emailid
     $customer_custtele = $membership['customer_custtele']; // customer telephone
     $cust_id = $membership['customer_id']; // customer id
-  
+    // test tax
+    $customerData = Mage::getModel('customer/customer')->load($cust_id);
+    $taxCalculation = Mage::getModel('tax/calculation')->setCustomer($customerData);
+    $address_id = $customerData->getDefaultShipping();
+    $address = Mage::getModel('customer/address')->load($address_id);
+// $shippingId is the id you get from order object.     
+//    echo $country = $address->getCountry();
     ?>
-
-
-
     <form method="post"  id="paymentform" action="<?php echo Mage::getBaseUrl(); ?>membership/payment/authorizepayment/" >
         <div class="form-list">
             <input type="hidden" value="<?php echo $customer_email; ?>" name="emailid" id="emailid" />  
             <input type="hidden" value="<?php echo $customer_custtele; ?>" name="custelephone" id="telephonenum" />  
             <input type="hidden" value="<?php echo $cust_id; ?>" name="cust_id" id="cust_id" />  
             <?php
+            $region_id = $address->getRegionId();
+            if ($region_id == '43') {
+                $request = $taxCalculation->getRateRequest($address, null, null);
+                $taxClassId = 2;
+                $taxRate = $taxCalculation->getRate($request->setProductClassId($taxClassId));
+                ?>
+            <input type="hidden" value="<?php echo $taxRate; ?>" name="tax_rate" id="tax" />        
+            <?php } ?>
+            <?php
             if ((empty($mem_id)) && ($group_id === '15')) {
                 ?>
-
                 <div id="previous_membership">
                     <h3 style="color: #e76200;"><?php echo "Guest"; ?></h3>
                     <h2 style="color: #e76200;"> <?php
@@ -178,7 +189,6 @@
                     <div class="input-box">
                         <?php
                         if (Mage::getSingleton('customer/session')->isLoggedIn()) {
-                       
                             ?>
                             <input type="text" class="input-text" size="15" name="x_first_name" value="<?php echo Mage::getSingleton('customer/session')->getCustomer()->getFirstname(); ?>" readonly></input>
                         <?php } else { ?>
@@ -192,7 +202,7 @@
 
                     <div class="input-box">
                         <?php
-                          if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+                        if (Mage::getSingleton('customer/session')->isLoggedIn()) {
                             ?>
                             <input type="text" class="input-text" size="14" name="x_last_name" value="<?php echo Mage::getSingleton('customer/session')->getCustomer()->getLastname(); ?>" readonly></input>
                         <?php } else { ?>
@@ -207,8 +217,8 @@
                     <label for="termservices" class="required pull-left">
                         <u class="show terms-cont" onclick="SubmitRequest();">Terms and Conditions</u>   <input type="hidden" required  value="" name="terms" id="termstext" />                                          
                     </label>
-         <!--neenu-->    
-                 
+                    <!--neenu-->    
+
                 </div>                           
                 <div class="popupWrapper">
                     <div class="popupBox-1" id="popupBox">
@@ -293,7 +303,7 @@
                     onSuccess: function (transport) {
                         var response = transport.responseText || "no response text";
                         node = $("price_change");
-                         var res = response.split("@");
+                        var res = response.split("@");
                         var details = res[0];
                         node.update(details);
 

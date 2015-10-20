@@ -101,7 +101,7 @@
                                             ->addAttributeToSelect('entity_id')
                                             ->addAttributeToFilter('status', 1)
                                             ->addAttributeToFilter('visibility', 4);
-                               
+
                                     $products = Mage::getModel('catalog/product')
                                             ->getCollection()
                                             ->addAttributeToFilter('customer_id', $userid)
@@ -125,7 +125,7 @@
                     if ($_page->getIsActive()) {
                         ?>
                         <li><a href="<?php echo $this->getUrl('') ?>faq"><?php echo $this->__('FAQ') ?></a></li>    
-<?php } ?>
+                    <?php } ?>
                     <li><a href="http://mycc.bridge-delivery.com/mgn/blog/" target="_blank" ><?php echo $this->__('BLOG') ?></a></li>
 
                 </ul>
@@ -134,36 +134,37 @@
                     $_page = Mage::getModel('cms/page')->load('testimonials');
                     if ($_page->getIsActive()) {
                         ?>
-                        <li><a href="<?php echo $this->getUrl('') ?>testimonials">Testimonials</a></li>    
+                        <li><a href="<?php echo $this->getUrl('') ?>testimonials">TESTIMONIALS</a></li>    
                     <?php } ?>
 
                     <?php
                     $_page = Mage::getModel('cms/page')->load('press');
                     if ($_page->getIsActive()) {
                         ?>
-                        <li><a href="<?php echo $this->getUrl('') ?>press">Press</a></li>    
+                        <li><a href="<?php echo $this->getUrl('') ?>press">PRESS</a></li>    
                     <?php } ?> 
 
                     <?php
                     $_page = Mage::getModel('cms/page')->load('careers');
                     if ($_page->getIsActive()) {
                         ?>
-                        <li><a href="<?php echo $this->getUrl('') ?>careers">Careers</a></li>    
+                        <li><a href="<?php echo $this->getUrl('') ?>careers">CAREERS</a></li>    
                     <?php } ?>
-
+                    
+                    <li><a href="mailto:info@myclosetconcierge.com?subject=Message from My Closet Concierge Visitor">CONTACT</a></li>  
                     <?php
                     $_page = Mage::getModel('cms/page')->load('termservices');
                     if ($_page->getIsActive()) {
                         ?>
-                        <li><a href="<?php echo $this->getUrl('') ?>termservices">Terms and Conditions</a></li>    
+                        <li><a href="<?php echo $this->getUrl('') ?>termservices">TERMS AND CONDITIONS </a></li>    
                     <?php } ?>
 
                     <?php
                     $_page = Mage::getModel('cms/page')->load('privacy');
                     if ($_page->getIsActive()) {
                         ?>
-                        <li><a href="<?php echo $this->getUrl('') ?>privacy">Privacy</a></li>    
-<?php } ?>
+                        <li><a href="<?php echo $this->getUrl('') ?>privacy">PRIVACY</a></li>    
+                    <?php } ?>
                 </ul>
 
             </div>
