@@ -746,10 +746,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', end
     float: right;
     margin: -14px -7px 0 0;
 }
-.terms-popupclose-1 {
-    float: right;
-    margin: -20px -10px 0 0;
-}
 
 
 .divFooter { background: #dadada; display: block; overflow: hidden; margin: 0 -15px;}
@@ -1063,8 +1059,13 @@ p.required { font-size:11px; text-align:right; color:#EB340A; }
  .itemList img {max-width: 100%; border: 0px solid #c3c3c3;}
 
  .popupBox-1{ background: #fff; border: 3px solid #c7c7c7; margin: 6% auto; padding: 20px; width: 770px; z-index: 109;}
+ .popupBox-1 .popupHead-1 h3{font: 20px/24px 'Lato'; float: left; width:93%; margin-top: 0px;}
+ .popupBox-1 .popupHead-1 p{font-size: 15px;}
  .popupContent-1{border:1px solid #c7c7c7; height: 460px; padding: 0 12px; overflow-y: auto;}
- .popupContent-1 p{font: 13px/20px 'Lato'; letter-spacing: 0.6px;}
+ 
+ 
+  .terms-popupclose-1 {float: right; margin: -20px -10px 0 0;}
+
 
 
 
@@ -1073,13 +1074,28 @@ p.required { font-size:11px; text-align:right; color:#EB340A; }
         .align_center .dataTable > .row{font-size:12px; line-height: 30px; }
         .align_center{text-align: center; margin: 0 auto; width: 100%; padding: 0 10px;}
         .align_center .dataTable .input-text{padding: 3px; font-size: 12px;}
-        .popupBox-1{ background: #fff; border: 3px solid #c7c7c7; margin: 25% auto; padding: 2%; width:80%; z-index: 109;}
-        .popupContent-1{height: 150px; padding: 0 6px;}
-        .popupContent-1 p{font: 12px/18px 'Lato'; text-align: justify;}
-        .popupContent-1 .subhead h2{ font: 13px/18px "Lato";letter-spacing: 0.6px; margin-top: 0; padding: 0; text-align: center;}
+        .popupBox-1{ background: #fff; border: 3px solid #c7c7c7; margin:40% auto; padding: 2%; width:80%; z-index: 109;}
+        .popupContent-1{height: 300px; padding: 0 6px;}
+        .terms-popupclose-1 {float: right; margin: -5px 0px 0 0;}
+        .popupBox-1 .popupHead-1 p{font: 13px/20px 'Lato';  text-align: left;}
+        .popupContent-1 .subhead h2{font: 16px/20px 'Lato'; margin-top: 10px;}
+        .popupContent-1{font: 14px/20px 'Lato'; }
+
+
 
 
     }
+@media only screen and (max-width : 360px) {
+        .popupContent-1{height: 150px; padding: 0 6px;}
+        .popupContent-1 .subhead h2{font: 13px/18px 'Lato'; letter-spacing: 0px;}
+
+}
+@media only screen and (max-width : 320px) {
+        .popupBox-1{margin:35% auto;}
+
+
+}
+
 
 /* neenu */
 .note-msg+.align_center {text-align: center;}

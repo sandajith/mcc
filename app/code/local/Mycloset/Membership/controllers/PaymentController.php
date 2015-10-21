@@ -33,10 +33,11 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
             $model = Mage::getModel('membership/types')->load($value);
             $finalPrice = $model->getMembershipPrice();
             $details = $model->getDetails();
+            $membershipType = $model->getMembershipType();
         }
         $currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
         $currency_symbol = Mage::app()->getLocale()->currency($currency_code)->getSymbol();
-        echo $currency_symbol . $finalPrice . '<br>' . $details . '@' . $finalPrice;
+        echo $currency_symbol . $finalPrice . '<br>' . $details . '@' . $finalPrice. '@'.$membershipType;
     }
 
     public function confirmpaymentAction() {
@@ -45,6 +46,9 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
     }
 
     public function authorizepaymentAction() {
+//        $postdata = $this->getRequest()->getPost();
+//        print_r($postdata);
+//        exit;
         $taxrate = $this->getRequest()->getPost('tax_rate');
         if (Mage::getSingleton('customer/session')->getMemID() === '') {// if session data is available
             $fname = Mage::getSingleton('customer/session')->getMemFname();
@@ -54,7 +58,7 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
             $customerid = Mage::getSingleton('customer/session')->getMemID();
         } else { // session data is not availabe then using post data
             $fname = $this->getRequest()->getPost('x_first_name');
-            $lname = $this->getRequest()->getPost('x_first_name');
+            $lname = $this->getRequest()->getPost('x_last_name');
             $telephone = $this->getRequest()->getPost('custelephone');
             $emailid = $this->getRequest()->getPost('emailid');
             $customerid = $this->getRequest()->getPost('cust_id');
@@ -62,7 +66,20 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
         if ($taxrate === '') {
             $mem_amount = $this->getRequest()->getPost('amt');
         } else {
-            $mem_amount = $this->getRequest()->getPost('amt') + $taxrate;
+          $taxrate;
+          $taxval= $taxrate/100;
+           $taxable_amount = $this->getRequest()->getPost('amt')*$taxval  ;
+           $amt=$this->getRequest()->getPost('amt');
+        $mem_amount = $amt+$taxable_amount;
+        
+//            You Chose Satndard closet
+//Membership amount : $150
+//Tax               : $y
+//Amount to be paid : $z
+//
+//150*8.75/100 = y
+//
+//150+y = z;
         }
 
 
@@ -201,7 +218,7 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
             $z_lastname = $lname;
             $z_email = $emailid;
             $z_memtype = $this->getRequest()->getPost('mem_type');
-            $z_amount = $mem_amount;
+         $z_amount = $mem_amount;
 
             if ("1" == $responseCode) {
                 //Email sending to the customer upon successful payment
@@ -236,7 +253,7 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
                         ->setTransactionId($transId)
                         ->setPaymentId($payment_id)
                         ->setPaymentDetails($paymentdetails)
-                        ->setAmountPaid($z_amount)
+                        ->setAmountPaid($mem_amount)
                         ->setTaxRate($taxrate)
                         ->setMembershipAmount($this->getRequest()->getPost('amt'))
                         ->save();
