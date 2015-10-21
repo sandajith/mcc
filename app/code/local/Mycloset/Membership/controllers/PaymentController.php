@@ -33,10 +33,11 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
             $model = Mage::getModel('membership/types')->load($value);
             $finalPrice = $model->getMembershipPrice();
             $details = $model->getDetails();
+            $membershipType = $model->getMembershipType();
         }
         $currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
         $currency_symbol = Mage::app()->getLocale()->currency($currency_code)->getSymbol();
-        echo $currency_symbol . $finalPrice . '<br>' . $details . '@' . $finalPrice;
+        echo $currency_symbol . $finalPrice . '<br>' . $details . '@' . $finalPrice. '@'.$membershipType;
     }
 
     public function confirmpaymentAction() {
@@ -45,6 +46,9 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
     }
 
     public function authorizepaymentAction() {
+//        $postdata = $this->getRequest()->getPost();
+//        print_r($postdata);
+//        exit;
         $taxrate = $this->getRequest()->getPost('tax_rate');
         if (Mage::getSingleton('customer/session')->getMemID() === '') {// if session data is available
             $fname = Mage::getSingleton('customer/session')->getMemFname();
@@ -54,7 +58,7 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
             $customerid = Mage::getSingleton('customer/session')->getMemID();
         } else { // session data is not availabe then using post data
             $fname = $this->getRequest()->getPost('x_first_name');
-            $lname = $this->getRequest()->getPost('x_first_name');
+            $lname = $this->getRequest()->getPost('x_last_name');
             $telephone = $this->getRequest()->getPost('custelephone');
             $emailid = $this->getRequest()->getPost('emailid');
             $customerid = $this->getRequest()->getPost('cust_id');

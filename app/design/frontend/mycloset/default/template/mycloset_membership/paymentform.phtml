@@ -82,7 +82,7 @@
                                 <?php echo $this->__('0') ?> <!-- amount here -->
                             </div>    
                             <input type="hidden" name="amt" id="mem_amt" value=" <?php echo $this->__('0') ?>"/>
-
+  <input type="hidden" name="mem_type" id="mem_type" value="<?php echo $this->__('Guest') ?>" />
                         </div>
                     </div>
                 </li>
@@ -127,7 +127,7 @@
                                 <?php echo $membership['membership_price'] ?> <!-- amount here -->
                             </div>    
                             <input type="hidden" name="amt" id="mem_amt" value=" <?php echo $this->__('0') ?>"/>
-
+                            <input type="hidden" id="mem_type" name="mem_type" value="<?php echo $this->__('Guest') ?>" />
                         </div>
                     </div>
 
@@ -158,7 +158,7 @@
 
 
             <div>
-                <label for="card_number">Credit Card Number</label>
+                <label for="card_number">Credit Card Number</label>  <i>(Visa and MasterCard currently accepted)</i>
                 <div class="input-box">
                     <input type="text" class="input-text"  name="x_card_num" value=""></input>
                 </div>
@@ -323,13 +323,15 @@
                     onSuccess: function (transport) {
                         var response = transport.responseText || "no response text";
                         node = $("price_change");
-                        var res = response.split("@");
-
+                        var res = response.split("@");                    
                         var details = res[0];
                         node.update(details);
 
                         var amt = res[1];
+                        var mem_type = res[2];
+                       
                         $('mem_amt').writeAttribute('value', amt);
+                        $('mem_type').writeAttribute('value', mem_type);
                         var tax_val = $$('[name="tax_rate_val"]')[0].value;
                         var tax_paid = parseFloat(amt) * parseFloat(tax_val);
                         var tax_paid1 = tax_paid.toFixed(2);

@@ -2238,3 +2238,87 @@ SimpleXMLElement Object
     [directResponse] => 3,1,8,The credit card has expired.,,P,0,MCC37599336,,30.00,CC,auth_only,144369549956,neenu,robin,,,,,,,123456,,neenu@gmail.com,neenu,robin,bridge,,,,,,,,0.00,,,E8E5C7C7D59B7B02FC4DE7EAA42F282F,,,,,,,,,,,,,XXXX0027,Visa,,,,,,,,,,,,,,,,,35768682
 
 )
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00003
+                    [text] => The 'AnetApi/xml/v1/schema/AnetApiSchema.xsd:customerProfileId' element is invalid - The value '' is invalid according to its datatype 'AnetApi/xml/v1/schema/AnetApiSchema.xsd:numericString' - The Pattern constraint failed.
+                )
+
+        )
+
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00003
+                    [text] => The 'AnetApi/xml/v1/schema/AnetApiSchema.xsd:customerProfileId' element is invalid - The value '' is invalid according to its datatype 'AnetApi/xml/v1/schema/AnetApiSchema.xsd:numericString' - The Pattern constraint failed.
+                )
+
+        )
+
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00003
+                    [text] => The 'AnetApi/xml/v1/schema/AnetApiSchema.xsd:name' element is invalid - The value '' is invalid according to its datatype 'String' - The actual length is less than the MinLength value.
+                )
+
+        )
+
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00003
+                    [text] => The 'AnetApi/xml/v1/schema/AnetApiSchema.xsd:cardNumber' element is invalid - The value '' is invalid according to its datatype 'String' - The actual length is less than the MinLength value.
+                )
+
+        )
+
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00003
+                    [text] => The 'AnetApi/xml/v1/schema/AnetApiSchema.xsd:amount' element is invalid - The value '0' is invalid according to its datatype 'Decimal' - The MinInclusive constraint failed.
+                )
+
+        )
+
+)
+SimpleXMLElement Object
+(
+    [messages] => SimpleXMLElement Object
+        (
+            [resultCode] => Error
+            [message] => SimpleXMLElement Object
+                (
+                    [code] => E00003
+                    [text] => The 'AnetApi/xml/v1/schema/AnetApiSchema.xsd:name' element is invalid - The value '' is invalid according to its datatype 'String' - The actual length is less than the MinLength value.
+                )
+
+        )
+
+)
