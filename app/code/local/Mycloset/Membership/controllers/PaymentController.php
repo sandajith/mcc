@@ -34,10 +34,11 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
             $finalPrice = $model->getMembershipPrice();
             $details = $model->getDetails();
             $membershipType = $model->getMembershipType();
+            $membershipId = $model->getMembershipId();
         }
         $currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
         $currency_symbol = Mage::app()->getLocale()->currency($currency_code)->getSymbol();
-        echo $currency_symbol . $finalPrice . '<br>' . $details . '@' . $finalPrice. '@'.$membershipType;
+        echo $currency_symbol . $finalPrice . '<br>' . $details . '@' . $finalPrice. '@'.$membershipType.'@'.$membershipId;
     }
 
     public function confirmpaymentAction() {
@@ -48,7 +49,8 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
     public function authorizepaymentAction() {
 //        $postdata = $this->getRequest()->getPost();
 //        print_r($postdata);
-//        exit;
+//      exit;
+        $z_memtype1 = $this->getRequest()->getPost('mem_table_id');
         $taxrate = $this->getRequest()->getPost('tax_rate');
         if (Mage::getSingleton('customer/session')->getMemID() === '') {// if session data is available
             $fname = Mage::getSingleton('customer/session')->getMemFname();
@@ -272,12 +274,12 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
                 $model = Mage::getModel('customer/customer')->load($customerid)->addData($update);
                 $update_customer_membership = array(
                     'customer_id' => $customerid,
-                    'membership_id' => $z_memtype
+                    'membership_id' => $z_memtype1
                 );
                 $jyuy = Mage::getModel('membership/customermembership')->load($customerid)->addData($update_customer_membership);
                 $membershiphistory = Mage::getModel('membership/membershiphistory');
                 $membershiphistory->setCustomerId($customerid)
-                        ->setMembershipId($z_memtype);
+                        ->setMembershipId($z_memtype1);
                 try {
                     $model->setId($customerid)->save();
                     $jyuy->setId($customerid)->save();

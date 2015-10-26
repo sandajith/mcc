@@ -83,6 +83,8 @@
                             </div>    
                             <input type="hidden" name="amt" id="mem_amt" value=" <?php echo $this->__('0') ?>"/>
   <input type="hidden" name="mem_type" id="mem_type" value="<?php echo $this->__('Guest') ?>" />
+   <input type="hidden" name="mem_table_id" value="<?php echo $mem_id; ?>" />
+    <input type="hidden" id="mem_table_id" name="mem_table_id" value="<?php echo $this->__('') ?>" />
                         </div>
                     </div>
                 </li>
@@ -128,6 +130,7 @@
                             </div>    
                             <input type="hidden" name="amt" id="mem_amt" value=" <?php echo $this->__('0') ?>"/>
                             <input type="hidden" id="mem_type" name="mem_type" value="<?php echo $this->__('Guest') ?>" />
+                         <input type="hidden" id="mem_table_id" name="mem_table_id" value="<?php echo $this->__('') ?>" />
                         </div>
                     </div>
 
@@ -329,9 +332,11 @@
 
                         var amt = res[1];
                         var mem_type = res[2];
+                        var mem_table_id = res[3];
                        
                         $('mem_amt').writeAttribute('value', amt);
                         $('mem_type').writeAttribute('value', mem_type);
+                        $('mem_table_id').writeAttribute('value', mem_table_id);
                         var tax_val = $$('[name="tax_rate_val"]')[0].value;
                         var tax_paid = parseFloat(amt) * parseFloat(tax_val);
                         var tax_paid1 = tax_paid.toFixed(2);
