@@ -23,7 +23,7 @@ class Mycloset_Membership_Block_Membership_Popup extends Mage_Catalog_Block_Prod
         $product['ThumbnailUrl'] = $model->load($product_id)->getThumbnailUrl(); //product's thumbnail image url
         $product['color'] = $model->load($product_id)->getAttributeText('color'); //product's thumbnail image url
         $product['sku'] = $model->load($product_id)->getSku(); //product's thumbnail image url      
-        $product['size'] = $model->load($product_id)->getSize(); //product's thumbnail image url      
+        $product['size'] = $model->load($product_id)->getAttributeText('size'); //product's thumbnail image url      
         $product['designer'] = $model->load($product_id)->getAttributeText('designer'); //product's thumbnail image url
         $product['product_status'] = $model->load($product_id)->getAttributeText('product_status'); //product's thumbnail image url
         $product['season'] = $model->load($product_id)->getAttributeText('season'); //product's thumbnail image url
