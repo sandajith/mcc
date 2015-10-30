@@ -36,8 +36,10 @@
                 $taxClassId = 2;
                 $taxRate = $taxCalculation->getRate($request->setProductClassId($taxClassId));
                 $taxval = $taxRate / 100;
-                $taxable_amount = $amount * $taxval;
-                $mem_amount = $amount + $taxable_amount;
+                $taxable_amount111 = $amount * $taxval;
+             $taxable_amount = number_format($taxable_amount111, 2);
+                $mem_amount111 = $amount + $taxable_amount;
+                 $mem_amount= number_format($mem_amount111, 2)
                 ?>
 
                 <input type="hidden" value="<?php echo $taxRate; ?>" name="tax_rate" id="tax" />        
@@ -300,7 +302,7 @@
     {
         //                            var passvrb= val;         // sent value '1' for link click check                 
         //  $('termstext').writeAttribute('value', passvrb);// change text box value 
-        new Ajax.Request('<?php echo Mage::getBaseUrl() . "mycloset/termservices" ?>',
+        new Ajax.Request('<?php echo Mage::getUrl("mycloset/termservices", array( '_secure' => true))   ?>',
                 {
                     method: "get",
                     onSuccess: function (transport) {
@@ -339,8 +341,9 @@
                         $('mem_table_id').writeAttribute('value', mem_table_id);
                         var tax_val = $$('[name="tax_rate_val"]')[0].value;
                         var tax_paid = parseFloat(amt) * parseFloat(tax_val);
-                        var tax_paid1 = tax_paid.toFixed(2);
-
+//                        var tax_paid1 = tax_paid.toFixed(2);
+                        var tax_paid1 =Math.round(tax_paid);
+alert(tax_paid1);
                         $$('label[id="amt123"]').first().update(tax_paid1);
 
                         var amount_paid = parseFloat(amt) + parseFloat(tax_paid);

@@ -35,7 +35,7 @@
     <?php echo $this->getMessagesBlock()->toHtml() ?>
     <div class="row loginRegister">
         <div class="col-sm-6">
-            <form action="<?php echo $this->getUrl('membership/account/createPost') ?>" method="post" id="form-validate">
+            <form action="<?php echo $this->getUrl('membership/account/createPost', array( '_secure' => true)) ?>" method="post" id="form-validate">
                 <div class="col-md-12 bordered">
                     <div class="fieldset">
                         <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />

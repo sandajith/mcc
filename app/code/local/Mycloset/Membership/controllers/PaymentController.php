@@ -65,6 +65,7 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
             $emailid = $this->getRequest()->getPost('emailid');
             $customerid = $this->getRequest()->getPost('cust_id');
         }
+   
         if ($taxrate === '') {
             $mem_amount = $this->getRequest()->getPost('amt');
         } else {
@@ -88,11 +89,14 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
 
 
 
-        $g_loginname = Mage::getStoreConfig(self::PATH_API_LOGIN); // Keep this secure.
-        $g_transactionkey = Mage::getStoreConfig(self::PATH_TRANS_KEY); // Keep this secure.
-        $g_apihost = Mage::getStoreConfig(self::PATH_GATE_URL);
-        $g_apipath = "/xml/v1/request.api";
+     $g_loginname = Mage::getStoreConfig(self::PATH_API_LOGIN); // Keep this secure.
+  
+        $g_transactionkey = Mage::getStoreConfig(self::PATH_TRANS_KEY); // Keep this secure.   
+  
+       $g_apihost = Mage::getStoreConfig(self::PATH_GATE_URL);    
+         $g_apipath = "/xml/v1/request.api";    
         require_once (Mage::getBaseDir('code') . '/local/Mycloset/Membership/Api/util.php');
+
 
         // Create new customer profile
         $content = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" .
@@ -105,9 +109,10 @@ class Mycloset_Membership_PaymentController extends Mage_Core_Controller_Front_A
                 "</profile>" .
                 "</createCustomerProfileRequest>";
 
-
+       
         $response = send_xml_request($g_apihost, $g_apipath, $content);
 
+       
         $parsedresponse = parse_api_response($response);
         $parsed_customer_id = $parsedresponse->customerProfileId;
 
