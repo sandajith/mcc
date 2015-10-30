@@ -308,7 +308,7 @@
     function GetPrice(memid)
     {
 
-        new Ajax.Request('<?php echo Mage::getBaseUrl() . "membership/payment/Getprice?memid=" ?>' + memid,
+        new Ajax.Request('<?php echo Mage::getUrl('',array('_secure' => true)) . "membership/payment/Getprice?memid=" ?>' + memid,
                 {
                     method: "get",
                     onSuccess: function (transport) {

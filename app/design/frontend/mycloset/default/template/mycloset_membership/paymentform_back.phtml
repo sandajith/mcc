@@ -36,7 +36,7 @@
                 $taxClassId = 2;
                 $taxRate = $taxCalculation->getRate($request->setProductClassId($taxClassId));
                 $taxval = $taxRate / 100;
-               $taxable_amount111 = $amount * $taxval;
+                $taxable_amount111 = $amount * $taxval;
              $taxable_amount = number_format($taxable_amount111, 2);
                 $mem_amount111 = $amount + $taxable_amount;
                  $mem_amount= number_format($mem_amount111, 2)
@@ -44,12 +44,8 @@
 
                 <input type="hidden" value="<?php echo $taxRate; ?>" name="tax_rate" id="tax" />        
                 <input type="hidden" value="<?php echo $taxval; ?>" name="tax_rate_val" id="tax_rate_val" />        
-            <?php }else {
-                 $taxable_amount = 0;
-                $mem_amount111 = $amount + $taxable_amount;
-                 $mem_amount= number_format($mem_amount111, 2);
-            } 
-           
+            <?php } ?>
+            <?php
             if ((empty($mem_id)) && ($group_id === '15')) {
                 ?>
                 <div id="previous_membership">
